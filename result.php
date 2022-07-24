@@ -1,40 +1,23 @@
 <?php
-  require_once('data.php');
+  require_once('Data.php');
+  require_once('CheckAnswer.php');
 
-  $name = "";
-  $result = [];
-  $url = "http://localhost/marie/quiz/index.php";
-  $countCorrAns = 0;
+  $name        = $_SESSION['name'];
+  $userAnswers = [];
 
   try {
-    if(isset($_SERVER['HTTP_REFERER'])) {
-      
-      if(isset($_POST['name'])){
-        $name = $_POST['name'];
-        if ($name == "") {
-          $name = "名無し";
-        } 
-      } 
-      // else {
-      //   $name = "isset==false";
-      //   var_dump($name);
-      // }
-
-      for ($i=1; $i<=count($questions); $i++) {
-        $ans = "answer".$i;
-        $corrAns =  "correctAnswer".$i;
-        if(isset($_POST[$ans])){
-          if ($_POST[$ans] == $_POST[$corrAns]) {
-            array_push($result, "正解です");
-            $countCorrAns++;
-          } else {
-            array_push($result, "不正解です");
-          }
-        } else {
-          array_push($result, "選択してください");
-        }
+    //問題ページから遷移されてた場合
+    if (isset($_SERVER['HTTP_REFERER'])) {
+      for ($i=1; $i<=count(Data::$questions); $i++) {
+        $userAns = "userAnswer".$i;
+        array_push($userAnswers, $_SESSION[$userAns]);
       }
+      $checkAnswer = new CheckAnswer();
+      $resultList = $checkAnswer->check_ans($userAnswers, Data::$questions, Data::$correctAnswer);
+    //問題ページから遷移されていない場合
     } else {
+      // $_SESSION = [];
+      // session_destroy();
       header('Location: http://localhost/marie/quiz/index.php');
       exit();
     }
@@ -53,12 +36,24 @@
 </head>
 <body>
   <h2>クイズの結果</h2>
-  <h4><?php echo $name."さん、こんにちは"?></h4>
-  <?php for ($i = 0; $i < count($questions); $i++): ?>
+  <h4>
+    <?php
+      if (isset($name)) {
+        echo $name."さん、こんにちは";  
+      }
+    ?>
+  </h4>
+  <?php for ($i = 0; $i < count(Data::$questions); $i++): ?>
     <h3>第<?php echo $i+1 ?>問目</h3>
-    <p><?php echo $result[$i] ?></p>
+    <p>
+      <?php
+        if (isset($resultList)) {
+          echo $resultList[0][$i];
+        }
+      ?>
+    </p>
   <?php endfor ?>
-    <h3><?php echo count($questions) ?>問中<?php echo $countCorrAns ?>個正解です</h3>
+    <h3><?php echo count(Data::$questions) ?>問中<?php echo $resultList[1] ?>問正解です</h3>
   <a href="index.php">戻る</a>
 </body>
 </html>
