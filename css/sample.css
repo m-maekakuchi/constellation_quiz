@@ -1,6 +1,6 @@
 body {
 
-    background-image: url(../img/background.jfif);
+    background-image: url("../img/background.jfif");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top left;

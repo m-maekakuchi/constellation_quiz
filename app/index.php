@@ -1,14 +1,19 @@
 <?php
-  require_once('Data.php');
+  require_once('QuizDao.php');
   session_start();
 
   $name         = "";
-  $countCorrAns = 0;
   $val_count    = 0;
   $success      = 0;
-  $url          = 'http://localhost/marie/quiz/result.php';
+  $url          = 'http://localhost/marie/quiz/app/result.php';
+  $dao          = null;
 
   try {
+    //問題数を取得
+    $dao = new QuizDao();
+    $questions_num = $dao->selectQuestionNum();
+    $contents = $dao->selectContents();
+
     //回答ボタンが押された場合
     if (isset($_POST['submit']) && $_POST['submit'] == "回答") {
       //名前が入力されているかの判定
@@ -21,16 +26,19 @@
         }
       }
       //選択されていない問題があるかの判定
-      for ($i = 1; $i <= count(Data::$questions); $i++) {
-        $userAns = "userAnswer".$i;
-        if (!isset($_POST[$userAns])) {
+      for ($i = 1; $i <= $questions_num; $i++) {
+        $choices_id = "choices_id".$i;
+        if (!isset($_POST[$choices_id])) {
+    
           $val_count++;
         } else {
-          $_SESSION[$userAns] = $_POST[$userAns];
+          $_SESSION[$choices_id] = $_POST[$choices_id];
         }
       }
       //全て入力・選択された場合
       if ($val_count == $success) {
+      // $now  = new DateTime(null, new DateTimeZone('Asia/Tokyo'));
+      // $row = $dao->insert($now->format('Y年m月d日 H時i分'), $correctRate);
         header('Location: '.$url);
         exit();
       }
@@ -42,10 +50,11 @@
                   $_SESSION = [];
                   session_destroy();
     }
+  } catch (PDOException $e) {
+    die ("データベースエラー:".$e->getMessage());
   } catch (Exception $e) {
     echo $e->getMessage(), "例外発生"; 
   }
-  
 
 ?>
 
@@ -54,7 +63,7 @@
 <head>
   <meta charset="UTF-8">
   <title>簡易星座クイズプログラム</title>
-  <link rel="stylesheet" href="css/sample.css">
+  <link rel="stylesheet" href="../css/sample.css">
 </head>
 <body>
   <h2>星座クイズ</h2>
@@ -65,30 +74,34 @@
       name="name"
       value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
     />
-    <?php for ($i = 0; $i < count(Data::$questions); $i++): ?>
-      <h4>第<?php echo $i+1 ?>問　<?php echo Data::$questions[$i][0] ?></h4>
-      <?php for ($j = 0; $j < count(Data::$questions[$i][1]); $j++): ?>
+    <?php for ($i = 0; $i < $questions_num; $i++): ?>
+      <h4>
+        第<?php echo $i+1 ?>問　
+        <?php
+          echo $contents[$i]['QUESTION'];
+        ?>
+      </h4>
+      <?php for ($j = 0; $j < count($contents[$i]['CHOICE_ID']); $j++): ?>
         <label>
           <input
             type="radio"
-            name="userAnswer<?php echo $i+1 ?>"
-            value="<?php echo $j ?>"
+            name="choices_id<?php echo $contents[$i]['QUESTION_ID'] ?>"
+            value="<?php echo $contents[$i]['CHOICE_ID'][$j] ?>"
             <?php if (
-                      isset($_SESSION["userAnswer".($i+1)])
+                      isset($_SESSION["choices_id".($i+1)])
                       &&
-                      $_SESSION["userAnswer".($i+1)] == $j
-                      ) {
-                        echo "checked";
-                  }
+                      $_SESSION["choices_id".($i+1)] == $contents[$i]['CHOICE_ID'][$j]
+                      )
+                      echo "checked";
             ?>
           />
-          <?php echo Data::$questions[$i][1][$j] ?>
+          <?php echo $contents[$i]['OPTIONS'][$j] ?>
         </label><br>
       <?php endfor ?>
     <?php endfor ?>
     <br>
-    <input type="submit" name="submit" value="回答">
-    <input type="submit" name="submit" value="リセット">
+    <input type="submit" name="submit" value="回答" />
+    <input type="submit" name="submit" value="リセット" />
   </form>
 </body>
 </html>
