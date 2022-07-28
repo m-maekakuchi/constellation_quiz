@@ -29,7 +29,6 @@
       for ($i = 1; $i <= $questions_num; $i++) {
         $choices_id = "choices_id".$i;
         if (!isset($_POST[$choices_id])) {
-    
           $val_count++;
         } else {
           $_SESSION[$choices_id] = $_POST[$choices_id];
@@ -37,8 +36,6 @@
       }
       //全て入力・選択された場合
       if ($val_count == $success) {
-      // $now  = new DateTime(null, new DateTimeZone('Asia/Tokyo'));
-      // $row = $dao->insert($now->format('Y年m月d日 H時i分'), $correctRate);
         header('Location: '.$url);
         exit();
       }
@@ -63,45 +60,54 @@
 <head>
   <meta charset="UTF-8">
   <title>簡易星座クイズプログラム</title>
-  <link rel="stylesheet" href="../css/sample.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <h2>星座クイズ</h2>
-  <form method="post" action="index.php">
-    <p>名前を入力してください</p>
-    <input 
-      type="text"
-      name="name"
-      value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
-    />
-    <?php for ($i = 0; $i < $questions_num; $i++): ?>
-      <h4>
-        第<?php echo $i+1 ?>問　
-        <?php
-          echo $contents[$i]['QUESTION'];
-        ?>
-      </h4>
-      <?php for ($j = 0; $j < count($contents[$i]['CHOICE_ID']); $j++): ?>
-        <label>
-          <input
-            type="radio"
-            name="choices_id<?php echo $contents[$i]['QUESTION_ID'] ?>"
-            value="<?php echo $contents[$i]['CHOICE_ID'][$j] ?>"
-            <?php if (
-                      isset($_SESSION["choices_id".($i+1)])
-                      &&
-                      $_SESSION["choices_id".($i+1)] == $contents[$i]['CHOICE_ID'][$j]
-                      )
-                      echo "checked";
-            ?>
-          />
-          <?php echo $contents[$i]['OPTIONS'][$j] ?>
-        </label><br>
+  <div class="main">
+    <div class="title">
+      <h2>星座クイズ</h2>
+    </div>
+    <form method="post" action="index.php">
+      <div class="item">
+        <label class="label" for="name">名前を入力してください：</label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
+        />
+      </div>
+      <?php for ($i = 0; $i < $questions_num; $i++): ?>
+        <h4>
+          第<?php echo $i+1 ?>問　
+          <?php
+            echo $contents[$i]['QUESTION'];
+          ?>
+        </h4>
+        <?php for ($j = 0; $j < count($contents[$i]['CHOICE_ID']); $j++): ?>
+          <label>
+            <input
+              type="radio"
+              name="choices_id<?php echo $contents[$i]['QUESTION_ID'] ?>"
+              value="<?php echo $contents[$i]['CHOICE_ID'][$j] ?>"
+              <?php if (
+                        isset($_SESSION["choices_id".($i+1)])
+                        &&
+                        $_SESSION["choices_id".($i+1)] == $contents[$i]['CHOICE_ID'][$j]
+                        )
+                        echo "checked";
+              ?>
+            />
+            <?php echo $contents[$i]['OPTIONS'][$j] ?>
+          </label><br>
+        <?php endfor ?>
       <?php endfor ?>
-    <?php endfor ?>
-    <br>
-    <input type="submit" name="submit" value="回答" />
-    <input type="submit" name="submit" value="リセット" />
-  </form>
+      <br>
+      <div class="btn">
+        <input type="submit" name="submit" class="submit" value="回答" />
+        <input type="submit" name="submit" class="submit" value="リセット" />
+      </div>
+    </form>
+  </div>
 </body>
 </html>

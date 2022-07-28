@@ -3,6 +3,9 @@
   session_start();
   
   $name         = $_SESSION['name'];
+  $choices_id1  = $_SESSION['choices_id1'];
+  $choices_id2  = $_SESSION['choices_id2'];
+  $choices_id3  = $_SESSION['choices_id3'];
   $results      = [];
   $dao          = null;
   $countCorrAns = 0;
@@ -12,11 +15,12 @@
     //問題ページ画面からの遷移の場合
     if (isset($_SERVER['HTTP_REFERER'])) {
       $dao = new QuizDao();
-      $row = $dao->checkAnswer($_SESSION['choices_id1']
-                              , $_SESSION['choices_id2']
-                              , $_SESSION['choices_id3']);
+      $row = $dao->insertUserAnswer($name, $choices_id1, $choices_id2, $choices_id3);
+      $rows = $dao->checkAnswer($choices_id1
+                                , $choices_id2
+                                , $choices_id3);
       for ($i = 0; $i < 3; $i++) {
-        if ($row[$i]['result_flg'] == $TRUE) {
+        if ($rows[$i]['result_flg'] == $TRUE) {
           $results[$i] = "正解！";
           $countCorrAns++;
         } else {
@@ -25,9 +29,9 @@
       }
     //問題ページ以外からの画面遷移の場合
     } else {
-      // $_SESSION = [];
-      // session_destroy();
-      header('Location: http://localhost/marie/quiz/index.php');
+      $_SESSION = [];
+      session_destroy();
+      header('Location: http://localhost/marie/quiz/app/index.php');
       exit();
     }
   } catch (PDOException $e) {
@@ -45,7 +49,7 @@
 <head>
   <meta charset="UTF-8">
   <title>簡易星座クイズプログラム</title>
-  <link rel="stylesheet" href="../css/sample.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <h2>クイズの結果</h2>

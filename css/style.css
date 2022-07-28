@@ -1,0 +1,44 @@
+.main {
+  max-width: 680px;
+  width: calc(100% - 10px);
+  margin: 0 auto;
+  font-size: 17px;
+}
+
+.title {
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  text-align: center;
+  margin: 25px auto;
+}
+
+body {
+  background-image: url("../img/background.jfif");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+input[type="text"] {
+  border: solid 2px #1680f9;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.submit {
+  border: none;
+  background: #1680f9;
+  border-radius: 7px;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 7px 20px;
+}

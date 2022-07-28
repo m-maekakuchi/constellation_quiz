@@ -80,14 +80,18 @@
       return $row;
     }
 
-    // public function insert($answer_dateTime, $correct_rate) {
-    //   $sql = "INSERT INTO quiz_result(answer_datetime, correct_rate) VALUES(?,?)";
-    //   $statement = $this->db->prepare($sql);
-    //   $statement->bindValue(1, $answer_dateTime);
-    //   $statement->bindValue(2, $correct_rate);
-    //   $statement->execute();
-    //   return $statement->rowCount();
-    // }
+    //ユーザーの回答を登録
+    public function insertUserAnswer($username, $choices_id1, $choices_id2, $choices_id3) {
+      $sql = "INSERT INTO answer_history(username, choices_id1, choices_id2, choices_id3)
+              VALUES(?, ?, ?, ?);";
+      $stt = $this->db->prepare($sql);
+      $stt->bindValue(1, $username);
+      $stt->bindValue(2, $choices_id1);
+      $stt->bindValue(3, $choices_id2);
+      $stt->bindValue(4, $choices_id3);
+      $stt->execute();
+      return $stt->rowCount();
+    }
 
     // public function selectByTime($date1, $date2) {
     //   $sql = "SELECT * FROM quiz_result WHERE answer_datetime BETWEEN ? AND ?";
