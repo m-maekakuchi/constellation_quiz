@@ -7,7 +7,7 @@
   $success      = 0;
   $url          = 'http://localhost/marie/quiz/app/result.php';
   $dao          = null;
-
+  
   try {
     //問題数を取得
     $dao = new QuizDao();
@@ -59,8 +59,9 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name=”viewport” content=”width=device-width, initial-scale=1”>
   <title>簡易星座クイズプログラム</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style2.css">
 </head>
 <body>
   <div class="main">
@@ -68,14 +69,16 @@
       <h2>星座クイズ</h2>
     </div>
     <form method="post" action="index.php">
-      <div class="item">
-        <label class="label" for="name">名前を入力してください：</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
-        />
+      <div class="name">
+        <h4>名前を入力してください：</h4>
+        <label class="label" for="name">
+          <input
+            id="name"
+            type="text"
+            name="name"
+            value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
+          />
+        </label>
       </div>
       <?php for ($i = 0; $i < $questions_num; $i++): ?>
         <h4>

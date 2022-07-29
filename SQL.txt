@@ -1,0 +1,43 @@
+SELECT * FROM choices c JOIN questions q ON c.questions_id = q.id WHERE c.id = 1;
+
+SELECT * FROM choices c JOIN questions q ON c.questions_id = q.id JOIN correct_answers ca ON q.id = ca.questions_id where c.id=1;
+
+SELECT * FROM correct_answers WHERE choices_id = 1;
+
+
+SELECT q.content, c.content FROM questions q JOIN choices c ON q.id = c.questions_id where q.id = 1;
+
+$questions1 = [
+    [
+        "title" => $result[0][0],
+        "choices" => [
+            $result[0][1],
+            $result[1][1],
+            $result[2][1],
+            $result[3][1]
+        ]
+    ],
+    [
+        "title" => $result[0][0],
+        "choices" => [
+            $result[0][1],
+            $result[1][1],
+            $result[2][1],
+            $result[3][1]
+        ]
+    ],
+    [
+        "title" => $result[0][0],
+        "choices" => [
+            $result[0][1],
+            $result[1][1],
+            $result[2][1],
+            $result[3][1]
+        ]
+    ]
+];
+
+
+
+
+
