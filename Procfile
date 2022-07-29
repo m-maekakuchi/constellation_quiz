@@ -1,0 +1,1 @@
+web: vendor/bin/constellation_quiz app/
