@@ -6,7 +6,8 @@
       $dsn = 'mysql:dbname=heroku_c4a85b99b211ade;host=us-cdbr-east-06.cleardb.net;charset=utf8';
       $user ='b7195eb6df8b24';
       $password ="1148410a";
-      $this->db = new PDO($dsn, $user, $password);
+      $driver_options = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET time_zone='+09:00'"];
+      $this->db = new PDO($dsn, $user, $password, $driver_options);
       $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

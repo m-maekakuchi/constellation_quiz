@@ -9,7 +9,7 @@
   $results      = [];
   $dao          = null;
   $countCorrAns = 0;
-  $TRUE         = 0;
+  $TRUE         = 1;
 
   try {
     //問題ページ画面からの遷移の場合
