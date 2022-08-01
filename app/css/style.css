@@ -1,7 +1,5 @@
 body {
-  background-image: url("../img/tori.png");
-  background-position: top right;
-  background-color:rgb(124, 179, 252);
+  background-color:rgb(47, 85, 200);
   background-image:
   radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
   radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
@@ -11,8 +9,22 @@ body {
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 
+h2{
+  color: #A9CDF5;
+  text-shadow: 2px 3px 4px #000;
+}
+
 h4 {
+  color: #ffffffd0;
   margin: 40px auto 10px;
+}
+
+label, p {
+  color: #ffffffd0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .main {
@@ -26,29 +38,27 @@ h4 {
   text-align: center;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-}
-
 .btn {
   text-align: center;
   margin: 25px auto;
 }
 
-input[type="text"] {
-  border: solid 2px #3f97fc;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 15px;
+.btn input:first-of-type{
+  margin-right: 50px;
 }
 
 .submit {
-  background: #3f97fc;
-  border-radius: 7px;
+  background: rgb(27, 51, 120);
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  color: white;
-  font-size: 15px;
+  color: #ffffffd0;
+  font-size: 17px;
   font-weight: bold;
   padding: 7px 20px;
 }
+
+.result h4 {
+  margin: 40px 0px;
+}
+

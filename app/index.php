@@ -61,25 +61,23 @@
   <meta charset="UTF-8">
   <meta name=”viewport” content=”width=device-width, initial-scale=1”>
   <title>簡易星座クイズプログラム</title>
-  <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <div class="main">
     <div class="title">
       <h2>星座クイズ</h2>
+      <h4>○○さん、ようこそ！</h4>
+      <!-- <label class="label" for="name">
+        <input
+          id="name"
+          type="text"
+          name="name"
+          value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
+        />
+      </label> -->
     </div>
     <form method="post" action="index.php">
-      <div class="name">
-        <h4>名前を入力してください：</h4>
-        <label class="label" for="name">
-          <input
-            id="name"
-            type="text"
-            name="name"
-            value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
-          />
-        </label>
-      </div>
       <?php for ($i = 0; $i < $questions_num; $i++): ?>
         <h4>
           第<?php echo $i+1 ?>問　
