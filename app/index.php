@@ -5,7 +5,7 @@
   $name         = "";
   $val_count    = 0;
   $success      = 0;
-  $url          = 'http://localhost/marie/quiz/app/result.php';
+  $url          = 'http://us-cdbr-east-06.cleardb.net/result.php';
   $dao          = null;
   
   try {
@@ -61,7 +61,7 @@
   <meta charset="UTF-8">
   <meta name=”viewport” content=”width=device-width, initial-scale=1”>
   <title>簡易星座クイズプログラム</title>
-  <link rel="stylesheet" href="../css/style2.css">
+  <link rel="stylesheet" href="css/style2.css">
 </head>
 <body>
   <div class="main">
