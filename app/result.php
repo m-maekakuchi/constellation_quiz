@@ -15,7 +15,7 @@
     //問題ページ画面からの遷移の場合
     if (isset($_SERVER['HTTP_REFERER'])) {
       $dao = new QuizDao();
-      // $row = $dao->insertUserAnswer($name, $choices_id1, $choices_id2, $choices_id3);
+      $row = $dao->insertUserAnswer($name, $choices_id1, $choices_id2, $choices_id3);
       $rows = $dao->checkAnswer($choices_id1
                                 , $choices_id2
                                 , $choices_id3);
