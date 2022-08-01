@@ -5,7 +5,7 @@
   $name         = "";
   $val_count    = 0;
   $success      = 0;
-  $url          = 'http://us-cdbr-east-06.cleardb.net/result.php';
+  $url          = 'https://fierce-ridge-82663.herokuapp.com/result.php';
   $dao          = null;
   
   try {
