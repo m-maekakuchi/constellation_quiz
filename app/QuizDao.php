@@ -3,7 +3,7 @@
     private $db;
 
     public function __construct() {
-      $dsn = 'mysql:dbname=quiz;host=localhost;charset=utf8';
+      $dsn = 'mysql:dbname=heroku_c4a85b99b211ade;host=us-cdbr-east-06.cleardb.net;charset=utf8';
       $user ='root';
       $password ="root";
       $this->db = new PDO($dsn, $user, $password);
