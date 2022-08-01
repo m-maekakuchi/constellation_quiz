@@ -1,1 +1,1 @@
-web: vendor/bin/constellation_quiz app/
+web: vendor/bin/heroku-php-apache2 app/
