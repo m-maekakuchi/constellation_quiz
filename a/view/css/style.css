@@ -1,0 +1,145 @@
+body {
+  font-family: "Hiragino Kaku Gothic ProN";
+  margin: 0px;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.top-wrapper {
+  padding: 60px 0px 40px;
+  background-image: url("../../img/login-top.jpg");
+  background-size: cover;
+  color:#A9CDF5;
+  height: 240px;
+}
+
+.top-wrapper h2 {
+  font-size: 40px;
+  margin: 30px 0;
+  opacity: 0.7;
+}
+
+.regist h2{
+  margin: 80px 0 20px;
+}
+
+.login .top-wrapper p , .question .top-wrapper p{
+  font-size: 20px;
+  margin: 0 0 30px;
+  opacity: 0.7;
+}
+
+.btn {
+  cursor: pointer;
+  display:inline-block;
+  padding: 8px 24px;
+  border-radius: 7px;
+  opacity: 0.8;
+  color: #ffffffd0;
+  font-size: 17px;
+  text-align: center;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+.top {
+  background-color: #3c627e;
+}
+
+.submit {
+  border: none;
+  background-color: #2078b9;
+}
+
+.form-wrapper {
+  padding: 30px 0px;
+  color: #5f5d60;
+  font-size: 20px;
+  text-align: center;
+}
+
+.login-form input {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #3c627e;
+  border-radius: 7px;
+  margin: 0 0 20px;
+}
+
+.login-form input:focus {
+  box-shadow: 0 0 5px 1px #2078b9;
+  outline: none;
+}
+
+.regist-wrapper {
+  padding: 30px 0px;
+  width: 700px;
+  margin: 0 auto;
+  color: #5f5d60;
+  font-size: 20px;
+  text-align: left;
+}
+
+.item {
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.item_column {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+.label {
+  width: 220px;
+}
+
+.label-required {
+  color: #fd7259;
+}
+
+.regist-wrapper input[type="text"],
+.regist-wrapper input[type="password"]{
+  border: 1px solid #3c627e;
+  border-radius: 5px;
+  padding: 10px;
+  size: 20px;
+  font-size: 16px;
+}
+
+.regist-wrapper select {
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid #3c627e;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.item input:focus, .item select:focus{
+  box-shadow: 0 0 5px 1px #2078b9;
+  outline: none;
+}
+
+.form-submit{
+  margin: 0 auto 20px;
+  width: 100px;
+}
+
+.error{
+  color: #fd7259;
+}
+
+.select1 {
+  width: 80px;
+}
+
+.select2 {
+  width: 170px;
+}
