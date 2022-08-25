@@ -8,25 +8,24 @@
     
     //空文字チェック
     public function checkEmpty($para) {
-        if (empty($para)) {
-            //echo "空です";
-            return true;
-        } else {
-            //echo "入力値あり";
-            return false;
-        }
+			if (empty($para)) {
+				//echo "空です";
+				return true;
+			} else {
+				//echo "入力値あり";
+				return false;
+			}
     }
     
     //バリデーションチェック
     public function checklPattern($flg, $para) {
-        if (!preg_match($this->patternList[$flg], $para)) {
-            //echo "パターンに一致しません";
-            return true;
-        } else {
-            //echo "パターンに一致します";
-            return false;
-        }
+			if (!preg_match($this->patternList[$flg], $para)) {
+				//echo "パターンに一致しません";
+				return true;
+			} else {
+				//echo "パターンに一致します";
+				return false;
+			}
     }
 
   }
-?>

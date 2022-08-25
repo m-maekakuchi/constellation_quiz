@@ -1,7 +1,9 @@
 <?php
+
 class Message {
 
   public static $NAME_EMPTY          = "名前が入力されていません";
+  public static $SAME_EMAIL          = "既に登録されているメールアドレスです";
   public static $EMAIL_EMPTY         = "メールアドレスが入力されていません";
   public static $EMAIL_NOT_CORRECT   = "メールアドレスが正しく入力されていません";
   public static $PASS_EMPTY          = "パスワードが入力されていません";
@@ -13,6 +15,7 @@ class Message {
   public static $EMAIL_OR_PASS_EMPTY = "メールアドレスとパスワードを入力してください";
   public static $EMAIL_NOT_REGIST    = "メールアドレスが登録されていません";
   public static $PASSWORD_WRONG      = "パスワードが間違っています";
+
+  public static $QUESTION_NOSELECT   = "全問回答してください";
   
 }
-?>
