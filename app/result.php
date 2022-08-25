@@ -15,7 +15,7 @@
     //問題ページ画面からの遷移の場合
     if (isset($_SERVER['HTTP_REFERER'])) {
       $dao = new QuizDao();
-      $row = $dao->insertUserAnswer("まりえ", $choices_id1, $choices_id2, $choices_id3);
+      $row = $dao->insertUserAnswer($name, $choices_id1, $choices_id2, $choices_id3);
       $rows = $dao->checkAnswer($choices_id1
                                 , $choices_id2
                                 , $choices_id3);
@@ -31,7 +31,7 @@
     } else {
       $_SESSION = [];
       session_destroy();
-      header('Location: http://localhost/marie/quiz/app/index.php');
+      header('Location: http://localhost/marie/quiz/app/question.php');
       exit();
     }
   } catch (PDOException $e) {
@@ -50,29 +50,32 @@
   <meta charset="UTF-8">
   <meta name=”viewport” content=”width=device-width, initial-scale=1”>
   <title>簡易星座クイズプログラム</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="main">
-    <div class="title">
+  <header>
+      <img src="img/icon.jpg" alt="mypage" width="100" height="100">
       <h2>クイズの結果</h2>
+  </header>
+  <main>
+    <div class="question">
+      <?php for ($i = 0; $i < count($results); $i++): ?>
+        <h4>第<?php echo $i+1 ?>問目</h4>
+        <p>
+          <?php
+            if (isset($results)) {
+              echo "　　".$results[$i];
+            }
+          ?>
+        </p>
+      <?php endfor ?>
     </div>
-    <?php for ($i = 0; $i < count($results); $i++): ?>
-      <h4>第<?php echo $i+1 ?>問目</h4>
-      <p>
-        <?php
-          if (isset($results)) {
-            echo "　　".$results[$i];
-          }
-        ?>
-      </p>
-    <?php endfor ?>
     <div class = "result">
-      <h4>〇〇さんは、<?php echo count($results) ?>問中<?php echo $countCorrAns ?>問正解です!</h4>
+      <h4><?php echo $name ?>さんは、<?php echo count($results) ?>問中<?php echo $countCorrAns ?>問正解です!</h4>
     </div>
     <div class = "btn">
-      <a href="index.php" class="submit">再挑戦</a><br>
+      <a href="question.php" class="submit">再挑戦</a><br>
     </div>
-  </div>
+  </main>
 </body>
 </html>

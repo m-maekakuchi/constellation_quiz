@@ -1,0 +1,114 @@
+body {
+  font-family: "Hiragino Kaku Gothic ProN";
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.top-wrapper {
+  padding: 60px 0px 40px;
+  background-image: url("../img/login-top.jpg");
+  background-size: cover;
+  color:#A9CDF5;
+  height: 240px;
+  text-align: center;
+}
+
+.top-wrapper h2 {
+  font-size: 40px;
+  margin: 30px 0;
+  opacity: 0.7;
+}
+
+.regist h2{
+  margin: 80px 0;
+}
+
+.top-wrapper p {
+  font-size: 20px;
+  margin: 0 0 30px;
+  opacity: 0.7;
+}
+
+.btn {
+  cursor: pointer;
+  display:inline-block;
+  padding: 8px 24px;
+  border-radius: 7px;
+  opacity: 0.8;
+  color: #ffffffd0;
+  font-size: 17px;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+.top {
+  background-color: #3c627e;
+}
+
+.form-wrapper {
+  padding: 30px 0px;
+  color: #5f5d60;
+  font-size: 20px;
+  text-align: center;
+}
+
+.login-form input {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #3c627e;
+  border-radius: 7px;
+  margin: 0 0 20px;
+}
+
+.login-form input:focus {
+  box-shadow: 0 0 5px 1px #2078b9;
+  outline: none;
+}
+
+.form {
+  border: none;
+  background-color: #2078b9;
+}
+
+.regist-wrapper {
+  padding: 30px 0px;
+  width: 500px;
+  margin: 0 auto;
+  color: #5f5d60;
+  font-size: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.label {
+  width: 220px;
+}
+
+.label-required {
+  color: #fd7259;
+}
+
+.regist-wrapper input {
+  border: 1px solid #3c627e;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.regist-wrapper select {
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid #3c627e;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+}

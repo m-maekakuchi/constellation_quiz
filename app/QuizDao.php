@@ -3,11 +3,10 @@
     private $db;
 
     public function __construct() {
-      $dsn = 'mysql:dbname=heroku_c4a85b99b211ade;host=us-cdbr-east-06.cleardb.net;charset=utf8';
-      $user ='b7195eb6df8b24';
-      $password ="1148410a";
-      $driver_options = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET time_zone='+09:00'"];
-      $this->db = new PDO($dsn, $user, $password, $driver_options);
+      $dsn = 'mysql:dbname=quiz;host=localhost;charset=utf8';
+      $user ='root';
+      $password ="root";
+      $this->db = new PDO($dsn, $user, $password);
       $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -94,17 +93,115 @@
       return $stt->rowCount();
     }
 
-    // public function selectByTime($date1, $date2) {
-    //   $sql = "SELECT * FROM quiz_result WHERE answer_datetime BETWEEN ? AND ?";
-    //   $stt = $this->db->prepare($sql);
-    //   $stt->bindValue(1, $date1);
-    //   $stt->bindValue(2, $date2);
-    //   $stt->execute();
-    //   $rows = [];
-    //   while($row = $stt->fetch(PDO::FETCH_ASSOC)) {
-    //     $rows[] = $row;
-    //   }
-    //   return $rows;
-    // }
+    //アカウントが登録されているか
+    public function selectUserId($email) {
+      $sql = "SELECT
+                id,
+                password
+              FROM
+                users
+              WHERE
+                email = ?;";
+      $stt = $this->db->prepare($sql);
+      $stt->bindValue(1, $email);
+      $stt->execute();
+      return $stt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    //ログインされたアカウント情報を取り出す
+    public function selectUserInfo($userId) {
+      $sql = "SELECT
+                d.name AS name,
+                u.email AS email,
+                u.password AS password,
+                a.address AS address,
+                d.birthday AS birthday,
+                d.tel AS tel,
+                w.work AS work
+              FROM
+                users u
+              LEFT JOIN user_detail d ON
+                u.id = d.users_id
+              LEFT JOIN addresss a ON
+                d.address_id = a.id
+              LEFT JOIN works w ON
+                d.works_id = w.id
+              WHERE
+                users_id = ?;";
+      $stt = $this->db->prepare($sql);
+      $stt->bindValue(1, $userId);
+      $stt->execute();
+      return $stt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    //住所一覧を取得
+    public function selectAddress() {
+      $sql = "SELECT
+                *
+              FROM
+                addresss;";
+      $stt = $this->db->prepare($sql);
+      $stt->execute();
+      return $stt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //仕事一覧を取得
+    public function selectWork() {
+      $sql = "SELECT
+                *
+              FROM
+                works;";
+      $stt = $this->db->prepare($sql);
+      $stt->execute();
+      return $stt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //usersテーブルのmaxのidを取得
+    public function selectMaxUsersId() {
+      $sql = "SELECT
+                  MAX(id) AS id
+              FROM
+                  users;";
+      $stt = $this->db->prepare($sql);
+      $stt->execute();
+      return $stt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    //アカウント登録
+    public function insertUsers($id, $email, $password) {
+      $sql = "INSERT INTO users(id, email, password)
+              VALUES(?, ?, ?);";
+      $stt = $this->db->prepare($sql);
+      $stt->bindValue(1, $id);
+      $stt->bindValue(2, $email);
+      $stt->bindValue(3, $password);
+      $stt->execute();
+      return $stt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //アカウント詳細登録
+    public function insertUser_d($id, $name, $address_id, $birthday, $tel, $works_id, $users_id) {
+      $sql = "INSERT INTO user_detail(
+                id,
+                name,
+                address_id,
+                birthday,
+                tel,
+                works_id,
+                users_id
+              )
+              VALUES(?, ?, ?, ?, ?, ?, ?);";
+      $stt = $this->db->prepare($sql);
+      $stt->bindValue(1, $id);
+      $stt->bindValue(2, $name);
+      $stt->bindValue(3, $address_id);
+      $stt->bindValue(4, $birthday);
+      $stt->bindValue(5, $tel);
+      $stt->bindValue(6, $works_id);
+      $stt->bindValue(7, $users_id);
+      $stt->execute();
+      return $stt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
   }
 ?>
