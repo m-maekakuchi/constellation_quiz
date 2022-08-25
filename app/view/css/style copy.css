@@ -1,7 +1,6 @@
 body {
   font-family: "Hiragino Kaku Gothic ProN";
   margin: 0px;
-  text-align: center;
 }
 
 a {
@@ -13,7 +12,8 @@ a {
   background-image: url("../img/login-top.jpg");
   background-size: cover;
   color:#A9CDF5;
-  height: 240px
+  height: 240px;
+  text-align: center;
 }
 
 .top-wrapper h2 {
@@ -23,10 +23,10 @@ a {
 }
 
 .regist h2{
-  margin: 80px 0 20px;
+  margin: 80px 0;
 }
 
-.login p {
+.top-wrapper p {
   font-size: 20px;
   margin: 0 0 30px;
   opacity: 0.7;
@@ -40,7 +40,6 @@ a {
   opacity: 0.8;
   color: #ffffffd0;
   font-size: 17px;
-  text-align: center;
 }
 
 .btn:hover {
@@ -49,11 +48,6 @@ a {
 
 .top {
   background-color: #3c627e;
-}
-
-.submit {
-  border: none;
-  background-color: #2078b9;
 }
 
 .form-wrapper {
@@ -76,24 +70,23 @@ a {
   outline: none;
 }
 
+.form {
+  border: none;
+  background-color: #2078b9;
+}
+
 .regist-wrapper {
   padding: 30px 0px;
-  width: 700px;
+  width: 500px;
   margin: 0 auto;
   color: #5f5d60;
   font-size: 20px;
-  text-align: left;
 }
 
 .item {
   display: flex;
+  align-items: center;
   padding-bottom: 20px;
-}
-
-.item_column {
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
 }
 
 .label {
@@ -104,13 +97,11 @@ a {
   color: #fd7259;
 }
 
-.regist-wrapper input[type="text"],
-.regist-wrapper input[type="password"]{
+.regist-wrapper input {
   border: 1px solid #3c627e;
   border-radius: 5px;
   padding: 10px;
-  size: 20px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .regist-wrapper select {
@@ -120,26 +111,4 @@ a {
   border-radius: 5px;
   padding: 10px;
   font-size: 18px;
-}
-
-.item input:focus, .item select:focus{
-  box-shadow: 0 0 5px 1px #2078b9;
-  outline: none;
-}
-
-.form-submit{
-  margin: 0 auto 20px;
-  width: 100px;
-}
-
-.error{
-  color: #fd7259;
-}
-
-.select1 {
-  width: 80px;
-}
-
-.select2 {
-  width: 170px;
 }

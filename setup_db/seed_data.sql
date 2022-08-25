@@ -52,7 +52,7 @@ INSERT INTO choices(id, content, result_flg, questions_id) VALUES (39, 'オロ�
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (40, 'アオジル', 0, 10);
 
 
-INSERT INTO answer_histroy(id, username, choices_id1, choices_id2, choices_id3) VALUES (1, 'テストユーザー', 1, 5, 11);
+INSERT INTO answer_histroy(id, users_id, choices_id1, choices_id2, choices_id3) VALUES (1, 5, 11, , 11);
 
 
 INSERT INTO users(id, email, password) VALUES (1, 'example@gmail.com', '1234abc');
