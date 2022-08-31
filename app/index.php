@@ -19,9 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 // コントローラークラスをまとめた連想配列
 $controllers = [
 	'login'          => 'LoginController',
-	'loginComplete'  => 'LoginCompleteController',
-	'regist'         => 'RegistController',
-	'registComplete' => 'RegistCompleteController',
+	'registration'   => 'RegistrationController',
 	'question'       => 'QuestionController',
 	'result'         => 'ResultController'
 ];
@@ -30,20 +28,25 @@ if (isset($params->action) === false) {
 	// リクエストパラメータのactionの値が指定されていない場合
 	// ログインページへ遷移するコントローラーを指定
 	$params->action = "login";
-} else if (array_key_exists($params->action, $controllers) === false) {
-	$params->action = "error";
-	$model->message = "不正なアクセスです";
+// } else if (array_key_exists($params->action, $controllers) === false) {
+// 	$params->action = "error";
+// 	$model->message = "不正なアクセスです";
 }
-$_SESSION['action'] = $params->action;
+
 // リクエストパラメータのactionの値から生成済みのコントローラーを取得
 $controller = createController($controllers[$params->action]);
 try {
 	// リクエストに対応した処理を行うメソッドの呼び出し、Viewのパスを取得
 	$view = $controller->action($params, $model);
+	if (array_key_exists($view, $controllers) === true) {
+		$params->action = $view;
+		$controller = createController($controllers[$params->action]);
+		$view = $controller->action($params, $model);
+	}
 } catch (Exception $e) {
-	// // エラー発生した場合の処理
-	// $model->message = $e->getMessage();
-	// $view = "app/view/error.php";
+	// エラー発生した場合の処理
+	$model->message = $e->getMessage();
+	$view = "app/view/error.php";
 }
 // Viewを表示
 $controller->view($view, $model);

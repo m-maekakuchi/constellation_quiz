@@ -11,7 +11,8 @@
     }
 
     //セレクトボックスのoption要素を生成
-    public function makeOptions($list, $key) {
+    public static function makeOptions($list, $key) {
+      echo 15;
       $options = [];
       array_push($options, '<option value="">--</option>');  
       for ($i = 0; $i < count($list); $i++) {

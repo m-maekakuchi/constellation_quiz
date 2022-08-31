@@ -1,7 +1,7 @@
 <?php
-require_once ("dao/Dao.php");
+require_once ("model/Model.php");
 
-class QuestionDao extends Dao {
+class QuestionModel extends Model {
 	/**
 	 * questions表のレコード数を取得
 	 * 
@@ -61,4 +61,23 @@ class QuestionDao extends Dao {
 		}
 		return $contents;
 	}
+
+	/**
+	 * choices表から正答を取得
+	 * 
+	 * @return 二次元配列
+	 */
+  public function selectByFlg() {
+    $this->open();
+    $sql = "SELECT
+              id,
+              questions_id
+            FROM
+              choices
+            WHERE
+              result_flg = 1";
+    $stt = $this->prepare($sql);
+		$stt->execute();
+    return $stt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

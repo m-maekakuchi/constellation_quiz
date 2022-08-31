@@ -18,7 +18,7 @@
       <div class="top-wrapper">
         <h2>星座クイズ</h2>
         <p>星座にまつわるクイズに挑戦しませんか</p>
-        <a href="index.php?action=regist" class="btn top">アカウント登録はこちら</a>
+        <a href="index.php?action=registration" class="btn top">アカウント登録はこちら</a>
       </div>
       <div class="form-wrapper">
       <?php if(isset($error)) echo "<p class='error'>{$error}</p>"; ?>
@@ -30,7 +30,6 @@
             <input type="password" name="password" placeholder="パスワード" />
           </div>
           <input type="submit" name="submit" class="btn submit" value="ログイン" />
-          <input type="hidden" name="action" value="loginComplete">
         </form>
       </div>
     </div>

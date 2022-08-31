@@ -1,25 +1,33 @@
 <?php
   require_once('utilities/Form.php');
 
-  try {
-    $adressDao = createDao("AdressDao");
-    $worksDao  = createDao("WorksDao");
-    $form      = new Form();
+  // try {
+  //   $adressDao = createDao("AdressDao");
+  //   $worksDao  = createDao("WorksDao");
+    // $form      = new Form();
 
-    $address   = $adressDao->selectAll();
-    $works     = $worksDao->selectAll();
-    $years     = $form->makeItems(1950, 2020);
-    $months    = $form->makeItems(1, 12);
-    $days      = $form->makeItems(1, 31);
+  //   $address   = $adressDao->selectAll();
+  //   $works     = $worksDao->selectAll();
+  //   $years     = $form->makeItems(1950, 2020);
+  //   $months    = $form->makeItems(1, 12);
+  //   $days      = $form->makeItems(1, 31);
 
-    if (isset($_SESSION['errors'])) {
-      $errors = $_SESSION['errors'];
-    }
-  } catch (PDOException $e) {
-    die ("データベースエラー:".$e->getMessage());
-  } catch (Exception $e) {
-    echo $e->getMessage(), "例外発生"; 
-  }
+  //   if (isset($_SESSION['errors'])) {
+  //     $errors = $_SESSION['errors'];
+  //   }
+  // } catch (PDOException $e) {
+  //   die ("データベースエラー:".$e->getMessage());
+  // } catch (Exception $e) {
+  //   echo $e->getMessage(), "例外発生"; 
+  // }
+  
+  $address = $_SESSION['address'];
+  $works   = $_SESSION['works'];
+  $years   = $_SESSION['years'];
+  $months  = $_SESSION['months'];
+  $days    = $_SESSION['days'];
+  // var_dump(Form::makeOptions($address, 'address'))
+
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +105,8 @@
           <label class="label">住所：</label>
             <select name="address" class="select1">
               <?php
-                $options = $form->makeOptions($address, 'address');
+                $options = Form::makeOptions($address, 'address');
+                var_dump($options);
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -108,7 +117,7 @@
           <label class="label">生年月日：</label>
             <select name="year" class="select1">
               <?php
-                $options = $form->makeOptions($years, 'year');
+                $options = Form::makeOptions($years, 'year');
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -116,7 +125,7 @@
             </select>年
             <select name="month" class="select1">
               <?php
-                $options = $form->makeOptions($months, 'month');
+                $options = Form::makeOptions($months, 'month');
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -124,7 +133,7 @@
             </select>月
             <select name="day" class="select1">
               <?php
-                $options = $form->makeOptions($days, 'day');
+                $options = Form::makeOptions($days, 'day');
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -150,7 +159,7 @@
             <label class="label">仕事：</label>
             <select name="work" class="select2"> 
               <?php
-                $options = $form->makeOptions($works, 'work');
+                $options = Form::makeOptions($works, 'work');
                 foreach ($options as $option) {
                   echo $option;
                 }

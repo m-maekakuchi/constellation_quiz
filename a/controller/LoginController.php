@@ -25,16 +25,16 @@ class LoginController extends Controller {
 		$password = $params->password;
 
 
-			if ($email != "" && $password != "") {
-				//データベース省略
-				if ($password === "1234") {
-					$_SESSION['loginStatus'] = "success";
-					return "question";
-				} else {
-					return "view/login.php";
-				}
+		if ($email != "" && $password != "") {
+			//データベース省略
+			if ($password === "1234") {
+				$_SESSION['loginStatus'] = "success";
+				return "question";
 			} else {
 				return "view/login.php";
 			}
+		} else {
+			return "view/login.php";
+		}
 	}
 }

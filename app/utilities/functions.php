@@ -15,14 +15,14 @@ function createController($className) {
 }
 
 /**
- * DAOオブジェクトを生成する関数
+ * Modelオブジェクトを生成する関数
  *
  * @param string $className
- *            DAOクラス名
- * @return DAO オブジェクト
+ *            Modelクラス名
+ * @return Model オブジェクト
  */
-function createDao($className) {
-	$classPath = "dao/" . $className . ".php";
+function createModel($className) {
+	$classPath = "model/" . $className . ".php";
 	require_once ($classPath);
 	// クラスからオブジェクト生成して返す
 	return new $className();

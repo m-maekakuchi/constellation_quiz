@@ -10,7 +10,7 @@ a {
 
 .top-wrapper {
   padding: 60px 0px 40px;
-  background-image: url("../../img/login-top.jpg");
+  background-image: url("../img/login-top.jpg");
   background-size: cover;
   color:#A9CDF5;
   height: 240px;
