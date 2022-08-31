@@ -1,34 +1,38 @@
 <?php
-	var_dump($_SESSION['action']);
-	$correct_answers = $_SESSION['correct_answers'];
+	// var_dump($_SESSION['action']);
+	// $correct_answers = $_SESSION['correct_answers'];
   
-	if ($_SESSION['action'] == 'loginComplete' || $_SESSION['action'] == 'question') {
-		$id = 1;
-		if (isset($_POST['question_id'])) {
-			if ($_POST['question_id'] < $_SESSION['questions_num']) {
-				$id = $_POST['question_id'] + 1;
-			} else {
-				$id = $_POST['question_id'];
-			}
-		}
-		try {
-			$questionDao = createDao("QuestionDao");
-			$contents = $questionDao->selectContents($id);
+	// if ($_SESSION['action'] == 'loginComplete' || $_SESSION['action'] == 'question') {
+	// 	$id = 1;
+	// 	if (isset($_POST['question_id'])) {
+	// 		if ($_POST['question_id'] < $_SESSION['questions_num']) {
+	// 			$id = $_POST['question_id'] + 1;
+	// 		} else {
+	// 			$id = $_POST['question_id'];
+	// 		}
+	// 	}
+	// 	try {
+	// 		$questionDao = createDao("QuestionDao");
+	// 		$contents = $questionDao->selectContents($id);
 
-			$title = $contents[0]['QUESTION'];
-			$choices = [];
-			for ($i = 0; $i < count($contents[0]['OPTIONS']); $i++) {
-				$choice = $contents[0]['OPTIONS'][$i];
-				array_push($choices, $choice);
-			}
-			$question_id = "choices_id".$contents[0]['QUESTION_ID'];
-		} catch (PDOException $e) {
-			die ("データベースエラー:".$e->getMessage());
-		} catch (Exception $e) {
-			echo $e->getMessage(), "例外発生"; 
-		}
-	}
-	$answer = $correct_answers[$contents[0]['QUESTION_ID'] - 1]['id'];
+	// 		$title = $contents[0]['QUESTION'];
+	// 		$choices = [];
+	// 		for ($i = 0; $i < count($contents[0]['OPTIONS']); $i++) {
+	// 			$choice = $contents[0]['OPTIONS'][$i];
+	// 			array_push($choices, $choice);
+	// 		}
+	// 		$question_id = "choices_id".$contents[0]['QUESTION_ID'];
+	// 	} catch (PDOException $e) {
+	// 		die ("データベースエラー:".$e->getMessage());
+	// 	} catch (Exception $e) {
+	// 		echo $e->getMessage(), "例外発生"; 
+	// 	}
+	// }
+	// $answer = $correct_answers[$contents[0]['QUESTION_ID'] - 1]['id'];
+	$question_id = $_SESSION['question_id'];
+	$title = $_SESSION['title'];
+	$choice_ids = $_SESSION['choice_ids'];
+	$choices = $_SESSION['choices'];
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +68,7 @@
 			<form action="index.php" method="post" name="question">
 				<div class="regist-wrapper">
 					<h4>
-						第<?php echo $id ?>問　
+						第<?php echo $question_id ?>問　
 						<?php echo $title; ?>
 					</h4>
 					<?php for ($i = 0; $i < count($choices); $i++): ?>
@@ -72,7 +76,7 @@
 							<input
 								type="radio"
 								name="choices_id"
-								value="<?php echo $contents[0]['CHOICE_ID'][$i] ?>"
+								value="<?php echo $choice_ids[$i] ?>"
 								id="question"
 							/>
 							<?php echo $choices[$i] ?>
@@ -81,7 +85,7 @@
 				</div>
 				<div class="form-submit">
 					<input type="submit" name="submit" class="btn submit" value="回答" onClick="return show_result();" >
-					<input type="hidden" name="question_id" value="<?php echo $contents[0]['QUESTION_ID'] ?>">
+					<input type="hidden" name="question_id" value="<?php echo $question_id ?>">
 					<input type="hidden" name="action" value="question">
 					<?php
 						if (

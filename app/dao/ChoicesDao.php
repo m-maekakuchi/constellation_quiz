@@ -1,7 +1,7 @@
 <?php
-require_once("dao/Dao.php");
+require_once ("model/Model.php");
 
-class ChoicesDao extends Dao {
+class ChoicesModel extends Model {
   /**
 	 * choices表から正答を取得
 	 * 
