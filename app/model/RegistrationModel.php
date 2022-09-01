@@ -9,10 +9,4 @@ class RegistrationModel extends Model {
     parent::__construct();
   }
 
-  
-
-
-
-
-
 }

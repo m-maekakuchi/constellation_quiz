@@ -26,7 +26,6 @@
   $years   = $_SESSION['years'];
   $months  = $_SESSION['months'];
   $days    = $_SESSION['days'];
-  // var_dump(Form::makeOptions($address, 'address'))
 
 ?>
 
@@ -168,7 +167,7 @@
           </div>
           <div class="form-submit">
             <input type="submit" name="submit" class="btn submit" value="登録する">
-            <input type="hidden" name="action" value="registComplete">
+            <input type="hidden" name="action" value="complete">
           </div>
         </form>
       </div>
