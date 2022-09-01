@@ -21,7 +21,8 @@ $controllers = [
 	'login'          => 'LoginController',
 	'registration'   => 'RegistrationController',
 	'question'       => 'QuestionController',
-	'result'         => 'ResultController'
+	'result'         => 'ResultController',
+	'complete'       => 'CompleteController'
 ];
 
 if (isset($params->action) === false) {
