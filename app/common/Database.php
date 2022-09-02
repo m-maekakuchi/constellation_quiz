@@ -16,8 +16,8 @@ class Database {
 	 */
 	function __construct() {
 		$dsn = Conf::DSN;
-		$user ='root';
-		$password ="root";
+		$user = Conf::USER;
+		$password = Conf::PASSWORD;
 		$this->db = new PDO($dsn, $user, $password);
 		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
@@ -42,12 +42,12 @@ class Database {
 		return $this->db->prepare($sql);
 	}
 
-	// /**
-	//  * 最後に挿入された行IDを取得するメソッド
-	//  *
-	//  * @return string 最後に挿入された行ID
-	//  */
-	// public function lastInsertId() {
-	// 	return $this->db->lastInsertId();
-	// }
+	/**
+	 * 挿入した最終行を取得するメソッド
+	 *
+	 * @return テーブルの最終行
+	 */
+	public function lastInsertId() {
+		return $this->db->lastInsertId();
+	}
 }

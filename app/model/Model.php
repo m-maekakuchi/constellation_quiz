@@ -10,6 +10,27 @@ class Model extends Database {
   }
 
 	/**
+	 * users表から同じメールアドレスのアカウントを取得
+	 *
+	 * @param string $id	ユーザーID
+	 * 
+	 * @return array 検索結果
+	 */
+	public function selectByEmail ($email) {
+		$sql = "SELECT
+							id,
+							password
+						FROM
+							users
+						WHERE
+							email = ?;";
+		$stt = $this->prepare($sql);
+		$stt->bindValue(1, $email);
+		$stt->execute();
+		return $stt->fetch(PDO::FETCH_ASSOC);
+	}
+
+	/**
 	 * addresss表から全件検索するメソッド
 	 *
 	 * @return array 検索結果（二次元配列）

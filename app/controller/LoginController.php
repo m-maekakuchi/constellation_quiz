@@ -1,6 +1,8 @@
 <?php
 
 require_once("controller/Controller.php");
+require_once('utilities/Validation.php');
+require_once('common/Message.php');
 
 class LoginController extends Controller {
 	/**
@@ -13,11 +15,8 @@ class LoginController extends Controller {
 	 * @return string Viewのパス
 	 */
 	public function action($params, $model) {
-		require_once('utilities/Validation.php');
-    require_once('common/Message.php');
-
-    $error = "";
-		$email = $params->email;
+    $error    = "";
+		$email    = $params->email;
 		$password = $params->password;
 
 		try {
@@ -32,12 +31,21 @@ class LoginController extends Controller {
 				} else {
 					$_SESSION['loginStatus'] = "success";
 					$loginModel = createModel("LoginModel");
-					//メールアドレスが一致するアカウントがあるか確認
+					//メールアドレスが一致するアカウントがあるか判定
 					$row = $loginModel->selectByEmail($params->email);
 					//一致したらアカウント情報をセッションに登録
 					if ($row) {
+						//パスワードが一致するか判定
 						if (password_verify($params->password, $row['password'])) {
-							$loginModel->selectUserInfo($row['id']);
+							//ログインされたアカウント情報をセッションに登録
+							$user = $loginModel->selectUserInfo($row['id']);
+							$_SESSION['id']       = $user['id'];
+							$_SESSION['name']     = $user['name'];
+							$_SESSION['email']    = $user['email'];
+							$_SESSION['address']  = $user['address'];
+							$_SESSION['birthday'] = $user['birthday'];
+							$_SESSION['tel']      = $user['tel'];
+							$_SESSION['work']     = $user['work'];
 							return "question";
 						} else {
 							$error = Message::$PASSWORD_WRONG;
