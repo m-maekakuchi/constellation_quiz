@@ -15,6 +15,7 @@ class ResultController extends Controller {
 	 */
 	public function action($params, $model) {
     $answers = [];
+    
 		if (isset($_SESSION['answers'])) {
 			$answers = $_SESSION['answers'];
 		}
