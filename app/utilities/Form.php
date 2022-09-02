@@ -12,9 +12,9 @@
 
     //セレクトボックスのoption要素を生成
     public static function makeOptions($list, $key) {
-      echo 15;
       $options = [];
-      array_push($options, '<option value="">--</option>');  
+      array_push($options, '<option value="">--</option>');
+      var_dump($list);
       for ($i = 0; $i < count($list); $i++) {
         if ($key == 'work' || $key == 'address'){
           if ($list[$i]['id'] == $_SESSION[$key]) {
@@ -32,6 +32,4 @@
       }
       return $options;
     }
-
   }
-?>

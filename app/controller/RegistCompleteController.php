@@ -1,6 +1,8 @@
 <?php
 
 require_once("controller/Controller.php");
+require_once('utilities/Validation.php');
+require_once('common/Message.php');
 
 class RegistCompleteController extends Controller {
 	/**
@@ -13,8 +15,7 @@ class RegistCompleteController extends Controller {
 	 * @return string Viewのパス
 	 */
 	public function action($params, $model) {
-		require_once('utilities/Validation.php');
-		require_once('common/Message.php');
+		
 	
 		$success   = 0;
 		$errors    = [];
