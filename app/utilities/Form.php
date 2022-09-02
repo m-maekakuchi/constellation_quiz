@@ -14,10 +14,6 @@
     public static function makeOptions($list, $key) {
       $options = [];
       array_push($options, '<option value="">--</option>');
-<<<<<<< HEAD
-=======
-      var_dump($list);
->>>>>>> main
       for ($i = 0; $i < count($list); $i++) {
         if ($key == 'work' || $key == 'address'){
           if ($list[$i]['id'] == $_SESSION[$key]) {
