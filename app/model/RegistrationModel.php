@@ -14,7 +14,7 @@ class RegistrationModel extends Model {
 	 *
 	 * @param string $email メールアドレス
 	 * 							 $password パスワード
-	 * @return array integer 挿入された行ID
+	 * @return integer 挿入された行ID
 	 */
 	public function insertUsers($email, $password) {
 		$sql = "INSERT INTO users(email, password)
@@ -29,14 +29,13 @@ class RegistrationModel extends Model {
 	/**
 	 * user_detail表に登録するメソッド
 	 *
-	 * @param string $id　ユーザーID
-	 * 				$name 名前
+	 * @param string $name 名前
 	 * 				$address_id addresss表のID
 	 * 				$birthday 誕生日
 	 * 				$tel 電話番号
 	 * 				$works_id works表のID
 	 * 				$users_id users表のID
-	 * @return array 検索結果（二次元配列）
+	 * @return array integer 挿入された行ID
 	 */
 	public function insertUser_d($name, $address_id, $birthday, $tel, $works_id, $users_id) {
 		$sql = "INSERT INTO user_detail(
