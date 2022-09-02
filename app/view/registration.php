@@ -1,32 +1,7 @@
 <?php
-  require_once('utilities/Form.php');
-
-  // try {
-  //   $adressDao = createDao("AdressDao");
-  //   $worksDao  = createDao("WorksDao");
-    // $form      = new Form();
-
-  //   $address   = $adressDao->selectAll();
-  //   $works     = $worksDao->selectAll();
-  //   $years     = $form->makeItems(1950, 2020);
-  //   $months    = $form->makeItems(1, 12);
-  //   $days      = $form->makeItems(1, 31);
-
-  //   if (isset($_SESSION['errors'])) {
-  //     $errors = $_SESSION['errors'];
-  //   }
-  // } catch (PDOException $e) {
-  //   die ("データベースエラー:".$e->getMessage());
-  // } catch (Exception $e) {
-  //   echo $e->getMessage(), "例外発生"; 
-  // }
-  
-  $address = $_SESSION['address'];
-  $works   = $_SESSION['works'];
-  $years   = $_SESSION['years'];
-  $months  = $_SESSION['months'];
-  $days    = $_SESSION['days'];
-
+    if (isset($_SESSION['errors'])) {
+      $errors = $_SESSION['errors'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -104,8 +79,7 @@
           <label class="label">住所：</label>
             <select name="address" class="select1">
               <?php
-                $options = Form::makeOptions($address, 'address');
-                var_dump($options);
+                $options = Form::makeOptions($_SESSION['addresss'], 'address');
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -116,7 +90,7 @@
           <label class="label">生年月日：</label>
             <select name="year" class="select1">
               <?php
-                $options = Form::makeOptions($years, 'year');
+                $options = Form::makeOptions($_SESSION['years'], 'year');
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -124,7 +98,7 @@
             </select>年
             <select name="month" class="select1">
               <?php
-                $options = Form::makeOptions($months, 'month');
+                $options = Form::makeOptions($_SESSION['months'], 'month');
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -132,7 +106,7 @@
             </select>月
             <select name="day" class="select1">
               <?php
-                $options = Form::makeOptions($days, 'day');
+                $options = Form::makeOptions($_SESSION['days'], 'day');
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -158,7 +132,7 @@
             <label class="label">仕事：</label>
             <select name="work" class="select2"> 
               <?php
-                $options = Form::makeOptions($works, 'work');
+                $options = Form::makeOptions($_SESSION['works'], 'work');
                 foreach ($options as $option) {
                   echo $option;
                 }
@@ -167,7 +141,7 @@
           </div>
           <div class="form-submit">
             <input type="submit" name="submit" class="btn submit" value="登録する">
-            <input type="hidden" name="action" value="complete">
+            <input type="hidden" name="action" value="registration">
           </div>
         </form>
       </div>

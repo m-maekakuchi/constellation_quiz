@@ -1,7 +1,7 @@
 <?php
 require_once ("common/Database.php");
 
-class QuestionModel extends Database {
+class QuestionModel extends Model {
 	/**
 	 * データベースを接続
 	 */
