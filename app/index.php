@@ -22,7 +22,8 @@ $controllers = [
 	'registration'   => 'RegistrationController',
 	'question'       => 'QuestionController',
 	'result'         => 'ResultController',
-	'complete'       => 'CompleteController'
+	'complete'       => 'CompleteController',
+	'mypage'         => 'MypageController'
 ];
 
 if (isset($params->action) === false) {
