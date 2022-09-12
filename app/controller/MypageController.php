@@ -1,6 +1,6 @@
 <?php
-
 require_once("controller/Controller.php");
+require_once('utilities/Form.php');
 require_once('utilities/Validation.php');
 require_once('common/Message.php');
 
