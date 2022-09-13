@@ -1,8 +1,9 @@
 <?php
     if (isset($_SESSION['errors'])) {
       $errors = $_SESSION['errors'];
+      echo $errors['name'];
     }
-
+    
     echo $_SESSION['address'];
     echo $_SESSION['birthday'];
     echo $_SESSION['tel'];

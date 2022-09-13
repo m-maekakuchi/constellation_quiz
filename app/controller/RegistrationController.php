@@ -15,9 +15,9 @@ class RegistrationController extends Controller {
 	 * @return string Viewのパス
 	 */
 	public function action($params, $model) {
-		//「アカウント登録はこちら」ボタンが押された場合
 		try {
 			$registrationModel = createModel("RegistrationModel");
+			//ログイン画面で「アカウント登録はこちら」ボタンが押された場合
 			if ($params->action === "registration" && isset($params->submit) === false) {
 				//フォームの選択肢を生成し、セッションに登録
 				$form    = new Form();

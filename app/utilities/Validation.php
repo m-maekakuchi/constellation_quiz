@@ -9,10 +9,10 @@
     //空文字チェック
     public function checkEmpty($para) {
 			if (empty($para)) {
-				//echo "空です";
+				//未入力
 				return true;
 			} else {
-				//echo "入力値あり";
+				//入力値あり
 				return false;
 			}
     }
@@ -20,10 +20,10 @@
     //バリデーションチェック
     public function checklPattern($flg, $para) {
 			if (!preg_match($this->patternList[$flg], $para)) {
-				//echo "パターンに一致しません";
+				//パターンに一致しない
 				return true;
 			} else {
-				//echo "パターンに一致します";
+				//パターンに一致
 				return false;
 			}
     }
