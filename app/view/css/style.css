@@ -100,6 +100,10 @@ a {
   width: 220px;
 }
 
+.label_form {
+  width: 380px;
+}
+
 .label-required {
   color: #fd7259;
 }
