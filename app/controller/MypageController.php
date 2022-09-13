@@ -15,7 +15,6 @@ class MypageController extends Controller {
 	 * @return string Viewのパス
 	 */
 	public function action($params, $model) {
-		var_dump($params);
 		$mypageModel = createModel("MypageModel");
 		$form    = new Form();
 		$works   = $mypageModel->selectWorks();
@@ -28,6 +27,9 @@ class MypageController extends Controller {
 		$_SESSION['years']    = $years;
 		$_SESSION['months']   = $months;
 		$_SESSION['days']     = $days;
+		if ($params->item === "name") {
+			echo "名前変更";
+		}
     return "view/mypage.php";
 
 		
