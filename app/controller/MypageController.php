@@ -35,15 +35,25 @@ class MypageController extends Controller {
 			//名前欄の更新ボタンが押された場合
 			} else if ($params->item === "name") {
 				if ($val->checkEmpty($params->name)) {
-					echo 38;
 					$errors['name'] = Message::$NAME_EMPTY;
-					$_SESSION['errors'] = $errors;
 				} else {
 					$updateRow = $mypageModel->updateName($params->name, $_SESSION['id']);
 					$_SESSION['name'] = $params->name;
-					// $_SESSION['message'] = "名前を更新しました";
+					$_SESSION['message'] = "名前を更新しました";
+				}
+			//メールアドレス欄の更新ボタンが押された場合
+			} else if ($params->item === "email") {
+				if ($val->checkEmpty($params->email)) {
+					$errors['email'] = Message::$EMAIL_EMPTY;
+				} else if ($val->checklPattern(0, $params->email)) {
+					$errors['email'] = Message::$EMAIL_NOT_CORRECT;
+				} else {
+					$updateRow = $mypageModel->updateEmail($params->email, $_SESSION['id']);
+					$_SESSION['email'] = $params->email;
+					$_SESSION['message'] = "メールアドレスを更新しました";
 				}
 			}
+			$_SESSION['errors'] = $errors;
 			return "view/mypage.php";
 		} catch (PDOException $e) {
 			die ("データベースエラー:".$e->getMessage());

@@ -1,13 +1,7 @@
 <?php
     if (isset($_SESSION['errors'])) {
       $errors = $_SESSION['errors'];
-      echo $errors['name'];
     }
-    
-    echo $_SESSION['address'];
-    echo $_SESSION['birthday'];
-    echo $_SESSION['tel'];
-    echo $_SESSION['work'];
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +20,7 @@
         <a href="index.php?action=login" class="btn top">ログインページに戻る</a>
       </div>
       <div class="regist-wrapper">
+        <?php if (isset($_SESSION['message'])) echo "<p class='update'>{$_SESSION['message']}</p>"; ?>
         <form action="index.php" method="post">
           <div class="item">
             <label class="label" for="label">名前<span class="label-required">*</span>：</label>
@@ -47,6 +42,8 @@
               <input type="hidden" name="item" value="name">
             </div>
           </div>
+        </form>
+        <form action="index.php" method="post">
           <div class="item">
             <label class="label" for="email">メールアドレス<span class="label-required">*</span>：</label>
             <div class="item_column">
@@ -61,7 +58,14 @@
                 echo "<span class ='error'>{$errors['email']}</span>";
               ?>
             </div>
+            <div class="form-submit">
+              <input type="submit" name="submit" class="btn submit" value="更新">
+              <input type="hidden" name="action" value="mypage">
+              <input type="hidden" name="item" value="email">
+            </div>
           </div>
+        </form>
+        <form action="index.php" method="post">
           <div class="item">
             <label class="label" for="pass">パスワード<span class="label-required">*</span>：</label>
             <div class="item_column">
@@ -85,7 +89,13 @@
                   echo "<span class ='error'>{$errors['password_confirm']}</span>";
               ?>
             </div>
+            <div class="form-submit">
+              <input type="submit" name="submit" class="btn submit" value="更新">
+              <input type="hidden" name="action" value="mypage">
+              <input type="hidden" name="item" value="password">
+            </div>
           </div>
+        </form>
           <div class="item">
             <label class="label">住所：</label>
             <div class="item_column">
@@ -165,7 +175,7 @@
             </div>
           </div>
           
-        </form>
+        
       </div>
     </div>
   </main>
