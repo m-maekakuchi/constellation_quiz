@@ -95,7 +95,7 @@
                   echo $option;
                 }
               ?>
-            </select>年
+            </select>年&nbsp;
             <select name="month" class="select1">
               <?php
                 $options = Form::makeOptions($_SESSION['months'], 'month');
@@ -103,7 +103,7 @@
                   echo $option;
                 }
               ?>
-            </select>月
+            </select>月&nbsp;
             <select name="day" class="select1">
               <?php
                 $options = Form::makeOptions($_SESSION['days'], 'day');
