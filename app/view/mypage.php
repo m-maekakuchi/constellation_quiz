@@ -23,7 +23,7 @@
         <?php if (isset($_SESSION['message'])) echo "<p class='update'>{$_SESSION['message']}</p>"; ?>
         <form action="index.php" method="post">
           <div class="item">
-            <label class="label" for="label">名前<span class="label-required">*</span>：</label>
+            <label class="label" for="label">名前：</label>
             <div class="item_column">
               <input 
                 type="text"
@@ -45,7 +45,7 @@
         </form>
         <form action="index.php" method="post">
           <div class="item">
-            <label class="label" for="email">メールアドレス<span class="label-required">*</span>：</label>
+            <label class="label" for="email">メールアドレス：</label>
             <div class="item_column">
               <input
                 type="text"
@@ -67,7 +67,7 @@
         </form>
         <form action="index.php" method="post">
           <div class="item">
-            <label class="label" for="pass">パスワード<span class="label-required">*</span>：</label>
+            <label class="label" for="pass">パスワード：</label>
             <div class="item_column">
               <input
                 type="password"
@@ -82,7 +82,7 @@
             </div>
           </div>
           <div class="item">
-            <label class="label" for="pass_confirm">パスワード確認用<span class="label-required">*</span>：</label>
+            <label class="label" for="pass_confirm">パスワード確認用：</label>
             <div class="item_column">
               <input type="password" id="pass_confirm" name="password_confirm" size="30"/>
               <?php if (isset($errors['password_confirm']))
@@ -96,6 +96,7 @@
             </div>
           </div>
         </form>
+        <form action="index.php" method="post">
           <div class="item">
             <label class="label">住所：</label>
             <div class="item_column">
@@ -107,43 +108,63 @@
                   }
                 ?>
               </select>
+              <?php if (isset($errors['address']))
+                  echo "<span class ='error'>{$errors['address']}</span>";
+              ?>
             </div>
             <div class="form-submit">
               <input type="submit" name="submit" class="btn submit" value="更新">
               <input type="hidden" name="action" value="mypage">
+              <input type="hidden" name="item" value="address">
             </div>
           </div>
+        </form>
+        <form action="index.php" method="post">
           <div class="item">
             <label class="label">生年月日：</label>
-            <? if ($_SESSION['birthday'] != null):
-                  echo $_SESSION['birthday'];
-              } else 
-            ?>
-            <select name="year" class="select1">
-              <?php
-                $options = Form::makeOptions($_SESSION['years'], 'year');
-                foreach ($options as $option) {
-                  echo $option;
-                }
-              ?>
-            </select>年
-            <select name="month" class="select1">
-              <?php
-                $options = Form::makeOptions($_SESSION['months'], 'month');
-                foreach ($options as $option) {
-                  echo $option;
-                }
-              ?>
-            </select>月
-            <select name="day" class="select1">
-              <?php
-                $options = Form::makeOptions($_SESSION['days'], 'day');
-                foreach ($options as $option) {
-                  echo $option;
-                }
-              ?>
-            </select>日
+            <?php if(isset($_SESSION['birthday'])) : ?>
+              <?php echo $_SESSION['birthday']; ?>
+            <?php else : ?>
+              <div class="item_column">
+                <div class="unity">
+                  <select name="year" class="select1">
+                    <?php
+                      $options = Form::makeOptions($_SESSION['years'], 'year');
+                      foreach ($options as $option) {
+                        echo $option;
+                      }
+                    ?>
+                  </select>年&nbsp;
+                  <select name="month" class="select1">
+                    <?php
+                      $options = Form::makeOptions($_SESSION['months'], 'month');
+                      foreach ($options as $option) {
+                        echo $option;
+                      }
+                    ?>
+                  </select>月&nbsp;
+                  <select name="day" class="select1">
+                    <?php
+                      $options = Form::makeOptions($_SESSION['days'], 'day');
+                      foreach ($options as $option) {
+                        echo $option;
+                      }
+                    ?>
+                  </select>日
+                </div>
+                <?php if (isset($errors['birthday']))
+                  echo "<span class ='error'>{$errors['birthday']}</span>";
+                ?>
+              </div>
+              <div class="form-submit">
+                <input type="submit" name="submit" class="btn submit" value="更新">
+                <input type="hidden" name="action" value="mypage">
+                <input type="hidden" name="item" value="birthday">
+              </div>
+            <?php endif; ?>
           </div>
+        </form>
+        <form action="index.php" method="post">
           <div class="item">
             <label class="label" for="tel">電話番号：</label>
             <div class="item_column">
@@ -158,24 +179,36 @@
                   echo "<span class ='error'>{$errors['tel']}</span>";
               ?>
             </div>
-          </div>
-          <div class="item">
-            <label class="label">仕事：</label>
-            <select name="work" class="select2"> 
-              <?php
-                $options = Form::makeOptions($_SESSION['works'], 'work');
-                foreach ($options as $option) {
-                  echo $option;
-                }
-              ?>
-            </select>
             <div class="form-submit">
               <input type="submit" name="submit" class="btn submit" value="更新">
               <input type="hidden" name="action" value="mypage">
+              <input type="hidden" name="item" value="tel">
             </div>
           </div>
-          
-        
+        </form>
+        <form action="index.php" method="post">
+          <div class="item">
+            <label class="label">仕事：</label>
+            <div class="item_column">
+              <select name="work" class="select2"> 
+                <?php
+                  $options = Form::makeOptions($_SESSION['works'], 'work');
+                  foreach ($options as $option) {
+                    echo $option;
+                  }
+                ?>
+              </select>
+              <?php if (isset($errors['work']))
+                    echo "<span class ='error'>{$errors['work']}</span>";
+              ?>
+            </div>
+            <div class="form-submit">
+              <input type="submit" name="submit" class="btn submit" value="更新">
+              <input type="hidden" name="action" value="mypage">
+              <input type="hidden" name="item" value="work">
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </main>
