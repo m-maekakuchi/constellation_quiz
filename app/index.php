@@ -18,12 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
 // コントローラークラスをまとめた連想配列
 $controllers = [
-	'login'          => 'LoginController',
-	'registration'   => 'RegistrationController',
-	'question'       => 'QuestionController',
-	'result'         => 'ResultController',
-	'complete'       => 'CompleteController',
-	'mypage'         => 'MypageController'
+	'login'        => 'LoginController',
+	'registration' => 'RegistrationController',
+	'question'     => 'QuestionController',
+	'result'       => 'ResultController',
+	'complete'     => 'CompleteController',
+	'result'       => 'ResultController',
+	'mypage'       => 'MypageController'
 ];
 
 if (isset($params->action) === false) {

@@ -1,9 +1,10 @@
 <?php
-	$question_id = $_SESSION['question_id'];
-	$title = $_SESSION['title'];
-	$choice_ids = $_SESSION['choice_ids'];
-	$choices = $_SESSION['choices'];
-	$corr_ans = $_SESSION['corr_ans'];
+	$question_id   = $_SESSION['question_id'];
+	$title         = $_SESSION['title'];
+	$choice_ids    = $_SESSION['choice_ids'];
+	$choices       = $_SESSION['choices'];
+	$questions_num = $_SESSION['questions_num'];
+	$corr_ans      = $_SESSION['corr_ans'];
 ?>
 
 <!DOCTYPE html>
@@ -66,13 +67,16 @@
 					<input type="hidden" name="question_id" value="<?php echo $question_id ?>">
 					<input type="hidden" name="action" value="question">
 					<?php
-						if (
-								isset($_SESSION['answers'])
-								&&
-								(count($_SESSION['answers']) == $_SESSION['questions_num'])
-								) {
-							echo "<input type='submit' name='submit' class='btn submit' value='結果' />";
-							echo "<input type='hidden' name='action' value='result'>";
+						// if (
+						// 		isset($_SESSION['answers'])
+						// 		&&
+						// 		(count($_SESSION['answers']) == $_SESSION['questions_num'])
+						// 		) {
+						// 	echo "<input type='submit' name='submit' class='btn submit' value='結果' />";
+						// 	echo "<input type='hidden' name='action' value='result'>";
+						// }
+						if ($question_id == $questions_num) {
+							echo "<input type=hidden name='last' value='last'>"; 
 						}
 					?>
 				</div>
