@@ -87,17 +87,15 @@ class QuestionModel extends Model {
 	 * 
 	 * @return 二次元配列
 	 */
-  public function selectByFlg() {
-    $this->open();
+  public function selectByFlg($id) {
     $sql = "SELECT
-              id,
-              questions_id
+              id
             FROM
               choices
             WHERE
-              result_flg = 1";
+              result_flg = 1 AND questions_id = $id";
     $stt = $this->prepare($sql);
 		$stt->execute();
-    return $stt->fetchAll(PDO::FETCH_ASSOC);
+    return $stt->fetch(PDO::FETCH_ASSOC);
   }
 }

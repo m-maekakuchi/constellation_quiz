@@ -1,38 +1,9 @@
 <?php
-	// var_dump($_SESSION['action']);
-	// $correct_answers = $_SESSION['correct_answers'];
-  
-	// if ($_SESSION['action'] == 'loginComplete' || $_SESSION['action'] == 'question') {
-	// 	$id = 1;
-	// 	if (isset($_POST['question_id'])) {
-	// 		if ($_POST['question_id'] < $_SESSION['questions_num']) {
-	// 			$id = $_POST['question_id'] + 1;
-	// 		} else {
-	// 			$id = $_POST['question_id'];
-	// 		}
-	// 	}
-	// 	try {
-	// 		$questionDao = createDao("QuestionDao");
-	// 		$contents = $questionDao->selectContents($id);
-
-	// 		$title = $contents[0]['QUESTION'];
-	// 		$choices = [];
-	// 		for ($i = 0; $i < count($contents[0]['OPTIONS']); $i++) {
-	// 			$choice = $contents[0]['OPTIONS'][$i];
-	// 			array_push($choices, $choice);
-	// 		}
-	// 		$question_id = "choices_id".$contents[0]['QUESTION_ID'];
-	// 	} catch (PDOException $e) {
-	// 		die ("データベースエラー:".$e->getMessage());
-	// 	} catch (Exception $e) {
-	// 		echo $e->getMessage(), "例外発生"; 
-	// 	}
-	// }
-	// $answer = $correct_answers[$contents[0]['QUESTION_ID'] - 1]['id'];
 	$question_id = $_SESSION['question_id'];
 	$title = $_SESSION['title'];
 	$choice_ids = $_SESSION['choice_ids'];
 	$choices = $_SESSION['choices'];
+	$corr_ans = $_SESSION['corr_ans'];
 ?>
 
 <!DOCTYPE html>
@@ -45,9 +16,16 @@
 </head>
 <script>
 	function show_result() {
-		let ans= <?php echo json_encode($answer); ?>;
-			alert(ans);
-		if (question.choices_id.value ) {
+		const choiceRadio = document.getElementsByName('choices_id');
+		const len = choiceRadio.length;
+		let checkValue;
+		let corr_ans= <?php echo $corr_ans; ?>;
+		for (let i = 0; i < len; i++) {
+			if (choiceRadio.item(i).checked) {
+				checkValue = choiceRadio.item(i).value;
+			}
+		}
+		if (question.choices_id.value == corr_ans) {
 			alert("正解！");
 		} else {
 			alert("不正解！");
@@ -77,7 +55,7 @@
 								type="radio"
 								name="choices_id"
 								value="<?php echo $choice_ids[$i] ?>"
-								id="question"
+								id="question<?php echo $i ?>"
 							/>
 							<?php echo $choices[$i] ?>
 						</label><br>

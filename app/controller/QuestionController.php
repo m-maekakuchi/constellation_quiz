@@ -47,6 +47,9 @@ class QuestionController extends Controller {
 
 				//表示する問題の情報をデータベースから取得してセッションに登録
 				$questionModel->selectContents($question_id);
+				//問題の正答をセッションに登録
+				$corr_ans = $questionModel->selectByFlg($question_id);
+				$_SESSION['corr_ans'] = $corr_ans['id'];
 			} catch (PDOException $e) {
 				die ("データベースエラー:".$e->getMessage());
 			} catch (Exception $e) {
@@ -58,7 +61,3 @@ class QuestionController extends Controller {
 		}
   }
 }
-
-// $choicesDao = createDao("ChoicesDao");
-// $correct_answers = $choicesDao->selectByFlg();
-// $_SESSION['correct_answers'] = $correct_answers;
