@@ -22,7 +22,7 @@
       <div class="regist-wrapper">
         <form action="index.php" method="post">
           <div class="item">
-            <label class="label" for="label">名前<span class="label-required">*</span>：</label>
+            <label class="label-item" for="label">名前<span class="label-required">*</span>：</label>
             <div class="item_column">
               <input 
                 type="text"
@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="item">
-            <label class="label" for="email">メールアドレス<span class="label-required">*</span>：</label>
+            <label class="label-item" for="email">メールアドレス<span class="label-required">*</span>：</label>
             <div class="item_column">
               <input
                 type="text"
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="item">
-            <label class="label" for="pass">パスワード<span class="label-required">*</span>：</label>
+            <label class="label-item" for="pass">パスワード<span class="label-required">*</span>：</label>
             <div class="item_column">
               <input
                 type="password"
@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="item">
-            <label class="label" for="pass_confirm">パスワード確認用<span class="label-required">*</span>：</label>
+            <label class="label-item" for="pass_confirm">パスワード確認用<span class="label-required">*</span>：</label>
             <div class="item_column">
               <input type="password" id="pass_confirm" name="password_confirm" size="30"/>
               <?php if (isset($errors['password_confirm']))
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="item">
-          <label class="label">住所：</label>
+          <label class="label-item">住所：</label>
             <select name="address" class="select1">
               <?php
                 $options = Form::makeOptions($_SESSION['addresss'], 'address');
@@ -87,7 +87,7 @@
             </select>
           </div>
           <div class="item">
-          <label class="label">生年月日：</label>
+          <label class="label-item">生年月日：</label>
             <select name="year" class="select1">
               <?php
                 $options = Form::makeOptions($_SESSION['years'], 'year');
@@ -114,7 +114,7 @@
             </select>日
           </div>
           <div class="item">
-            <label class="label" for="tel">電話番号：</label>
+            <label class="label-item" for="tel">電話番号：</label>
             <div class="item_column">
               <input type="text"
                       id="tel"
@@ -129,7 +129,7 @@
             </div>
           </div>
           <div class="item">
-            <label class="label">仕事：</label>
+            <label class="label-item">仕事：</label>
             <select name="work" class="select2"> 
               <?php
                 $options = Form::makeOptions($_SESSION['works'], 'work');

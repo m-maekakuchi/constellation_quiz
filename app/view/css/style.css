@@ -96,12 +96,20 @@ a {
   font-size: 16px;
 }
 
-.label {
+.item input[type="submit"] {
+  margin-left: auto;
+}
+
+.item .form-submit {
+  margin-left: auto;
+}
+
+.label-item {
   width: 220px;
 }
 
-.label_form {
-  width: 380px;
+.label-form {
+  width: 330px;
 }
 
 .label-required {
