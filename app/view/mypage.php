@@ -17,7 +17,7 @@
     <div class="container">
       <div class="top-wrapper">
         <h2>マイページ</h2>
-        <a href="index.php?action=login" class="btn top">ログインページに戻る</a>
+        <a href="index.php?action=login" class="btn top">ログアウト</a>
       </div>
       <div class="regist-wrapper">
         <?php if (isset($_SESSION['message'])) echo "<p class='update'>{$_SESSION['message']}</p>"; ?>

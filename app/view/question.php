@@ -26,8 +26,9 @@
 				checkValue = choiceRadio.item(i).value;
 			}
 		}
-		if (question.choices_id.value == corr_ans) {
+		if (checkValue == corr_ans) {
 			alert("正解！");
+			corr_num++;
 		} else {
 			alert("不正解！");
 		}
@@ -67,14 +68,6 @@
 					<input type="hidden" name="question_id" value="<?php echo $question_id ?>">
 					<input type="hidden" name="action" value="question">
 					<?php
-						// if (
-						// 		isset($_SESSION['answers'])
-						// 		&&
-						// 		(count($_SESSION['answers']) == $_SESSION['questions_num'])
-						// 		) {
-						// 	echo "<input type='submit' name='submit' class='btn submit' value='結果' />";
-						// 	echo "<input type='hidden' name='action' value='result'>";
-						// }
 						if ($question_id == $questions_num) {
 							echo "<input type=hidden name='last' value='last'>"; 
 						}

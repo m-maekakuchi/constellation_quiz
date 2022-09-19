@@ -9,7 +9,7 @@ a {
 }
 
 .top-wrapper {
-  padding: 60px 0px 40px;
+  padding: 60px 0px 50px;
   background-image: url("../img/login-top.jpg");
   background-size: cover;
   color:#A9CDF5;
@@ -49,6 +49,7 @@ a {
 
 .top {
   background-color: #3c627e;
+  margin: 10px;
 }
 
 .submit {
