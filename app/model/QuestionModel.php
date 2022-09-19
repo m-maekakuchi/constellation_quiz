@@ -62,7 +62,6 @@ class QuestionModel extends Model {
 				$loop = 0;
 			}
 		}
-		// return $contents;
 
 		$choices = [];
 		$choice_ids = [];
@@ -77,9 +76,8 @@ class QuestionModel extends Model {
 			array_push($choice_ids, $choice_id);
 		}
 
-		$_SESSION['title'] = $title;
-		$_SESSION['choices'] = $choices;
-		$_SESSION['choice_ids'] = $choice_ids;
+		$contents = ['title'=>$title, 'choices'=>$choices, 'choice_ids'=>$choice_ids];
+		return $contents;
 	}
 
 	/**

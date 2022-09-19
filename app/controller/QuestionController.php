@@ -54,7 +54,10 @@ class QuestionController extends Controller {
 					$_SESSION['question_id'] = $question_id;
 
 					//表示する問題の情報をデータベースから取得してセッションに登録
-					$questionModel->selectContents($question_id);
+					$contents = $questionModel->selectContents($question_id);
+					$_SESSION['title'] = $contents['title'];
+					$_SESSION['choices'] = $contents['choices'];
+					$_SESSION['choice_ids'] = $contents['choice_ids'];
 					//問題の正答をセッションに登録
 					$corr_ans = $questionModel->selectByFlg($question_id);
 					$_SESSION['corr_ans'] = $corr_ans['id'];
