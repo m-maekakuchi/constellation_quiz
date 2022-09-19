@@ -52,7 +52,8 @@ INSERT INTO choices(id, content, result_flg, questions_id) VALUES (39, 'オロ�
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (40, 'アオジル', 0, 10);
 
 
-INSERT INTO answer_histroy(id, users_id, choices_id1, choices_id2, choices_id3) VALUES (1, 5, 11, , 11);
+INSERT INTO answer_history(id, users_id, choices_id1, choices_id2, choices_id3, choices_id4, choices_id5, choices_id6, choices_id7, choices_id8, choices_id9, choices_id10)
+VALUES (1, 1, 2, 5, 12, 15, 19, 24, 28, 31, 36, 38);
 
 
 INSERT INTO users(id, email, password) VALUES (1, 'example@gmail.com', '1234abc');

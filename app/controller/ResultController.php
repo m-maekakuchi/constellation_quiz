@@ -15,31 +15,29 @@ class ResultController extends Controller {
 	 */
 	public function action($params, $model) {
     try {
+      //ログイン状態が保たれていた場合
       if (isset($_SESSION['loginStatus'])) {
         $corr_num = 0;
         $answers = $_SESSION['answers'];
         $questions_num = $_SESSION['questions_num'];
         $resultModel = createModel("ResultModel");
+
+        //ユーザーの回答の正誤を判断し、正解数を取得
         $corr_ans = $resultModel->selectFlugs();
-        
         for ($i = 0; $i < $questions_num; $i++) {
           if ($answers[$i] == $corr_ans[$i]['id']) {
             $corr_num++;
           }
         }
         $_SESSION['corr_num'] = $corr_num;
+
+        //ユーザーの回答をDBに登録
+        $resultModel->insertAnswers($_SESSION['id'], $answers);
+
         return "view/result.php";
       } else {
-				return "view/login.php";
-			}      
-  //     //結果ページから戻ってきた場合
-  //     } elseif (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] == $url) {
-  //       for ($i = 1; $i <= $_SESSION['questions_num']; $i++) {
-  //         $choices_id = "choices_id".$i;
-  //         unset($_SESSION[$choices_id]);
-  //       }
-  //       return "view/question.php";
-  //     }
+				return "login";
+			}
     } catch (PDOException $e) {
       die ("データベースエラー:".$e->getMessage());
     } catch (Exception $e) {

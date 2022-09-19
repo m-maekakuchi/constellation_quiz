@@ -62,7 +62,7 @@ class QuestionController extends Controller {
 					return "view/question.php";
 				}
 			} else {
-				return "view/login.php";
+				return "login";
 			}
 		} catch (PDOException $e) {
 			die ("データベースエラー:".$e->getMessage());
