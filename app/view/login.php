@@ -24,7 +24,7 @@
       <?php if(isset($error)) echo "<p class='error'>{$error}</p>"; ?>
         <form action="index.php" method="post">
           <div class="login-form">
-            <input type="email" name="email" placeholder="メールアドレス" /><br>          
+            <input type="text" name="email" placeholder="メールアドレス" /><br>          
           </div>
           <div class="login-form">
             <input type="password" name="password" placeholder="パスワード" />

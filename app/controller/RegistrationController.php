@@ -48,7 +48,7 @@ class RegistrationController extends Controller {
 					$val = new Validation();
 					//入力必須の名前のバリデーションチェック
 					if ($val->checkEmpty($params->name)) {
-						$errors['name'] = Message::$NAME_EMPTY;
+						$errors['name'] = Message::$VAL_NAME_EMPTY;
 					} else {
 						$_SESSION['name'] = $params->name;
 						$name = $_SESSION['name'];
@@ -56,11 +56,11 @@ class RegistrationController extends Controller {
 
 					//入力必須のメールアドレスのバリデーションチェック
 					if ($val->checkEmpty($params->email)) {
-						$errors['email'] = Message::$EMAIL_EMPTY;
+						$errors['email'] = Message::$VAL_EMAIL_EMPTY;
 					} else if ($val->checklPattern(0, $params->email)) {
-						$errors['email'] = Message::$EMAIL_NOT_CORRECT;
+						$errors['email'] = Message::$VAL_EMAIL_NOT_CORRECT;
 					} else if ($registrationModel->selectByEmail($params->email) != false) {
-						$errors['email'] = Message::$SAME_EMAIL;
+						$errors['email'] = Message::$VAL_SAME_EMAIL;
 					} else {
 						$_SESSION['email'] = $params->email;
 						$email = $_SESSION['email'];
@@ -68,13 +68,13 @@ class RegistrationController extends Controller {
 
 					//入力必須のパスワードのバリデーションチェック
 					if ($val->checkEmpty($params->password)) {
-						$errors['password'] = Message::$PASS_EMPTY;
+						$errors['password'] = Message::$VAL_PASS_EMPTY;
 					} else if ($val->checkEmpty($params->password_confirm)) {
-						$errors['password_confirm'] = Message::$PASS_CONFIRM_EMPTY;
+						$errors['password_confirm'] = Message::$VAL_PASS_CONFIRM_EMPTY;
 					} else if ($val->checklPattern(1, $params->password)) {
-						$errors['password'] = Message::$PASS_NOT_CORRECT;
+						$errors['password'] = Message::$VAL_PASS_NOT_CORRECT;
 					} else if ($params->password !== $params->password_confirm) {
-						$errors['password_confirm'] = Message::$PASS_NOT_EQUAL;
+						$errors['password_confirm'] = Message::$VAL_PASS_NOT_EQUAL;
 					} else {
 						$password = $params->password;
 					}
@@ -82,7 +82,7 @@ class RegistrationController extends Controller {
 					//入力任意の電話番号のバリデーションチェック
 					if (!$val->checkEmpty($params->tel)) {
 						if ($val->checklPattern(2, $params->tel)) {
-							$errors['tel'] =  Message::$TEL_NO_CORRECT;
+							$errors['tel'] =  Message::$VAL_TEL_NO_CORRECT;
 						} else {
 							$_SESSION['tel'] = $params->tel;
 							$tel = $_SESSION['tel'];

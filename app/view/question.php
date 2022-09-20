@@ -15,26 +15,6 @@
 	<title>簡易星座クイズプログラム</title>
 	<link rel="stylesheet" href="view/css/style.css">
 </head>
-<script>
-	function show_result() {
-		const choiceRadio = document.getElementsByName('choices_id');
-		const len = choiceRadio.length;
-		let checkValue;
-		let corr_ans= <?php echo $corr_ans; ?>;
-		for (let i = 0; i < len; i++) {
-			if (choiceRadio.item(i).checked) {
-				checkValue = choiceRadio.item(i).value;
-			}
-		}
-		if (checkValue == corr_ans) {
-			alert("正解！");
-			corr_num++;
-		} else {
-			alert("不正解！");
-		}
-		return true;
-	}
-</script>
 <body class="question">
 	<main>
 		<div class="container">
@@ -68,13 +48,31 @@
 					<input type="hidden" name="question_id" value="<?php echo $question_id ?>">
 					<input type="hidden" name="action" value="question">
 					<?php
-						if ($question_id == $questions_num) {
-							echo "<input type=hidden name='last' value='last'>"; 
-						}
+						echo $question_id == $questions_num ?  "<input type=hidden name='last' value='last'>":"";
 					?>
 				</div>
 			</form>
 		</div>
 	</main>
 </body>
+<script>
+	function show_result() {
+		const choiceRadio = document.getElementsByName('choices_id');
+		const len = choiceRadio.length;
+		let checkValue;
+		let corr_ans= <?php echo $corr_ans; ?>;
+		for (let i = 0; i < len; i++) {
+			if (choiceRadio.item(i).checked) {
+				checkValue = choiceRadio.item(i).value;
+			}
+		}
+		if (checkValue == corr_ans) {
+			alert("正解！");
+			corr_num++;
+		} else {
+			alert("不正解！");
+		}
+		return true;
+	}
+</script>
 </html>

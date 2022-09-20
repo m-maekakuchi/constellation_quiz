@@ -18,13 +18,18 @@ class LoginController extends Controller {
     $error    = "";
 		$email    = $params->email;
 		$password = $params->password;
-
+		$val      = new Validation();
 		try {
 			//ログインボタンが押された場合
 			if ($params->submit === "ログイン") {
 				//メールアドレスかパスワードが未入力の場合
 				if (empty($params->email) || empty($params->password)) {
-					$error = Message::$EMAIL_OR_PASS_EMPTY;
+					$error = Message::$VAL_EMAIL_OR_PASS_EMPTY;
+					$_SESSION['error'] = $error;
+					return "view/login.php";
+				//メールアドレスが正しく入力されていない場合
+				} else if ($val->checklPattern(0, $params->email)) {
+					$error = Message::$VAL_EMAIL_NOT_CORRECT;
 					$_SESSION['error'] = $error;
 					return "view/login.php";
 				//メールアドレスとパスワードともに入力された場合
@@ -48,12 +53,12 @@ class LoginController extends Controller {
 							$_SESSION['work']     = $user['work'];
 							return "question";
 						} else {
-							$error = Message::$PASSWORD_WRONG;
+							$error = Message::$VAL_PASSWORD_WRONG;
 							$_SESSION['error'] = $error;
 							return "view/login.php";
 						}
           } else {
-						$error = Message::$EMAIL_NOT_REGIST;
+						$error = Message::$VAL_EMAIL_NOT_REGIST;
 						$_SESSION['error'] = $error;
 						return "view/login.php";
 					}

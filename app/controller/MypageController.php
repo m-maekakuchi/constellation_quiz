@@ -38,51 +38,51 @@ class MypageController extends Controller {
 				//名前欄の更新ボタンが押された場合
 				} else if ($params->item === "name") {
 					if ($val->checkEmpty($params->name)) {
-						$errors['name'] = Message::$NAME_EMPTY;
+						$errors['name'] = Message::$VAL_NAME_EMPTY;
 					} else {
 						$updateRow = $mypageModel->updateName($params->name, $_SESSION['id']);
 						$_SESSION['name'] = $params->name;
-						$message = "名前を更新しました";
+						$message = Message::$UPDATE_NAME;
 					}
 				//メールアドレス欄の更新ボタンが押された場合
 				} else if ($params->item === "email") {
 					if ($val->checkEmpty($params->email)) {
-						$errors['email'] = Message::$EMAIL_EMPTY;
+						$errors['email'] = Message::$VAL_EMAIL_EMPTY;
 					} else if ($val->checklPattern(0, $params->email)) {
-						$errors['email'] = Message::$EMAIL_NOT_CORRECT;
+						$errors['email'] = Message::$VAL_EMAIL_NOT_CORRECT;
 					} else {
 						$updateRow = $mypageModel->updateEmail($params->email, $_SESSION['id']);
 						$_SESSION['email'] = $params->email;
-						$message = "メールアドレスを更新しました";
+						$message = Message::$UPDATE_EMAIL;
 					}
 				//パスワード欄の更新ボタンが押された場合
 				} else if ($params->item === "password") {
 					if ($val->checkEmpty($params->password)) {
-						$errors['password'] = Message::$PASS_EMPTY;
+						$errors['password'] = Message::$VAL_PASS_EMPTY;
 					} else if ($val->checkEmpty($params->password_confirm)) {
-						$errors['password_confirm'] = Message::$PASS_CONFIRM_EMPTY;
+						$errors['password_confirm'] = Message::$VAL_PASS_CONFIRM_EMPTY;
 					} else if ($val->checklPattern(1, $params->password)) {
-						$errors['password'] = Message::$PASS_NOT_CORRECT;
+						$errors['password'] = Message::$VAL_PASS_NOT_CORRECT;
 					} else if ($params->password !== $params->password_confirm) {
-						$errors['password_confirm'] = Message::$PASS_NOT_EQUAL;
+						$errors['password_confirm'] = Message::$VAL_PASS_NOT_EQUAL;
 					} else {
 						$hashed_pass = password_hash($params->password, PASSWORD_DEFAULT);
 						$updateRow = $mypageModel->updatePassword($hashed_pass, $_SESSION['id']);
-						$message = "パスワードを更新しました";
+						$message = Message::$UPDATE_PASS;
 					}
 				//住所の更新ボタンが押された場合
 				} else if ($params->item === 'address') {
 					if ($val->checkEmpty($params->address)) {
-						$errors['address'] = Message::$ADDRESS_NOT_SELECT;
+						$errors['address'] = Message::$VAL_ADDRESS_NOT_SELECT;
 					} else {
 						$updateRow = $mypageModel->updateAddress($params->address, $_SESSION['id']);
 						$_SESSION['address'] = $params->address;
-						$message = "住所を更新しました";
+						$message = Message::UPDATE_ADDRESS;
 					}
 				//生年月日の更新ボタンが押された場合
 				} else if ($params->item === 'birthday') {
 					if ($val->checkEmpty($params->year) || $val->checkEmpty($params->month) || $val->checkEmpty($params->day)) {
-						$errors['birthday'] = Message::$BIRTHDAY_NOT_SELECT;
+						$errors['birthday'] = Message::$VAL_BIRTHDAY_NOT_SELECT;
 					} else {
 						$_SESSION['year'] = $params->year;
 						$_SESSION['month'] = $params->month;
@@ -90,40 +90,34 @@ class MypageController extends Controller {
 						$birthday = "{$params->year}/{$params->month}/{$params->day}";
 						$updateRow = $mypageModel->updateBirthday($birthday, $_SESSION['id']);
 						$_SESSION['birthday'] = $birthday;
-						$message = "生年月日を更新しました";
+						$message = Message::$UPDATE_BIRTHDAY;
 					}
 				//電話番号欄の更新ボタンが押された場合
 				} else if ($params->item === "tel") {
 					if ($val->checkEmpty($params->tel)) {
-						$errors['tel'] = Message::$TEL_EMPTY;
+						$errors['tel'] = Message::$VAL_TEL_EMPTY;
 					} else if ($val->checklPattern(2, $params->tel)) {
-						$errors['tel'] =  Message::$TEL_NO_CORRECT;
+						$errors['tel'] =  Message::$VAL_TEL_NO_CORRECT;
 					} else {
 						$updateRow = $mypageModel->updateTel($params->tel, $_SESSION['id']);
 						$_SESSION['tel'] = $params->tel;
-						$message = "電話番号を更新しました";
+						$message = Message::$UPDATE_TEL;
 					}
 				//仕事欄の更新ボタンが押された場合
 				} else if ($params->item === 'work') {
 					if ($val->checkEmpty($params->work)) {
-						$errors['work'] = Message::$WORL_NOT_SELECT;
+						$errors['work'] = Message::$VAL_WORK_NOT_SELECT;
 					} else {
 						$updateRow = $mypageModel->updateWork($params->work, $_SESSION['id']);
 						$_SESSION['work'] = $params->work;
-						$message = "仕事を更新しました";
+						$message = Message::$UPDATE_WORK;
 					}
 				} else if ($params->output === 'csv') {
 					$mypagetModel = createModel("MypageModel");
 					$corr_ans = $mypagetModel->selectFlugs();
 					$csvstr = $mypageModel->csvOutput($_SESSION['id'], $_SESSION['questions_num'], $corr_ans);
 					$fileName = "quizResult.csv";
-					// header('Content-Type: text/csv');
-					// header('Content-Disposition: attachment; filename='.$fileName);
-					// echo mb_convert_encoding($csvstr, "SJIS", "UTF-8");
-
 					$mypageModel->csvDownload($fileName, $csvstr);
-
-
         	exit();
 				}
 				$_SESSION['errors'] = $errors;
