@@ -136,50 +136,59 @@ class MypageModel extends Model {
 	}
 
 		/**
-	 * クイズ結果のcsv出力
+	 * クイズ結果をcsvで出力するための文字列を生成するメソッド
 	 */
-  public function csvDownload($id, $questions_num) {
-    $csvstr   = "";
+  public function csvOutput($id, $questions_num, $corr_ans) {
+		//csvで出力する文字列
+    $csvstr = "";
+		//列名を設定
     for ($i = 1; $i <= $questions_num; $i++) {
-      $csvstr .= "第{$i}問,";
+      $csvstr .= "第{$i}問, 正誤, ";
       if ($i == $questions_num) {
-        $csvstr .= "回答日\n";
+        $csvstr .= "正解率, 回答日\n";
       }
     }
-    
+		//SQL文を生成
+		$colums = "";
+		for ($i = 1; $i <= $questions_num; $i++) {
+			$colums .= "choices_id{$i} AS '第{$i}問',";
+			if ($i == $questions_num) {
+				$colums .= "created_at AS '回答日'";
+			}
+		}
     $sql = "SELECT
-              choices_id1 AS '第1問', 
-              choices_id2 AS '第2問',
-              choices_id3 AS '第3問',
-              choices_id4 AS '第4問',
-              choices_id5 AS '第5問',
-              choices_id6 AS '第6問',
-              choices_id7 AS '第7問',
-              choices_id8 AS '第8問',
-              choices_id9 AS '第9問',
-              choices_id10 AS '第10問',
-              created_at AS '回答日'
+							{$colums}
             FROM
               answer_history
             WHERE
-              users_id = ? AND '2022-09-19 00:00:00' <= created_at AND created_at < '2022-09-20 00:00:00';";
+              users_id = ? AND '2022-08-01 00:00:00' <= created_at AND created_at < '2022-09-21 00:00:00';";
     $stt = $this->prepare($sql);
     $stt->bindValue(1, $id);
 		$stt->execute();
+		
+		//answer_histrory表のデータとクイズの結果を一つの文字列にする
 		while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
-      $csvstr .= $row['第1問'].",";
-      $csvstr .= $row['第2問'].",";
-      $csvstr .= $row['第3問'].",";
-      $csvstr .= $row['第4問'].",";
-      $csvstr .= $row['第5問'].",";
-      $csvstr .= $row['第6問'].",";
-      $csvstr .= $row['第7問'].",";
-      $csvstr .= $row['第8問'].",";
-      $csvstr .= $row['第9問'].",";
-      $csvstr .= $row['第10問'].",";
+			$corr_num = 0;
+			for ($i = 1; $i <= $questions_num; $i++) {
+				$csvstr .= $row["第{$i}問"].",";
+				//クイズの正誤を○×で登録
+				if ($row["第{$i}問"] == $corr_ans[$i - 1]['id']) {
+					$corr_num++;
+					$csvstr .= "○, ";
+				} else {
+					$csvstr .= "×, ";
+				}
+			}
+			$corr_rate = $corr_num / $questions_num * 100;
+			$csvstr .= "{$corr_rate},";
       $csvstr .= $row['回答日']."\n";
     }
-
     return $csvstr;
-  }
+	}
+
+	public function csvDownload($fileName, $data) {
+		header('Content-Type: text/csv');
+		header('Content-Disposition: attachment; filename='.$fileName);
+		echo mb_convert_encoding($data, "SJIS", "UTF-8");
+	}
 }
