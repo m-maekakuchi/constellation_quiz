@@ -15,7 +15,6 @@ class MypageController extends Controller {
 	 * @return string Viewのパス
 	 */
 	public function action($params, $model) {
-		var_dump($params);
 		try {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
@@ -114,11 +113,17 @@ class MypageController extends Controller {
 						$message = "仕事を更新しました";
 					}
 				} else if ($params->output === 'csv') {
-					$csvstr = $mypageModel->csvDownload($_SESSION['id'], $_SESSION['questions_num']);
+					$mypagetModel = createModel("MypageModel");
+					$corr_ans = $mypagetModel->selectFlugs();
+					$csvstr = $mypageModel->csvOutput($_SESSION['id'], $_SESSION['questions_num'], $corr_ans);
 					$fileName = "quizResult.csv";
-					header('Content-Type: text/csv');
-					header('Content-Disposition: attachment; filename='.$fileName);
-					echo mb_convert_encoding($csvstr, "SJIS", "UTF-8");
+					// header('Content-Type: text/csv');
+					// header('Content-Disposition: attachment; filename='.$fileName);
+					// echo mb_convert_encoding($csvstr, "SJIS", "UTF-8");
+
+					$mypageModel->csvDownload($fileName, $csvstr);
+
+
         	exit();
 				}
 				$_SESSION['errors'] = $errors;

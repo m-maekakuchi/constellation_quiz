@@ -19,13 +19,17 @@
         <h2>マイページ</h2>
         <a href="index.php?action=login" class="btn top">ログアウト</a>
       </div>
-      <div class="form-wrapper">
+      <div class="regist-wrapper">
+        <h4>クイズ結果</h4>
+        回答データをダウンロード
         <form action=index.php method="post">
           <div class="form-submit">
             <input type="submit" name="submit" class="btn submit" value="csv出力">
             <input type="hidden" name="action" value="mypage">
             <input type="hidden" name="output" value="csv">
           </div>
+        </form>
+        <form action=index.php method="post">
           <div class="form-submit">
             <input type="submit" name="submit" class="btn submit" value="pdf出力">
             <input type="hidden" name="action" value="mypage">
@@ -34,6 +38,7 @@
         </form>
       </div>
       <div class="regist-wrapper">
+        <h4>登録情報</h4>
         <?php if (isset($_SESSION['message'])) echo "<p class='update'>{$_SESSION['message']}</p>"; ?>
         <form action="index.php" method="post">
           <div class="item">

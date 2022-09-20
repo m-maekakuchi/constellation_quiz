@@ -60,8 +60,22 @@ class Model extends Database {
 		return $stt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
-
-
+  	/**
+	 * choices表から正答を取得するメソッド
+	 *
+	 * @return integer 配列
+	 */
+  public function selectFlugs() {
+    $sql = "SELECT
+              id
+            FROM
+              choices
+            WHERE
+              result_flg = 1;";
+    $stt = $this->prepare($sql);
+		$stt->execute();
+		return $stt->fetchAll(PDO::FETCH_ASSOC);
+  }
 
 
 
