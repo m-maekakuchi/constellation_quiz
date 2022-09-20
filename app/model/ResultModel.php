@@ -48,4 +48,6 @@ class ResultModel extends Model {
 		$stt->execute();
 		return $stt->rowCount();
   }
+
+
 }

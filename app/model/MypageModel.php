@@ -135,5 +135,51 @@ class MypageModel extends Model {
 		return $stt->rowCount();
 	}
 
-	
+		/**
+	 * クイズ結果のcsv出力
+	 */
+  public function csvDownload($id, $questions_num) {
+    $csvstr   = "";
+    for ($i = 1; $i <= $questions_num; $i++) {
+      $csvstr .= "第{$i}問,";
+      if ($i == $questions_num) {
+        $csvstr .= "回答日\n";
+      }
+    }
+    
+    $sql = "SELECT
+              choices_id1 AS '第1問', 
+              choices_id2 AS '第2問',
+              choices_id3 AS '第3問',
+              choices_id4 AS '第4問',
+              choices_id5 AS '第5問',
+              choices_id6 AS '第6問',
+              choices_id7 AS '第7問',
+              choices_id8 AS '第8問',
+              choices_id9 AS '第9問',
+              choices_id10 AS '第10問',
+              created_at AS '回答日'
+            FROM
+              answer_history
+            WHERE
+              users_id = ? AND '2022-09-19 00:00:00' <= created_at AND created_at < '2022-09-20 00:00:00';";
+    $stt = $this->prepare($sql);
+    $stt->bindValue(1, $id);
+		$stt->execute();
+		while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
+      $csvstr .= $row['第1問'].",";
+      $csvstr .= $row['第2問'].",";
+      $csvstr .= $row['第3問'].",";
+      $csvstr .= $row['第4問'].",";
+      $csvstr .= $row['第5問'].",";
+      $csvstr .= $row['第6問'].",";
+      $csvstr .= $row['第7問'].",";
+      $csvstr .= $row['第8問'].",";
+      $csvstr .= $row['第9問'].",";
+      $csvstr .= $row['第10問'].",";
+      $csvstr .= $row['回答日']."\n";
+    }
+
+    return $csvstr;
+  }
 }

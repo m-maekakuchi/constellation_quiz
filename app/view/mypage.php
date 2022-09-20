@@ -19,6 +19,20 @@
         <h2>マイページ</h2>
         <a href="index.php?action=login" class="btn top">ログアウト</a>
       </div>
+      <div class="form-wrapper">
+        <form action=index.php method="post">
+          <div class="form-submit">
+            <input type="submit" name="submit" class="btn submit" value="csv出力">
+            <input type="hidden" name="action" value="mypage">
+            <input type="hidden" name="output" value="csv">
+          </div>
+          <div class="form-submit">
+            <input type="submit" name="submit" class="btn submit" value="pdf出力">
+            <input type="hidden" name="action" value="mypage">
+            <input type="hidden" name="output" value="pdf">
+          </div>
+        </form>
+      </div>
       <div class="regist-wrapper">
         <?php if (isset($_SESSION['message'])) echo "<p class='update'>{$_SESSION['message']}</p>"; ?>
         <form action="index.php" method="post">

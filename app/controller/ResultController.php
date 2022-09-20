@@ -33,7 +33,6 @@ class ResultController extends Controller {
 
         //ユーザーの回答をDBに登録
         $resultModel->insertAnswers($_SESSION['id'], $answers);
-
         return "view/result.php";
       } else {
 				return "login";
