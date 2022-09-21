@@ -113,12 +113,15 @@ class MypageController extends Controller {
 						$message = Message::$UPDATE_WORK;
 					}
 				} else if ($params->output === 'csv') {
-					$mypagetModel = createModel("MypageModel");
-					$corr_ans = $mypagetModel->selectFlugs();
+					$corr_ans = $mypageModel->selectFlugs();
 					$csvstr = $mypageModel->csvOutput($_SESSION['id'], $_SESSION['questions_num'], $corr_ans);
 					$fileName = "quizResult.csv";
 					$mypageModel->csvDownload($fileName, $csvstr);
         	exit();
+				} else if ($params->output === 'pdf') {
+					$corr_ans = $mypageModel->selectFlugs();
+					$html = $mypageModel->makeHTML($_SESSION['id'], $_SESSION['questions_num'], $corr_ans);
+					$mypageModel->pdfDownload($html);
 				}
 				$_SESSION['errors'] = $errors;
 				$_SESSION['message'] = $message;
