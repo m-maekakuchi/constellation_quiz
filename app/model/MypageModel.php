@@ -121,7 +121,7 @@ class MypageModel extends Model {
 	 * user＿detail表の仕事を更新するメソッド
 	 *
 	 * @param string $work 入力された仕事
-	 * 							 $id ログイン中のユーザーID
+	 * 				       $id ログイン中のユーザーID
 	 * @return integer 更新された行数
 	 */
 	public function updateWork($work, $id) {
@@ -135,19 +135,14 @@ class MypageModel extends Model {
 		return $stt->rowCount();
 	}
 
-		/**
-	 * クイズ結果をcsvで出力するための文字列を生成するメソッド
+	/**
+	 * answer_history表から回答履歴を取得するためのSQL文を持つPDOオブジェクトを生成
+	 *
+	 * @param $id ログイン中のユーザーID
+	 *        $questions_num 問題数
+	 * @return PODオブジェクト
 	 */
-  public function csvOutput($id, $questions_num, $corr_ans) {
-		//csvで出力する文字列
-    $csvstr = "";
-		//列名を設定
-    for ($i = 1; $i <= $questions_num; $i++) {
-      $csvstr .= "第{$i}問, 正誤, ";
-      if ($i == $questions_num) {
-        $csvstr .= "正解率, 回答日\n";
-      }
-    }
+	public function selectResult($id, $questions_num) {
 		//SQL文を生成
 		$colums = "";
 		for ($i = 1; $i <= $questions_num; $i++) {
@@ -165,6 +160,25 @@ class MypageModel extends Model {
     $stt = $this->prepare($sql);
     $stt->bindValue(1, $id);
 		$stt->execute();
+		return $stt;
+	}
+
+
+		/**
+	 * クイズ結果をcsvで出力するための文字列を生成するメソッド
+	 */
+  public function csvOutput($id, $questions_num, $corr_ans) {
+		//csvで出力する文字列
+    $csvstr = "";
+		//列名を設定
+    for ($i = 1; $i <= $questions_num; $i++) {
+      $csvstr .= "第{$i}問, 正誤, ";
+      if ($i == $questions_num) {
+        $csvstr .= "正解率, 回答日\n";
+      }
+    }
+		//回答履歴データを取得
+		$stt = $this->selectResult($id, $questions_num);
 		
 		//answer_histrory表のデータとクイズの結果を一つの文字列にする
 		while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
@@ -211,23 +225,8 @@ class MypageModel extends Model {
 										</tr>";
       }
     }
-		//SQL文を生成
-		$colums = "";
-		for ($i = 1; $i <= $questions_num; $i++) {
-			$colums .= "choices_id{$i} AS '第{$i}問',";
-			if ($i == $questions_num) {
-				$colums .= "created_at AS '回答日'";
-			}
-		}
-    $sql = "SELECT
-							{$colums}
-            FROM
-              answer_history
-            WHERE
-              users_id = ? AND '2022-08-01 00:00:00' <= created_at AND created_at < '2022-09-21 00:00:00';";
-    $stt = $this->prepare($sql);
-    $stt->bindValue(1, $id);
-		$stt->execute();
+		//回答履歴データを取得
+		$stt = $this->selectResult($id, $questions_num);
 
 		//answer_histrory表のデータとクイズの結果を一つの文字列にする
 		while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
