@@ -28,6 +28,7 @@ class QuestionController extends Controller {
 				if (isset($params->choices_id)) {
 					array_push($answers, $params->choices_id);
 					$_SESSION['answers'] = $answers;
+					var_dump($_SESSION['answers']);
 				}
 				//最終問題の回答ボタンが押された場合、結果画面に遷移
 				if (isset($params->last)) {

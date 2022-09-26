@@ -69,6 +69,7 @@ class LoginController extends Controller {
 				return "registraion";
 			//ログイン中のアカウントがある場合
 			} else if (isset($_SESSION['id'])) {
+				unset($_SESSION['answers']);
 				return "question";
 			} else {
 				$_SESSION = [];
