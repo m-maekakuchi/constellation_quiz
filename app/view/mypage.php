@@ -39,6 +39,39 @@
               }
             ?>
           </select>月&nbsp;
+          <select name="day" class="select1">
+            <?php
+              $options = Form::makeOptions($_SESSION['days'], 'day');
+              foreach ($options as $option) {
+                echo $option;
+              }
+            ?>
+          </select>日
+            ～
+          <select name="year" class="select1">
+            <?php
+              $options = Form::makeOptions($_SESSION['years'], 'year');
+              foreach ($options as $option) {
+                echo $option;
+              }
+            ?>
+          </select>年&nbsp;
+          <select name="month" class="select1">
+            <?php
+              $options = Form::makeOptions($_SESSION['months'], 'month');
+              foreach ($options as $option) {
+                echo $option;
+              }
+            ?>
+          </select>月&nbsp;
+          <select name="day" class="select1">
+            <?php
+              $options = Form::makeOptions($_SESSION['days'], 'day');
+              foreach ($options as $option) {
+                echo $option;
+              }
+            ?>
+          </select>日
           <div class="form-submit">
             <input type="submit" name="submit" class="btn submit" value="csv出力">
             <input type="hidden" name="action" value="mypage">
