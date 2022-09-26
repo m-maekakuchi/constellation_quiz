@@ -57,14 +57,19 @@ class LoginController extends Controller {
 							$_SESSION['error'] = $error;
 							return "view/login.php";
 						}
+					//一致するメールアドレスがなかった場合
           } else {
 						$error = Message::$VAL_EMAIL_NOT_REGIST;
 						$_SESSION['error'] = $error;
 						return "view/login.php";
 					}
 				}
+			//「アカウント登録はこちら」ボタンが押された場合
 			} else if ($params->submit === "アカウント登録はこちら") {
 				return "registraion";
+			//ログイン中のアカウントがある場合
+			} else if (isset($_SESSION['id'])) {
+				return "question";
 			} else {
 				$_SESSION = [];
 				session_destroy();

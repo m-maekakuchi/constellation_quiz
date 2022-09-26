@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 // コントローラークラスをまとめた連想配列
 $controllers = [
 	'login'        => 'LoginController',
+	'logout'       => 'LogoutController',
 	'registration' => 'RegistrationController',
 	'question'     => 'QuestionController',
 	'result'       => 'ResultController',

@@ -17,7 +17,7 @@
     <div class="container">
       <div class="top-wrapper">
         <h2>マイページ</h2>
-        <a href="index.php?action=login" class="btn top">ログアウト</a>
+        <a href="index.php?action=logout" class="btn top">ログアウト</a>
       </div>
       <div class="regist-wrapper">
         <h4>クイズ結果</h4>
