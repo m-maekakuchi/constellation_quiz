@@ -28,7 +28,7 @@ class MypageController extends Controller {
 					$form    = new Form();
 					$works   = $mypageModel->selectWorks();
 					$address = $mypageModel->selectAddress();
-					$years   = $form->makeItems(1950, 2020);
+					$years   = $form->makeItems(1950, date('Y'));
 					$months  = $form->makeItems(1, 12);
 					$days    = $form->makeItems(1, 31);
 					$_SESSION['addresss'] = $address;
@@ -78,7 +78,7 @@ class MypageController extends Controller {
 					} else {
 						$updateRow = $mypageModel->updateAddress($params->address, $_SESSION['id']);
 						$_SESSION['address'] = $params->address;
-						$message = Message::UPDATE_ADDRESS;
+						$message = Message::$UPDATE_ADDRESS;
 					}
 				//生年月日の更新ボタンが押された場合
 				} else if ($params->item === 'birthday') {

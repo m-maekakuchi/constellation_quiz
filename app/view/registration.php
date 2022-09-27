@@ -2,6 +2,8 @@
     if (isset($_SESSION['errors'])) {
       $errors = $_SESSION['errors'];
     }
+    $dateArray = ["year" => "年", "month" => "月", "day" => "日"];
+    $keys = array_keys($dateArray);
 ?>
 
 <!DOCTYPE html>
@@ -87,31 +89,20 @@
             </select>
           </div>
           <div class="item">
-          <label class="label-item">生年月日：</label>
-            <select name="year" class="select1">
-              <?php
-                $options = Form::makeOptions($_SESSION['years'], 'year');
+            <label class="label-item">生年月日：</label>
+            <?php
+              for ($i = 0; $i < count($dateArray); $i++) {
+                $key = $keys[$i];
+                $variable = $key."s";
+                echo "<select name='{$key}' class='select1'>";
+                $options = Form::makeOptions($_SESSION[$variable], $key);
                 foreach ($options as $option) {
                   echo $option;
                 }
-              ?>
-            </select>年&nbsp;
-            <select name="month" class="select1">
-              <?php
-                $options = Form::makeOptions($_SESSION['months'], 'month');
-                foreach ($options as $option) {
-                  echo $option;
-                }
-              ?>
-            </select>月&nbsp;
-            <select name="day" class="select1">
-              <?php
-                $options = Form::makeOptions($_SESSION['days'], 'day');
-                foreach ($options as $option) {
-                  echo $option;
-                }
-              ?>
-            </select>日
+                echo "</select>".$dateArray[$key]."&nbsp;";
+              }
+            ?>
+            
           </div>
           <div class="item">
             <label class="label-item" for="tel">電話番号：</label>

@@ -2,6 +2,8 @@
     if (isset($_SESSION['errors'])) {
       $errors = $_SESSION['errors'];
     }
+    $dateArray = ["year" => "年", "month" => "月", "day" => "日"];
+    $keys = array_keys($dateArray);
 ?>
 
 <!DOCTYPE html>
@@ -11,11 +13,6 @@
   <meta name=”viewport” content=”width=device-width, initial-scale=1”>
   <title>簡易星座クイズプログラム</title>
   <link rel="stylesheet" href="view/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
-  <script src="js\sample_javascript.js"></script>
 </head>
 <body class="mypage">
   <main>
@@ -31,13 +28,37 @@
           <div class="item">
             <label class="label-item" for="label">開始日：</label>
             <label class="label-form" for="label">
-              <input type="text" id="fromDatepicker" name="fromDate" placeholder="年/月/日" size="30" />
+              <?php
+                for ($i = 0; $i < count($dateArray); $i++) {
+                  $key = $keys[$i];
+                  $variable = $key."s";
+                  $name = "from{$key}";
+                  echo "<select name='{$name}' class='select1'>";
+                  $options = Form::makeOptions($_SESSION[$variable], $name);
+                  foreach ($options as $option) {
+                    echo $option;
+                  }
+                  echo "</select>".$dateArray[$key]."&nbsp;";
+                }
+              ?>
             </label>
           </div>
           <div class="item">
             <label class="label-item" for="label">終了日：</label>
             <label class="label-form" for="label">
-              <input type="text" id="toDatepicker" name="toDate" placeholder="年/月/日" size="30" />
+              <?php
+                for ($i = 0; $i < count($dateArray); $i++) {
+                  $key = $keys[$i];
+                  $variable = $key."s";
+                  $name = "to{$key}";
+                  echo "<select name='{$name}' class='select1'>";
+                  $options = Form::makeOptions($_SESSION[$variable], $name);
+                  foreach ($options as $option) {
+                    echo $option;
+                  }
+                  echo "</select>".$dateArray[$key]."&nbsp;";
+                }
+              ?>
             </label>
           </div>
           <input type="submit" name="submit" class="btn submit" value="csvダウンロード">
@@ -165,30 +186,18 @@
               <?php else : ?>
                 <div class="item_column">
                   <div class="unity">
-                    <select name="year" class="select1">
-                      <?php
-                        $options = Form::makeOptions($_SESSION['years'], 'year');
+                    <?php
+                      for ($i = 0; $i < count($dateArray); $i++) {
+                        $key = $keys[$i];
+                        $variable = $key."s";
+                        echo "<select name='{$key}' class='select1'>";
+                        $options = Form::makeOptions($_SESSION[$variable], $key);
                         foreach ($options as $option) {
                           echo $option;
                         }
-                      ?>
-                    </select>年&nbsp;
-                    <select name="month" class="select1">
-                      <?php
-                        $options = Form::makeOptions($_SESSION['months'], 'month');
-                        foreach ($options as $option) {
-                          echo $option;
-                        }
-                      ?>
-                    </select>月&nbsp;
-                    <select name="day" class="select1">
-                      <?php
-                        $options = Form::makeOptions($_SESSION['days'], 'day');
-                        foreach ($options as $option) {
-                          echo $option;
-                        }
-                      ?>
-                    </select>日
+                        echo "</select>".$dateArray[$key]."&nbsp;";
+                      }
+                    ?>
                   </div>
                   <?php if (isset($errors['birthday']))
                     echo "<span class ='error'>{$errors['birthday']}</span>";
@@ -256,8 +265,4 @@
     </div>
   </main>
 </body>
-<script>
-  $('#fromDatepicker').datepicker();
-  $('#toDatepicker').datepicker();
-</script>
 </html>
