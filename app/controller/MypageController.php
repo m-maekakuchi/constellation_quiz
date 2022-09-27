@@ -18,6 +18,7 @@ class MypageController extends Controller {
 		try {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
+				var_dump($params);
 				$mypageModel = createModel("MypageModel");
 				$val = new Validation();
 				$message = null;

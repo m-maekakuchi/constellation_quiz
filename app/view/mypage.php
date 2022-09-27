@@ -11,6 +11,11 @@
   <meta name=”viewport” content=”width=device-width, initial-scale=1”>
   <title>簡易星座クイズプログラム</title>
   <link rel="stylesheet" href="view/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+  <script src="js\sample_javascript.js"></script>
 </head>
 <body class="mypage">
   <main>
@@ -21,69 +26,23 @@
       </div>
       <div class="regist-wrapper">
         <h4>クイズ結果</h4>
-        回答データをダウンロード
+        <p>回答日を指定して下さい</p>
         <form action=index.php method="post">
-          <select name="year" class="select1">
-            <?php
-              $options = Form::makeOptions($_SESSION['years'], 'year');
-              foreach ($options as $option) {
-                echo $option;
-              }
-            ?>
-          </select>年&nbsp;
-          <select name="month" class="select1">
-            <?php
-              $options = Form::makeOptions($_SESSION['months'], 'month');
-              foreach ($options as $option) {
-                echo $option;
-              }
-            ?>
-          </select>月&nbsp;
-          <select name="day" class="select1">
-            <?php
-              $options = Form::makeOptions($_SESSION['days'], 'day');
-              foreach ($options as $option) {
-                echo $option;
-              }
-            ?>
-          </select>日
-            ～
-          <select name="year" class="select1">
-            <?php
-              $options = Form::makeOptions($_SESSION['years'], 'year');
-              foreach ($options as $option) {
-                echo $option;
-              }
-            ?>
-          </select>年&nbsp;
-          <select name="month" class="select1">
-            <?php
-              $options = Form::makeOptions($_SESSION['months'], 'month');
-              foreach ($options as $option) {
-                echo $option;
-              }
-            ?>
-          </select>月&nbsp;
-          <select name="day" class="select1">
-            <?php
-              $options = Form::makeOptions($_SESSION['days'], 'day');
-              foreach ($options as $option) {
-                echo $option;
-              }
-            ?>
-          </select>日
-          <div class="form-submit">
-            <input type="submit" name="submit" class="btn submit" value="csv出力">
-            <input type="hidden" name="action" value="mypage">
-            <input type="hidden" name="output" value="csv">
+          <div class="item">
+            <label class="label-item" for="label">開始日：</label>
+            <label class="label-form" for="label">
+              <input type="text" id="fromDatepicker" name="fromDate" placeholder="年/月/日" size="30" />
+            </label>
           </div>
-        </form>
-        <form action=index.php method="post">
-          <div class="form-submit">
-            <input type="submit" name="submit" class="btn submit" value="pdf出力">
-            <input type="hidden" name="action" value="mypage">
-            <input type="hidden" name="output" value="pdf">
+          <div class="item">
+            <label class="label-item" for="label">終了日：</label>
+            <label class="label-form" for="label">
+              <input type="text" id="toDatepicker" name="toDate" placeholder="年/月/日" size="30" />
+            </label>
           </div>
+          <input type="submit" name="submit" class="btn submit" value="csvダウンロード">
+          <input type="submit" name="submit" class="btn submit" value="pdfダウンロード">
+          <input type="hidden" name="action" value="mypage">
         </form>
       </div>
       <div class="regist-wrapper">
@@ -297,4 +256,8 @@
     </div>
   </main>
 </body>
+<script>
+  $('#fromDatepicker').datepicker();
+  $('#toDatepicker').datepicker();
+</script>
 </html>
