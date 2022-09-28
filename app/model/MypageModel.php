@@ -142,7 +142,7 @@ class MypageModel extends Model {
 	 *        $questions_num 問題数
 	 * @return PODオブジェクト
 	 */
-	public function selectResult($id, $questions_num) {
+	public function selectResult($id, $questions_num, $fromdate, $todate) {
 		//SQL文を生成
 		$colums = "";
 		for ($i = 1; $i <= $questions_num; $i++) {
@@ -156,9 +156,11 @@ class MypageModel extends Model {
             FROM
               answer_history
             WHERE
-              users_id = ? AND '2022-08-01 00:00:00' <= created_at AND created_at < '2022-09-21 00:00:00';";
+              users_id = ? AND ? <= created_at AND created_at < ?;";
     $stt = $this->prepare($sql);
     $stt->bindValue(1, $id);
+		$stt->bindValue(2, $fromdate);
+		$stt->bindValue(3, $todate);
 		$stt->execute();
 		return $stt;
 	}
@@ -167,7 +169,7 @@ class MypageModel extends Model {
 		/**
 	 * クイズ結果をcsvで出力するための文字列を生成するメソッド
 	 */
-  public function csvOutput($id, $questions_num, $corr_ans) {
+  public function makeCsvStr($id, $questions_num, $corr_ans, $fromdate, $todate) {
 		//csvで出力する文字列
     $csvstr = "";
 		//列名を設定
@@ -178,7 +180,7 @@ class MypageModel extends Model {
       }
     }
 		//回答履歴データを取得
-		$stt = $this->selectResult($id, $questions_num);
+		$stt = $this->selectResult($id, $questions_num, $fromdate, $todate);
 		
 		//answer_histrory表のデータとクイズの結果を一つの文字列にする
 		while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
@@ -212,7 +214,7 @@ class MypageModel extends Model {
 		/**
 	 * クイズ結果をpdfで出力するための文字列を生成するメソッド
 	 */
-  public function makeHTML($id, $questions_num, $corr_ans) {
+  public function makeHTML($id, $questions_num, $corr_ans, $fromdate, $todate) {
 		//csvで出力する文字列
     $pdfStr = "<tr>";
 		//列名を設定
@@ -226,7 +228,7 @@ class MypageModel extends Model {
       }
     }
 		//回答履歴データを取得
-		$stt = $this->selectResult($id, $questions_num);
+		$stt = $this->selectResult($id, $questions_num, $fromdate, $todate);
 
 		//answer_histrory表のデータとクイズの結果を一つの文字列にする
 		while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
@@ -288,6 +290,6 @@ EOF;
 
 		$tcpdf->writeHTML($html);
 		$fileName = 'quizResult.pdf';
-		$tcpdf->Output($fileName, "I");
+		$tcpdf->Output($fileName, "D");
 	}
 }

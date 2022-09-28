@@ -20,6 +20,7 @@ class Message {
   public static $VAL_BIRTHDAY_NOT_SELECT = "生年月日を選択してください";
   public static $VAL_WORK_NOT_SELECT     = "仕事を選択してください";
 
+  public static $VAL_DATE_EMPTY          = "対象期間を指定してください";
   public static $UPDATE_NAME             = "名前を更新しました";
   public static $UPDATE_EMAIL            = "メールアドレスを更新しました";
   public static $UPDATE_PASS             = "パスワードを更新しました";
