@@ -24,6 +24,9 @@
       <div class="regist-wrapper">
         <h4>クイズ結果</h4>
         <p>回答日を指定して下さい</p>
+        <?php if (isset($errors['date']))
+                echo "<p class ='error'>{$errors['date']}</p>";
+        ?>
         <form action=index.php method="post">
           <div class="item">
             <label class="label-item" for="label">開始日：</label>

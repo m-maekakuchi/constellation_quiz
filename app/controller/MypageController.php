@@ -18,7 +18,6 @@ class MypageController extends Controller {
 		try {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
-				var_dump($params);
 				$mypageModel = createModel("MypageModel");
 				$val = new Validation();
 				$message = null;
@@ -113,16 +112,39 @@ class MypageController extends Controller {
 						$_SESSION['work'] = $params->work;
 						$message = Message::$UPDATE_WORK;
 					}
-				} else if ($params->output === 'csv') {
-					$corr_ans = $mypageModel->selectFlugs();
-					$csvstr = $mypageModel->csvOutput($_SESSION['id'], $_SESSION['questions_num'], $corr_ans);
-					$fileName = "quizResult.csv";
-					$mypageModel->csvDownload($fileName, $csvstr);
-        	exit();
-				} else if ($params->output === 'pdf') {
-					$corr_ans = $mypageModel->selectFlugs();
-					$html = $mypageModel->makeHTML($_SESSION['id'], $_SESSION['questions_num'], $corr_ans);
-					$mypageModel->pdfDownload($html);
+				} else if ($params->submit === "csvダウンロード" || $params->submit === "pdfダウンロード") {
+					if (
+						empty($params->fromyear) ||
+						empty($params->frommonth) ||
+						empty($params->fromday) ||
+						empty($params->toyear) ||
+						empty($params->tomonth) ||
+						empty($params->today)
+					) {
+						$_SESSION['fromyear'] = $params->fromyear;
+						$_SESSION['frommonth'] = $params->frommonth;
+						$_SESSION['fromday'] = $params->fromday;
+						$_SESSION['toyear'] = $params->toyear;
+						$_SESSION['tomonth'] = $params->tomonth;
+						$_SESSION['today'] = $params->today;
+						$errors['date'] = Message::$VAL_DATE_EMPTY;
+					//「csvダウンロード」ボタンが押された場合
+					} else if ($params->submit === "csvダウンロード") {
+						$fromdate = "{$params->fromyear}/{$params->frommonth}/{$params->fromday}";
+						$todate = "{$params->toyear}/{$params->tomonth}/{$params->today}";
+						$corr_ans = $mypageModel->selectFlugs();
+						$csvstr = $mypageModel->makeCsvStr($_SESSION['id'], $_SESSION['questions_num'], $corr_ans, $fromdate, $todate);
+						$fileName = "quizResult.csv";
+						$mypageModel->csvDownload($fileName, $csvstr);
+						exit();
+					//「pdfダウンロード」ボタンが押された場合
+					} else {
+						$fromdate = "{$params->fromyear}/{$params->frommonth}/{$params->fromday}";
+						$todate = "{$params->toyear}/{$params->tomonth}/{$params->today}";
+						$corr_ans = $mypageModel->selectFlugs();
+						$html = $mypageModel->makeHTML($_SESSION['id'], $_SESSION['questions_num'], $corr_ans, $fromdate, $todate);
+						$mypageModel->pdfDownload($html);
+					}
 				}
 				$_SESSION['errors'] = $errors;
 				$_SESSION['message'] = $message;
@@ -135,7 +157,5 @@ class MypageController extends Controller {
 		} catch (Exception $e) {
 			echo $e->getMessage(), "例外発生"; 
 		}
-
-		
 	}
 }
