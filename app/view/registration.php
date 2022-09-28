@@ -13,6 +13,7 @@
   <meta name=”viewport” content=”width=device-width, initial-scale=1”>
   <title>簡易星座クイズプログラム</title>
   <link rel="stylesheet" href="view/css/style.css">
+  <script src="js/validation.php"></script>
 </head>
 <body class="regist">
   <main>
@@ -69,9 +70,9 @@
             </div>
           </div>
           <div class="item">
-            <label class="label-item" for="pass_confirm">パスワード確認用<span class="label-required">*</span>：</label>
+            <label class="label-item" for="passConfirm">パスワード確認用<span class="label-required">*</span>：</label>
             <div class="item_column">
-              <input type="password" id="pass_confirm" name="password_confirm" size="30"/>
+              <input type="password" id="passConfirm" name="password_confirm" size="30"/>
               <?php if (isset($errors['password_confirm']))
                   echo "<span class ='error'>{$errors['password_confirm']}</span>";
               ?>
@@ -79,7 +80,7 @@
           </div>
           <div class="item">
           <label class="label-item">住所：</label>
-            <select name="address" class="select1">
+            <select id="address" name="address" class="select1">
               <?php
                 $options = Form::makeOptions($_SESSION['addresss'], 'address');
                 foreach ($options as $option) {
@@ -94,7 +95,7 @@
               for ($i = 0; $i < count($dateArray); $i++) {
                 $key = $keys[$i];
                 $variable = $key."s";
-                echo "<select name='{$key}' class='select1'>";
+                echo "<select id='{$key}' name='{$key}' class='select1'>";
                 $options = Form::makeOptions($_SESSION[$variable], $key);
                 foreach ($options as $option) {
                   echo $option;
@@ -121,7 +122,7 @@
           </div>
           <div class="item">
             <label class="label-item">仕事：</label>
-            <select name="work" class="select2"> 
+            <select id="work" name="work" class="select2"> 
               <?php
                 $options = Form::makeOptions($_SESSION['works'], 'work');
                 foreach ($options as $option) {
@@ -131,7 +132,7 @@
             </select>
           </div>
           <div class="form-submit">
-            <input type="submit" name="submit" class="btn submit" value="登録する">
+            <input type="submit" name="submit" class="btn submit" value="登録する" onClick="return val();">
             <input type="hidden" name="action" value="registration">
           </div>
         </form>
