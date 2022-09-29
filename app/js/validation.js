@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelector('submit').addEventListener('click', function(event) {
     let message = [];
-    if
 
   });
 });
