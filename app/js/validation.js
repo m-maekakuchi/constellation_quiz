@@ -1,18 +1,34 @@
-document.addEventListener("DOMContentLoaded", () => {
 
-  const name = document.getElementById('name');
-  const email = document.getElementById('email');
-  const pass = document.getElementById('pass');
-  const passConfirm = document.getElementById('passConfirm');
-  const address = document.getElementById('address');
-  const tel = document.getElementById('tel');
-  const year = document.getElementsById('year');
-  const month = document.getElementById('month');
-  const day = document.getElementById('day');
-  const work = document.getElementsById('work');
+class Validation {
 
-  document.querySelector('submit').addEventListener('click', function(event) {
-    let message = [];
+  constructor() {
+    this.patternList = [
+      /^[a-zA-Z0-9_.+-]+[@][a-zA-Z0-9.-]+$/,      //emailの正規表現パターン
+      /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,16}$/i,   //passwordの正規表現パターン、半角英数字それぞれ1つ以上含む
+      /^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/,        //telの正規表現パターン
+    ];
+  }
+  
+  //空文字チェック
+  checkEmpty(para) {
+    if (!para) {
+      //未入力
+      return true;
+    } else {
+      //入力値あり
+      return false;
+    }
+  };
+  
+  //バリデーションチェック
+  checklPattern(property, para) {
+    if (!this.patternList[property].test(para)) {
+      //パターンに一致しない
+      return true;
+    } else {
+      //パターンに一致
+      return false;
+    }
+  };
 
-  });
-});
+}

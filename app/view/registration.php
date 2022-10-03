@@ -13,7 +13,6 @@
   <meta name=”viewport” content=”width=device-width, initial-scale=1”>
   <title>簡易星座クイズプログラム</title>
   <link rel="stylesheet" href="view/css/style.css">
-  <script src="js/validation.php"></script>
 </head>
 <body class="regist">
   <main>
@@ -34,9 +33,6 @@
                 size="30"
                 value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
               />
-              <?php if (isset($errors['name']))
-                echo "<span class ='error'>{$errors['name']}</span>";
-              ?>
             </div>
           </div>
           <div class="item">
@@ -132,12 +128,15 @@
             </select>
           </div>
           <div class="form-submit">
-            <input type="submit" name="submit" class="btn submit" value="登録する" onClick="return val();">
+            <input type="submit" name="submit" class="btn submit" value="登録する">
             <input type="hidden" name="action" value="registration">
           </div>
         </form>
       </div>
     </div>
   </main>
+  <script src="js/Validation.js"></script>
+  <script src="js/Message.js"></script>
+  <script src="js/valCheck.js"></script>
 </body>
 </html>
