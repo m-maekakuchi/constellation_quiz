@@ -18,7 +18,9 @@ class RegistrationController extends Controller {
 		try {
 			$registrationModel = createModel("RegistrationModel");
 			//ログイン画面で「アカウント登録はこちら」ボタンが押された場合
-			if ($params->action === "registration" && isset($params->submit) === false) {
+			var_dump($params);
+			if ($params->action === "registration" && isset($params->regist_submit) === false) {
+				echo 22;
 				//フォームの選択肢を生成し、セッションに登録
 				$form    = new Form();
 				$works   = $registrationModel->selectWorks();
@@ -34,7 +36,8 @@ class RegistrationController extends Controller {
 				return "view/registration.php";
 
 			//登録するボタンが押された場合
-			} else if (isset($params->submit) && $params->submit === '登録する') {
+			} else if (isset($params->regist_submit) && $params->regist_submit === 'regist') {
+				echo 39;
 				try {
 					$errors   = [];
 					$year     = "";
