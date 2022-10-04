@@ -63,6 +63,7 @@ document.getElementById('btn').addEventListener('click', e => {
   console.log(errorCount);
   if (errorCount === 0) {
     if (window.confirm('この内容で登録しますか')) {
+      console.log('Okを押した');
       document.myform.submit();
     }
   }
@@ -91,5 +92,3 @@ document.getElementById('btn').addEventListener('click', e => {
 
     
 });
-
-

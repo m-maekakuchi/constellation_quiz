@@ -20,7 +20,7 @@ class RegistrationController extends Controller {
 			//ログイン画面で「アカウント登録はこちら」ボタンが押された場合
 			var_dump($params);
 			if ($params->action === "registration" && isset($params->regist_submit) === false) {
-				echo 22;
+				echo 23;
 				//フォームの選択肢を生成し、セッションに登録
 				$form    = new Form();
 				$works   = $registrationModel->selectWorks();
