@@ -112,13 +112,10 @@
               ?>
             </select>
           </div>
-          <!-- <div class="form-submit">
-            <input type="submit" name="regist_submit" class="btn submit" value="登録する">
-            <input type="hidden" name="action" value="registration">
-          </div> -->
           <div class="form-submit">
-            <button id="btn" name="regist_submit" value="regist" class="btn submit">登録</button>
+            <button id="btn" class="btn submit">登録</button>
             <input type="hidden" name="action" value="registration">
+            <input type="hidden" name="regist_submit" value="regist">
           </div>
         </form>
       </div>
