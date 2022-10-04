@@ -18,9 +18,7 @@ class RegistrationController extends Controller {
 		try {
 			$registrationModel = createModel("RegistrationModel");
 			//ログイン画面で「アカウント登録はこちら」ボタンが押された場合
-			var_dump($params);
 			if ($params->action === "registration" && isset($params->regist_submit) === false) {
-				echo 23;
 				//フォームの選択肢を生成し、セッションに登録
 				$form    = new Form();
 				$works   = $registrationModel->selectWorks();
@@ -37,7 +35,6 @@ class RegistrationController extends Controller {
 
 			//登録するボタンが押された場合
 			} else if (isset($params->regist_submit) && $params->regist_submit === 'regist') {
-				echo 39;
 				try {
 					$errors   = [];
 					$year     = "";
@@ -82,7 +79,7 @@ class RegistrationController extends Controller {
 						$password = $params->password;
 					}
 
-					//入力任意の電話番号のバリデーションチェック
+					//入力任意の電話番号が入力された場合のバリデーションチェック
 					if (!$val->checkEmpty($params->tel)) {
 						if ($val->checklPattern(2, $params->tel)) {
 							$errors['tel'] =  Message::$VAL_TEL_NO_CORRECT;
@@ -92,31 +89,31 @@ class RegistrationController extends Controller {
 						}
 					}
 
-					//入力任意の住所のバリデーションチェック
+					//入力任意の住所が入力された場合
 					if (!$val->checkEmpty($params->address)) {
 						$_SESSION['address'] = $params->address;
 						$addr = $_SESSION['address'];
 					}
 
-					//入力任意の仕事のバリデーションチェック
+					//入力任意の仕事が入力された場合
 					if (!$val->checkEmpty($params->work)) {
 						$_SESSION['work'] = $params->work;
 						$work = $_SESSION['work'];
 					}
 
-					//入力任意の年のバリデーションチェック
+					//入力任意の年が入力された場合
 					if (!$val->checkEmpty($params->year)) {
 						$_SESSION['year'] = $params->year;
 						$year = $_SESSION['year'];
 					}
 
-					//入力任意の月のバリデーションチェック
+					//入力任意の月が入力された場合
 					if (!$val->checkEmpty($params->month)) {
 						$_SESSION['month'] = $params->month;
 						$month = $_SESSION['month'];
 					}
 
-					//入力任意の日のバリデーションチェック
+					//入力任意の日が入力された場合
 					if (!$val->checkEmpty($params->day)) {
 						$_SESSION['day'] = $params->day;
 						$day = $_SESSION['day'];

@@ -60,11 +60,9 @@ document.getElementById('btn').addEventListener('click', e => {
   }
 
   //エラーがなければalertを表示
-  console.log(errorCount);
   if (errorCount === 0) {
     if (window.confirm('この内容で登録しますか')) {
-      console.log('Okを押した');
-      document.myform.submit();
+      document.registForm.submit();
     }
   }
 

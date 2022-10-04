@@ -1,6 +1,9 @@
 <?php
-    $dateArray = ["year" => "年", "month" => "月", "day" => "日"];
-    $keys = array_keys($dateArray);
+  if (isset($_SESSION['errors'])) {
+    $errors = $_SESSION['errors'];
+  }
+  $dateArray = ["year" => "年", "month" => "月", "day" => "日"];
+  $keys = array_keys($dateArray);
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +22,7 @@
         <a href="index.php?action=login" class="btn top">ログインページに戻る</a>
       </div>
       <div class="regist-wrapper">
-        <form action="index.php" method="post" name="myform">
+        <form action="index.php" method="post" name="registForm">
           <div class="item">
             <label class="label-item" for="label">名前<span class="label-required">*</span>：</label>
             <div class="item_column">
@@ -30,6 +33,9 @@
                 size="30"
                 value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ""; ?>"
               />
+              <?php if (isset($errors['name']))
+                echo "<span class ='error'>{$errors['name']}</span>";
+              ?>
             </div>
           </div>
           <div class="item">
@@ -43,6 +49,9 @@
                 size="30"
                 value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ""; ?>"
               />
+              <?php if (isset($errors['email']))
+                echo "<span class ='error'>{$errors['email']}</span>";
+              ?>
             </div>
           </div>
           <div class="item">
@@ -53,13 +62,20 @@
                 id="pass"
                 name="password"
                 placeholder="8文字以上16文字以内の半角英数字"
-                size="30"/>
+                size="30"
+              />
+              <?php if (isset($errors['password']))
+                echo "<span class ='error'>{$errors['password']}</span>";
+              ?>
             </div>
           </div>
           <div class="item">
             <label class="label-item" for="passConfirm">パスワード確認用<span class="label-required">*</span>：</label>
             <div class="item_column">
               <input type="password" id="passConfirm" name="password_confirm" size="30"/>
+              <?php if (isset($errors['password_confirm']))
+                  echo "<span class ='error'>{$errors['password_confirm']}</span>";
+              ?>
             </div>
           </div>
           <div class="item">
@@ -99,6 +115,9 @@
                       value="<?php echo isset($_SESSION['tel']) ? $_SESSION['tel'] : ""; ?>"
                       placeholder="000-0000-0000"
               />
+              <?php if (isset($errors['tel']))
+                  echo "<span class ='error'>{$errors['tel']}</span>";
+              ?>
             </div>
           </div>
           <div class="item">
@@ -123,6 +142,6 @@
   </main>
   <script src="js/Validation.js"></script>
   <script src="js/Message.js"></script>
-  <script src="js/valCheck.js"></script>
+  <script src="js/inputCheck.js"></script>
 </body>
 </html>

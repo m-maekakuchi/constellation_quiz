@@ -12,22 +12,19 @@ class Validation {
   //空文字チェック
   checkEmpty(para) {
     if (!para) {
-      //未入力
-      return true;
+      return true;    //未入力
     } else {
-      //入力値あり
-      return false;
+      
+      return false;   //入力値あり
     }
   };
   
   //バリデーションチェック
   checklPattern(property, para) {
     if (!this.patternList[property].test(para)) {
-      //パターンに一致しない
-      return true;
+      return true;    //パターンに一致しない
     } else {
-      //パターンに一致
-      return false;
+      return false;   //パターンに一致
     }
   };
 
