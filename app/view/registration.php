@@ -132,7 +132,7 @@
             </select>
           </div>
           <div class="form-submit">
-            <button id="btn" class="btn submit">登録</button>
+            <button id="registBtn" class="btn submit">登録する</button>
             <input type="hidden" name="action" value="registration">
             <input type="hidden" name="regist_submit" value="regist">
           </div>

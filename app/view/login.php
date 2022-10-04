@@ -24,15 +24,21 @@
       <?php if(isset($error)) echo "<p class='error'>{$error}</p>"; ?>
         <form action="index.php" method="post">
           <div class="login-form">
-            <input type="text" name="email" placeholder="メールアドレス" /><br>          
+            <input type="text" id="email" name="email" placeholder="メールアドレス" />
           </div>
           <div class="login-form">
-            <input type="password" name="password" placeholder="パスワード" />
+            <input type="password" id="pass" name="password" placeholder="パスワード" />
           </div>
-          <input type="submit" name="submit" class="btn submit" value="ログイン" />
+          <div class="form-submit">
+            <button id="loginBtn" class="btn submit">ログイン</button>
+            <input type="hidden" name="loginSubmit" value="login">
+          </div>
         </form>
       </div>
     </div>
   </main>
+  <script src="js/Validation.js"></script>
+  <script src="js/Message.js"></script>
+  <script src="js/inputCheck.js"></script>
 </body>
 </html>

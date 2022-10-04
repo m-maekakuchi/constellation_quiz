@@ -21,7 +21,8 @@ class LoginController extends Controller {
 		$val      = new Validation();
 		try {
 			//ログインボタンが押された場合
-			if ($params->submit === "ログイン") {
+			// if ($params->submit === "ログイン") {
+			if ($params->loginSubmit === "login") {
 				//メールアドレスかパスワードが未入力の場合
 				if (empty($params->email) || empty($params->password)) {
 					$error = Message::$VAL_EMAIL_OR_PASS_EMPTY;
