@@ -18,12 +18,13 @@ class MypageController extends Controller {
 		try {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
+				var_dump($params);
 				$mypageModel = createModel("MypageModel");
 				$val = new Validation();
 				$message = null;
 				$errors = [];
 				//クイズ画面で「マイページ」ボタンが押された場合
-				if ($params->action === "mypage" && isset($params->submit) === false) {
+				if ($params->action === "mypage" && isset($params->item) === false) {
 					$form    = new Form();
 					$works   = $mypageModel->selectWorks();
 					$address = $mypageModel->selectAddress();

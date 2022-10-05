@@ -1,5 +1,6 @@
+//アカウント登録画面の「登録」ボタンが押された場合
 const registBtn = document.getElementById('registBtn');
-if (registBtn != null) {
+if (registBtn !== null) {
   registBtn.addEventListener('click', e => {
     e.preventDefault();
     const val = new Validation();
@@ -33,6 +34,7 @@ if (registBtn != null) {
     }
 
     //エラーがなければalertを表示
+    //「OK」ボタンが押されたらaction先にパラメータを送信
     if (errorCount === 0) {
       if (window.confirm('この内容で登録しますか')) {
         document.registForm.submit();
@@ -41,9 +43,10 @@ if (registBtn != null) {
   });
 }
 
+//ログイン画面の「ログイン」ボタンが押された場合
 const loginBtn = document.getElementById('loginBtn');
-if (loginBtn != null) {
-  loginBtn.addEventListener('click', e =>{
+if (loginBtn !== null) {
+  loginBtn.addEventListener('click', e => {
     e.preventDefault();
     const val = new Validation();
     let errorCount = 0;
@@ -63,6 +66,32 @@ if (loginBtn != null) {
     //エラーがなければパラメータをaction先に送信
     if (errorCount === 0) {
       document.loginForm.submit();
+    }
+  });
+}
+
+//マイページの名前の更新ボタンが押された場合
+const updateNameBtn = document.getElementById('updateNameBtn');
+if (updateNameBtn !== null) {
+  updateNameBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const val = new Validation();
+    const name = document.getElementById('name');
+    if (validateName(name, val) === 0) {
+      document.updateNameForm.submit();
+    }
+  });
+}
+
+//マイページのメールアドレスの更新ボタンが押された場合
+const updateEmailBtn = document.getElementById('updateEmailBtn');
+if (updateEmailBtn !== null) {
+  updateEmailBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const val = new Validation();
+    const email = document.getElementById('email');
+    if (validateEmail(email, val) === 0) {
+      document.updateEmailForm.submit();
     }
   });
 }

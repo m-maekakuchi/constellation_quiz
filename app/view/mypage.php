@@ -72,7 +72,7 @@
       <div class="regist-wrapper">
         <h4>登録情報</h4>
         <?php if (isset($_SESSION['message'])) echo "<p class='update'>{$_SESSION['message']}</p>"; ?>
-        <form action="index.php" method="post">
+        <form action="index.php" method="post" name="updateNameForm">
           <div class="item">
             <label class="label-item" for="label">名前：</label>
             <label class="label-form" for="label">
@@ -90,13 +90,13 @@
               </div>
             </label>
             <div class="form-submit">
-              <input type="submit" name="submit" class="btn submit" value="更新">
+              <button id="updateNameBtn" class="btn submit">更新</button>
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="name">
             </div>
           </div>
         </form>
-        <form action="index.php" method="post">
+        <form action="index.php" method="post" name="updateEmailForm">
           <div class="item">
             <label class="label-item" for="email">メールアドレス：</label>
             <label class="label-form" for="email">
@@ -114,7 +114,7 @@
               </div>
             </label>
             <div class="form-submit">
-              <input type="submit" name="submit" class="btn submit" value="更新">
+              <button id="updateEmailBtn" class="btn submit">更新</button>
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="email">
             </div>
@@ -149,7 +149,7 @@
               </div>
             </label>
             <div class="form-submit">
-              <input type="submit" name="submit" class="btn submit" value="更新">
+              <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="password">
             </div>
@@ -174,7 +174,7 @@
               </div>
             </label>
             <div class="form-submit">
-              <input type="submit" name="submit" class="btn submit" value="更新">
+              <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="address">
             </div>
@@ -208,7 +208,7 @@
                 </div>
               </label>
               <div class="form-submit">
-                <input type="submit" name="submit" class="btn submit" value="更新">
+                <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
                 <input type="hidden" name="action" value="mypage">
                 <input type="hidden" name="item" value="birthday">
               </div>
@@ -233,7 +233,7 @@
               </div>
             </label>
             <div class="form-submit">
-              <input type="submit" name="submit" class="btn submit" value="更新">
+              <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="tel">
             </div>
@@ -258,7 +258,7 @@
               </div>
             </label>
             <div class="form-submit">
-              <input type="submit" name="submit" class="btn submit" value="更新">
+              <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="work">
             </div>
@@ -267,5 +267,8 @@
       </div>
     </div>
   </main>
+  <script src="js/Validation.js"></script>
+  <script src="js/Message.js"></script>
+  <script src="js/inputCheck.js"></script>
 </body>
 </html>
