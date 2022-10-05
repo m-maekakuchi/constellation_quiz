@@ -17,42 +17,21 @@ if (registBtn != null) {
       errorCount++;
     }
     
-
     //入力必須のパスワードのバリデーション
     const pass = document.getElementById('pass');
     const passConfirm = document.getElementById('passConfirm');
-    if (val.checkEmpty(pass.value)) {
-      displayError(pass, Message.VAL_PASS_EMPTY);
+    if (validateRegistPass(pass, passConfirm, val) === 1){
       errorCount++;
-    } else if (val.checkEmpty(passConfirm.value)) {
-      displayError(passConfirm, Message.VAL_PASS_CONFIRM_EMPTY);
-      removeError(pass);
-      errorCount++;
-    } else if (val.checklPattern(1, pass.value)) {
-      displayError(pass, Message.VAL_PASS_NOT_CORRECT);
-      removeError(passConfirm);
-      errorCount++;
-    } else if (pass.value !== passConfirm.value) {
-      displayError(passConfirm, Message.VAL_PASS_NOT_EQUAL);
-      removeError(pass);
-      errorCount++;
-    } else {
-      removeError(pass);
-      removeError(passConfirm);
     }
 
     //入力任意の電話番号のバリデーション
     const tel = document.getElementById('tel');
     if (!val.checkEmpty(tel.value)) {
-      if (val.checklPattern(2, tel.value)) {
-        displayError(tel, Message.VAL_TEL_NO_CORRECT);
+      if (validateTel(tel, val)) {
         errorCount++;
-      } else {
-        removeError(tel);
       }
     }
 
-    console.log(errorCount);
     //エラーがなければalertを表示
     if (errorCount === 0) {
       if (window.confirm('この内容で登録しますか')) {
@@ -62,7 +41,33 @@ if (registBtn != null) {
   });
 }
 
-//名前入力欄のバリデーション
+const loginBtn = document.getElementById('loginBtn');
+if (loginBtn != null) {
+  loginBtn.addEventListener('click', e =>{
+    e.preventDefault();
+    const val = new Validation();
+    let errorCount = 0;
+  
+    //メールアドレスのバリデーション
+    const email = document.getElementById('email');
+    if (validateEmail(email, val) === 1) {
+      errorCount++;
+    }
+
+    //パスワードのバリデーション
+    const pass = document.getElementById('pass');
+    if(validateLoginPass(pass, val) === 1) {
+      errorCount++;
+    }
+
+    //エラーがなければパラメータをaction先に送信
+    if (errorCount === 0) {
+      document.loginForm.submit();
+    }
+  });
+}
+
+//名前のバリデーション
 function validateName(form, val) {
   if (val.checkEmpty(form.value)) {
     displayError(form, Message.VAL_NAME_EMPTY);
@@ -73,7 +78,7 @@ function validateName(form, val) {
   }
 };
 
-//メールアドレス入力欄のバリデーション
+//メールアドレスのバリデーション
 function validateEmail(form, val) {
   if (val.checkEmpty(form.value)) {
     displayError(form, Message.VAL_EMAIL_EMPTY);
@@ -85,9 +90,53 @@ function validateEmail(form, val) {
     removeError(form);
     return 0;
   }
+};
+
+//ログイン時のパスワードのバリデーション
+function validateLoginPass(pass, val) {
+  if (val.checkEmpty(pass.value)) {
+    displayError(pass, Message.VAL_PASS_EMPTY);
+    return 1;
+  } else {
+    removeError(pass);
+    return 0;
+  }
 }
 
+//パスワード登録のバリデーション
+function validateRegistPass(pass, passConfirm, val) {
+  if (val.checkEmpty(pass.value)) {
+    displayError(pass, Message.VAL_PASS_EMPTY);
+    return 1;
+  } else if (val.checkEmpty(passConfirm.value)) {
+    displayError(passConfirm, Message.VAL_PASS_CONFIRM_EMPTY);
+    removeError(pass);
+    return 1;
+  } else if (val.checklPattern(1, pass.value)) {
+    displayError(pass, Message.VAL_PASS_NOT_CORRECT);
+    removeError(passConfirm);
+    return 1;
+  } else if (pass.value !== passConfirm.value) {
+    displayError(passConfirm, Message.VAL_PASS_NOT_EQUAL);
+    removeError(pass);
+    return 1;
+  } else {
+    removeError(pass);
+    removeError(passConfirm);
+    return 0;
+  }
+};
 
+//電話番号のバリデーション
+function validateTel(tel, val) {
+  if (val.checklPattern(2, tel.value)) {
+    displayError(tel, Message.VAL_TEL_NO_CORRECT);
+    return 1;
+  } else {
+    removeError(tel);
+    return 0;
+  }
+};
 
 //エラーメッセージを要素内容に持つ要素Nodeを作成して追加
 function displayError(form, message) {
@@ -108,18 +157,3 @@ function removeError(form) {
     form.nextElementSibling.remove();
   }
 };
-
-const loginBtn = document.getElementById('loginBtn');
-if (loginBtn != null) {
-  loginBtn.addEventListener('click', e =>{
-    e.preventDefault();
-    const val = new Validation();
-    let errorCount = 0;
-  
-    //Emailのバリデーション
-    const email = document.getElementById('email');
-    if (validateEmail(email, val) === 1) {
-      errorCount++;
-    }
-  });
-}

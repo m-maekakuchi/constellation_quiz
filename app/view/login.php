@@ -21,8 +21,8 @@
         <a href="index.php?action=registration" class="btn top">アカウント登録はこちら</a>
       </div>
       <div class="form-wrapper">
-      <?php if(isset($error)) echo "<p class='error'>{$error}</p>"; ?>
-        <form action="index.php" method="post">
+        <?php if(isset($error)) echo "<p class='error'>{$error}</p>"; ?>
+        <form action="index.php" method="post" name="loginForm">
           <div class="login-form">
             <input type="text" id="email" name="email" placeholder="メールアドレス" />
           </div>
