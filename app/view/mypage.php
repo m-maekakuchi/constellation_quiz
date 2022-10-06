@@ -36,7 +36,7 @@
                   $key = $keys[$i];
                   $variable = $key."s";
                   $name = "from{$key}";
-                  echo "<select name='{$name}' class='select1'>";
+                  echo "<select name='{$name}' id='{$name}' class='select1'>";
                   $options = Form::makeOptions($_SESSION[$variable], $name);
                   foreach ($options as $option) {
                     echo $option;
@@ -49,24 +49,27 @@
           <div class="item">
             <label class="label-item" for="label">終了日：</label>
             <label class="label-form" for="label">
-              <?php
-                for ($i = 0; $i < count($dateArray); $i++) {
-                  $key = $keys[$i];
-                  $variable = $key."s";
-                  $name = "to{$key}";
-                  echo "<select name='{$name}' class='select1'>";
-                  $options = Form::makeOptions($_SESSION[$variable], $name);
-                  foreach ($options as $option) {
-                    echo $option;
+              <div id="endDate">
+                <?php
+                  for ($i = 0; $i < count($dateArray); $i++) {
+                    $key = $keys[$i];
+                    $variable = $key."s";
+                    $name = "to{$key}";
+                    echo "<select name='{$name}' id='{$name}' class='select1'>";
+                    $options = Form::makeOptions($_SESSION[$variable], $name);
+                    foreach ($options as $option) {
+                      echo $option;
+                    }
+                    echo "</select>".$dateArray[$key]."&nbsp;";
                   }
-                  echo "</select>".$dateArray[$key]."&nbsp;";
-                }
-              ?>
+                ?>
+              </div>
             </label>
           </div>
-          <input type="submit" name="submit" class="btn submit" value="csvダウンロード">
-          <input type="submit" name="submit" class="btn submit" value="pdfダウンロード">
+          <button id="csvDlBtn" name="resultDl" value="csvDl" class="btn submit">csvダウンロード</button>
+          <button id="pdfDlBtn" name="resultDl" value="pdfDl" class="btn submit">pdfダウンロード</button>
           <input type="hidden" name="action" value="mypage">
+          <input type="hidden" name="item" value="result">
         </form>
       </div>
       <div class="regist-wrapper">
@@ -120,7 +123,7 @@
             </div>
           </div>
         </form>
-        <form action="index.php" method="post">
+        <form action="index.php" method="post" name="updatePassForm">
           <div class="item">
             <label class="label-item" for="pass">パスワード：</label>
             <label class="label-form" for="pass">
@@ -142,25 +145,25 @@
             <label class="label-item" for="pass_confirm">パスワード確認用：</label>
             <label class="label-form" for="pass_confirm">
               <div class="item_column">
-                <input type="password" id="pass_confirm" name="password_confirm" size="30"/>
+                <input type="password" id="passConfirm" name="password_confirm" size="30"/>
                 <?php if (isset($errors['password_confirm']))
                     echo "<span class ='error'>{$errors['password_confirm']}</span>";
                 ?>
               </div>
             </label>
             <div class="form-submit">
-              <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
+              <button id="updatePassBtn" class="btn submit">更新</button>
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="password">
             </div>
           </div>
         </form>
-        <form action="index.php" method="post">
+        <form action="index.php" method="post" name="updateAddressForm">
           <div class="item">
             <label class="label-item">住所：</label>
             <label class="label-form">
               <div class="item_column">
-                <select name="address" class="select1">
+                <select name="address" class="select1" id="address">
                   <?php
                     $options = Form::makeOptions($_SESSION['addresss'], 'address');
                     foreach ($options as $option) {
@@ -174,13 +177,13 @@
               </div>
             </label>
             <div class="form-submit">
-              <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
+              <button id="updateAddressBtn" class="btn submit">更新</button>
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="address">
             </div>
           </div>
         </form>
-        <form action="index.php" method="post">
+        <form action="index.php" method="post" name="updateBirthdayForm">
           <div class="item">
             <label class="label-item">生年月日：</label>
             <label class="label-form">
@@ -188,12 +191,12 @@
                 <?php echo $_SESSION['birthday']; ?>
               <?php else : ?>
                 <div class="item_column">
-                  <div class="unity">
+                  <div id="selectBirthday">
                     <?php
                       for ($i = 0; $i < count($dateArray); $i++) {
                         $key = $keys[$i];
                         $variable = $key."s";
-                        echo "<select name='{$key}' class='select1'>";
+                        echo "<select name='{$key}' class='select1' id='{$key}'>";
                         $options = Form::makeOptions($_SESSION[$variable], $key);
                         foreach ($options as $option) {
                           echo $option;
@@ -208,14 +211,14 @@
                 </div>
               </label>
               <div class="form-submit">
-                <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
-                <input type="hidden" name="action" value="mypage">
-                <input type="hidden" name="item" value="birthday">
-              </div>
+              <button id="updateBirthdayBtn" class="btn submit">更新</button>
+              <input type="hidden" name="action" value="mypage">
+              <input type="hidden" name="item" value="birthday">
+            </div>
             <?php endif; ?>
           </div>
         </form>
-        <form action="index.php" method="post">
+        <form action="index.php" method="post" name="updateTelForm">
           <div class="item">
             <label class="label-item" for="tel">電話番号：</label>
             <label class="label-form" for="tel">
@@ -233,18 +236,18 @@
               </div>
             </label>
             <div class="form-submit">
-              <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
+              <button id="updateTelBtn" class="btn submit">更新</button>
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="tel">
             </div>
           </div>
         </form>
-        <form action="index.php" method="post">
+        <form action="index.php" method="post" name="updateWorkForm">
           <div class="item">
             <label class="label-item">仕事：</label>
             <label class="label-form">
               <div class="item_column">
-                <select name="work" class="select2"> 
+                <select name="work" class="select2" id="work"> 
                   <?php
                     $options = Form::makeOptions($_SESSION['works'], 'work');
                     foreach ($options as $option) {
@@ -258,7 +261,7 @@
               </div>
             </label>
             <div class="form-submit">
-              <!-- <input type="submit" name="submit" class="btn submit" value="更新"> -->
+              <button id="updateWorkBtn" class="btn submit">更新</button>
               <input type="hidden" name="action" value="mypage">
               <input type="hidden" name="item" value="work">
             </div>

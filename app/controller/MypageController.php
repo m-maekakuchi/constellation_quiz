@@ -113,7 +113,7 @@ class MypageController extends Controller {
 						$_SESSION['work'] = $params->work;
 						$message = Message::$UPDATE_WORK;
 					}
-				} else if ($params->submit === "csvダウンロード" || $params->submit === "pdfダウンロード") {
+				} else if ($params->resultDl == "csvDl" || $params->resultDl == "pdfDl") {
 					if (
 						empty($params->fromyear) ||
 						empty($params->frommonth) ||
@@ -130,7 +130,7 @@ class MypageController extends Controller {
 						$_SESSION['today'] = $params->today;
 						$errors['date'] = Message::$VAL_DATE_EMPTY;
 					//「csvダウンロード」ボタンが押された場合
-					} else if ($params->submit === "csvダウンロード") {
+					} else if ($params->resultDl === "csvDl") {
 						$fromdate = "{$params->fromyear}/{$params->frommonth}/{$params->fromday}";
 						$todate = "{$params->toyear}/{$params->tomonth}/{$params->today}";
 						$corr_ans = $mypageModel->selectFlugs();
