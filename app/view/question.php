@@ -59,20 +59,26 @@
 	function show_result() {
 		const choiceRadio = document.getElementsByName('choices_id');
 		const len = choiceRadio.length;
-		let checkValue;
+		let checkValue = 0;
 		let corr_ans= <?php echo $corr_ans; ?>;
 		for (let i = 0; i < len; i++) {
 			if (choiceRadio.item(i).checked) {
 				checkValue = choiceRadio.item(i).value;
 			}
 		}
-		if (checkValue == corr_ans) {
-			alert("正解！");
-			corr_num++;
+		console.log(checkValue);
+		if(checkValue !== 0) {
+			if (checkValue === corr_ans) {
+						alert("正解！");
+						corr_num++;
+					} else {
+						alert("不正解！");
+					}
+					return true;
 		} else {
-			alert("不正解！");
+			alert("選択してください");
+			return false;
 		}
-		return true;
-	}
+	};
 </script>
 </html>
