@@ -66,9 +66,8 @@
 				checkValue = choiceRadio.item(i).value;
 			}
 		}
-		console.log(checkValue);
 		if(checkValue !== 0) {
-			if (checkValue === corr_ans) {
+			if (checkValue == corr_ans) {
 						alert("正解！");
 						corr_num++;
 					} else {
