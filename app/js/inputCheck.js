@@ -81,16 +81,24 @@ if (pdfDlBtn !== null || pdfDlBtn !== null) {
   const tomonth = document.getElementById('tomonth');
   const today = document.getElementById('today');
 
+  let newValue = document.createElement('input');
+  newValue.type = "hidden";
+  newValue.name = "resultDl";
+
   csvDlBtn.addEventListener('click', e => {
     e.preventDefault();
     if (val.validateDate(fromyear, frommonth, fromday, toyear, tomonth, today) === 0) {
-      document.csvDlBtn.submit();
+      newValue.value = "csv";
+      document.quizResultForm.appendChild(newValue);
+      document.quizResultForm.submit();
     }
   });
   pdfDlBtn.addEventListener('click', e => {
     e.preventDefault();
     if (val.validateDate(fromyear, frommonth, fromday, toyear, tomonth, today) === 0) {
-      document.pdfDlBtn.submit();
+      newValue.value = "pdf";
+      document.quizResultForm.appendChild(newValue);
+      document.quizResultForm.submit();
     }
   });
 }

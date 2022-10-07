@@ -27,7 +27,7 @@
         <?php if (isset($errors['date']))
                 echo "<p class ='error'>{$errors['date']}</p>";
         ?>
-        <form action=index.php method="post">
+        <form action=index.php method="post" name="quizResultForm">
           <div class="item">
             <label class="label-item" for="label">開始日：</label>
             <label class="label-form" for="label">
@@ -66,8 +66,8 @@
               </div>
             </label>
           </div>
-          <button id="csvDlBtn" name="resultDl" value="csvDl" class="btn submit">csvダウンロード</button>
-          <button id="pdfDlBtn" name="resultDl" value="pdfDl" class="btn submit">pdfダウンロード</button>
+          <button id="csvDlBtn" class="btn submit">csvダウンロード</button>
+          <button id="pdfDlBtn" class="btn submit">pdfダウンロード</button>
           <input type="hidden" name="action" value="mypage">
           <input type="hidden" name="item" value="result">
         </form>

@@ -18,7 +18,6 @@ class MypageController extends Controller {
 		try {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
-				var_dump($params);
 				$mypageModel = createModel("MypageModel");
 				$val = new Validation();
 				$message = null;
@@ -113,7 +112,13 @@ class MypageController extends Controller {
 						$_SESSION['work'] = $params->work;
 						$message = Message::$UPDATE_WORK;
 					}
-				} else if ($params->resultDl == "csvDl" || $params->resultDl == "pdfDl") {
+				} else if ($params->item === 'result') {
+						$_SESSION['fromyear'] = $params->fromyear;
+						$_SESSION['frommonth'] = $params->frommonth;
+						$_SESSION['fromday'] = $params->fromday;
+						$_SESSION['toyear'] = $params->toyear;
+						$_SESSION['tomonth'] = $params->tomonth;
+						$_SESSION['today'] = $params->today;
 					if (
 						empty($params->fromyear) ||
 						empty($params->frommonth) ||
@@ -122,15 +127,9 @@ class MypageController extends Controller {
 						empty($params->tomonth) ||
 						empty($params->today)
 					) {
-						$_SESSION['fromyear'] = $params->fromyear;
-						$_SESSION['frommonth'] = $params->frommonth;
-						$_SESSION['fromday'] = $params->fromday;
-						$_SESSION['toyear'] = $params->toyear;
-						$_SESSION['tomonth'] = $params->tomonth;
-						$_SESSION['today'] = $params->today;
 						$errors['date'] = Message::$VAL_DATE_EMPTY;
-					//「csvダウンロード」ボタンが押された場合
-					} else if ($params->resultDl === "csvDl") {
+					// 「csvダウンロード」ボタンが押された場合
+					} else if ($params->resultDl === 'csv'){
 						$fromdate = "{$params->fromyear}/{$params->frommonth}/{$params->fromday}";
 						$todate = "{$params->toyear}/{$params->tomonth}/{$params->today}";
 						$corr_ans = $mypageModel->selectFlugs();
@@ -138,8 +137,8 @@ class MypageController extends Controller {
 						$fileName = "quizResult.csv";
 						$mypageModel->csvDownload($fileName, $csvstr);
 						exit();
-					//「pdfダウンロード」ボタンが押された場合
-					} else {
+					// 「pdfダウンロード」ボタンが押された場合
+					} else if ($params->resultDl === 'pdf') {
 						$fromdate = "{$params->fromyear}/{$params->frommonth}/{$params->fromday}";
 						$todate = "{$params->toyear}/{$params->tomonth}/{$params->today}";
 						$corr_ans = $mypageModel->selectFlugs();
