@@ -24,7 +24,7 @@
 					<?php echo $_SESSION['name'] ?>さんは、<?php echo $questions_num ?>問中<?php echo $corr_num ?>問正解です!
 				</h4>
 				<a href="index.php?action=question&tryAgain=tryAgain" class="btn submit">再挑戦</a>
-				<a href="index.php" class="btn submit">ログアウト</a>
+				<a href="index.php?action=logout" class="btn submit">ログアウト</a>
       </div>
 		</div>
 	</main>

@@ -16,9 +16,13 @@ class QuestionController extends Controller {
 		try {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
+				$questionModel = createModel("QuestionModel");
 				//結果画面の再挑戦ボタンが押された場合は回答履歴を削除
 				if (isset($params->tryAgain)) {
 					unset($_SESSION['answers']);
+				} else if (isset($params->loginSubmit)) {
+					$questions_num = $questionModel->selectCount();
+					$_SESSION['questions_num'] = $questions_num;
 				}
 				//ユーザーの回答を保持するオブジェクト配列を取得
 				$answers = [];
@@ -36,16 +40,8 @@ class QuestionController extends Controller {
 					return "result";
 				//最終問題ではない場合
 				} else {
-					$question_id = 1;
-					$questionModel = createModel("QuestionModel");
-
-					//問題数を取得してセッションに登録
-					if (isset($params->choices_id) === false) {
-						$questions_num = $questionModel->selectCount();
-						$_SESSION['questions_num'] = $questions_num;
-					}
-				
 					//表示する問題が何問目かを算出
+					$question_id = 1;
 					if (isset($_POST['question_id'])) {
 						if ($_POST['question_id'] < $_SESSION['questions_num']) {
 							$question_id = $_POST['question_id'] + 1;
