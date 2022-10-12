@@ -19,6 +19,7 @@ class QuestionController extends Controller {
 				//結果画面の再挑戦ボタンが押された場合は回答履歴を削除
 				if (isset($params->tryAgain)) {
 					unset($_SESSION['answers']);
+					unset($_SESSION['resultArrived']);
 				//ログイン後（第1問目）の場合問題数をセッションに登録
 				} else if (isset($params->loginSubmit)) {
 					$questions_num = $questionModel->selectCount();

@@ -18,23 +18,28 @@ class ResultController extends Controller {
     try {
       //ログイン状態が保たれていた場合
       if (isset($_SESSION['loginStatus'])) {
-        $corr_num = 0;
-        $answers = $_SESSION['answers'];
-        $questions_num = $_SESSION['questions_num'];
-        $resultModel = createModel("ResultModel");
+        if (!isset($_SESSION['resultArrived'])) {
+          $corr_num = 0;
+          $answers = $_SESSION['answers'];
+          $questions_num = $_SESSION['questions_num'];
+          $resultModel = createModel("ResultModel");
 
-        //ユーザーの回答の正誤を判断し、正解数を取得
-        $corr_ans = $resultModel->selectFlugs();
-        for ($i = 0; $i < $questions_num; $i++) {
-          if ($answers[$i] == $corr_ans[$i]['id']) {
-            $corr_num++;
+          //ユーザーの回答の正誤を判断し、正解数を取得
+          $corr_ans = $resultModel->selectFlugs();
+          for ($i = 0; $i < $questions_num; $i++) {
+            if ($answers[$i] == $corr_ans[$i]['id']) {
+              $corr_num++;
+            }
           }
-        }
-        $_SESSION['corr_num'] = $corr_num;
+          $_SESSION['corr_num'] = $corr_num;
 
-        //ユーザーの回答をDBに登録
-        $resultModel->insertAnswers($_SESSION['id'], $answers);
-        return "view/result.php";
+          //ユーザーの回答をDBに登録
+          $resultModel->insertAnswers($_SESSION['id'], $answers);
+          $_SESSION['resultArrived'] = "回答をDBに登録済";
+          return "view/result.php";
+        } else {
+          return "view/result.php";
+        }
       } else {
 				return "login";
 			}
