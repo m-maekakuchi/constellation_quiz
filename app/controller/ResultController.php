@@ -34,6 +34,7 @@ class ResultController extends Controller {
 
           //ユーザーの回答をDBに登録
           $resultModel->insertAnswers($_SESSION['id'], $answers);
+          //リロードによるフォームの多重送信防止のためのセッションオブジェクトを作成
           $_SESSION['resultArrived'] = "回答をDBに登録済";
           return "view/result.php";
         } else {

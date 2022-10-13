@@ -27,9 +27,9 @@ class MypageController extends Controller {
 					$form    = new Form();
 					$works   = $mypageModel->selectWorks();
 					$address = $mypageModel->selectAddress();
-					$years   = $form->makeItems(1950, date('Y'));
-					$months  = $form->makeItems(1, 12);
-					$days    = $form->makeItems(1, 31);
+					$years   = callApi(1950, date('Y'));
+					$months  = callApi(1, 12);
+					$days    = callApi(1, 31);
 					$_SESSION['addresss'] = $address;
 					$_SESSION['works']    = $works;
 					$_SESSION['years']    = $years;
@@ -112,6 +112,7 @@ class MypageController extends Controller {
 						$_SESSION['work'] = $params->work;
 						$message = Message::$UPDATE_WORK;
 					}
+				//csvダウンロードかpdfダウンロードボタンが押された場合
 				} else if ($params->item === 'result') {
 						$_SESSION['fromyear'] = $params->fromyear;
 						$_SESSION['frommonth'] = $params->frommonth;

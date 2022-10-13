@@ -23,9 +23,9 @@ class RegistrationController extends Controller {
 				$form    = new Form();
 				$works   = $registrationModel->selectWorks();
 				$address = $registrationModel->selectAddress();
-				$years   = $form->makeItems(1950, 2020);
-				$months  = $form->makeItems(1, 12);
-				$days    = $form->makeItems(1, 31);
+				$years   = callApi(1950, 2020);
+				$months  = callApi(1, 12);
+				$days    = callApi(1, 31);
 				$_SESSION['addresss'] = $address;
 				$_SESSION['works']    = $works;
 				$_SESSION['years']    = $years;
