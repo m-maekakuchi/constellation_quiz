@@ -14,7 +14,6 @@ class ResultController extends Controller {
 	 * @return string Viewのパス
 	 */
 	public function action($params, $model) {
-    var_dump($params);
     try {
       //ログイン状態が保たれていた場合
       if (isset($_SESSION['loginStatus'])) {
