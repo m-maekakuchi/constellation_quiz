@@ -1,15 +1,6 @@
 <?php
   class Form {
 
-    //セレクトボックスの項目を生成
-    public function makeItems($start, $end) {
-      $items = [];
-      for ($i = $start; $i <= $end; $i++) {
-        $items[] = $i;
-      }
-      return $items;
-    }
-
     //セレクトボックスのoption要素を生成
     public static function makeOptions($list, $key) {
       $options = [];
