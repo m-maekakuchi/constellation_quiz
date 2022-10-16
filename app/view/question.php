@@ -22,6 +22,7 @@
 				<h2>星座クイズ</h2>
 				<p><?php echo $_SESSION['name'] ?>さん、ようこそ！</p>
 				<a href="index.php?action=mypage" class="btn top">マイページ</a>
+				<a href="index.php?action=management" class="btn top">管理画面</a>
 			</div>
 			<div class="regist-wrapper">
 			<?php if(isset($error)) echo "<p class='error'>{$error}</p>"; ?>

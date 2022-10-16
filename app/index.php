@@ -25,7 +25,8 @@ $controllers = [
 	'result'       => 'ResultController',
 	'complete'     => 'CompleteController',
 	'result'       => 'ResultController',
-	'mypage'       => 'MypageController'
+	'mypage'       => 'MypageController',
+	'management'   => 'ManagementController'
 ];
 
 if (isset($params->action) === false) {

@@ -35,7 +35,7 @@ class RegistrationController extends Controller {
 
 			//登録するボタンが押された場合
 			} else if (isset($params->regist_submit) && $params->regist_submit === 'regist') {
-				try {
+				// try {
 					$errors   = [];
 					$year     = "";
 					$month    = "";
@@ -135,12 +135,12 @@ class RegistrationController extends Controller {
 						$_SESSION['errors'] = $errors;
 						return "view/registration.php";
 					}
-				} catch (PDOException $e) {
-					die ("データベースエラー:".$e->getMessage());
-				} catch (Exception $e) {
-					echo $e->getMessage(), "例外発生"; 
-				}
-				return "view/registration.php";
+				// } catch (PDOException $e) {
+				// 	die ("データベースエラー:".$e->getMessage());
+				// } catch (Exception $e) {
+				// 	echo $e->getMessage(), "例外発生"; 
+				// }
+				// return "view/registration.php";
 			} else {
 				return "view/login.php";
 			} 
