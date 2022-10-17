@@ -98,6 +98,8 @@ class ManagementController extends Controller {
 							}
 							$newChoicesId = $managementModel->insertChoices($choices[$i], $result_flg, $newQuestionsId);
 						}
+						//answer_historyに新しい列を追加
+						$managementModel->insertColum($newQuestionsId);
 						$_REQUEST['message'] = Message::$INSERT_QUESTION;
 						//クイズの登録に成功したら以下のセッションオブジェクトを破棄
 						unset($_SESSION['question']);
