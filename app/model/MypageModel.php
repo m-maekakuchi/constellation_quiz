@@ -255,13 +255,6 @@ class MypageModel extends Model {
 						$pdfStr .= "<td class='rightOrWrong'>×</td>";
 					}
 				}
-				
-				// if ($row["第{$i}問"] == $corr_ans[$i - 1]['id']) {
-				// 	$corr_num++;
-				// 	$pdfStr .= "<td class='rightOrWrong'>○</td>";
-				// } else {
-				// 	$pdfStr .= "<td class='rightOrWrong'>×</td>";
-				// }
 			}
 			$corr_rate = (int)($corr_num / $que_num * 100);
 			$pdfStr .= "<td class='corrRate'>{$corr_rate}</td>";
