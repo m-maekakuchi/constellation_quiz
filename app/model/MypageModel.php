@@ -176,7 +176,7 @@ class MypageModel extends Model {
     for ($i = 1; $i <= $questions_num; $i++) {
       $csvstr .= "第{$i}問, 正誤, ";
       if ($i == $questions_num) {
-        $csvstr .= "正解率, 回答日\n";
+        $csvstr .= "正解率(%), 回答日\n";
       }
     }
 		//回答履歴データを取得
@@ -185,17 +185,23 @@ class MypageModel extends Model {
 		//answer_histrory表のデータとクイズの結果を一つの文字列にする
 		while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
 			$corr_num = 0;
+			$que_num = 0;		//問題を解いた時の問題数
 			for ($i = 1; $i <= $questions_num; $i++) {
 				$csvstr .= $row["第{$i}問"].",";
 				//クイズの正誤を○×で登録
-				if ($row["第{$i}問"] == $corr_ans[$i - 1]['id']) {
-					$corr_num++;
-					$csvstr .= "○, ";
+				if (empty($row["第{$i}問"])) {
+					$csvstr .= "-, ";
 				} else {
-					$csvstr .= "×, ";
+					$que_num++;
+					if ($row["第{$i}問"] == $corr_ans[$i - 1]['id']) {
+						$corr_num++;
+						$csvstr .= "○, ";
+					} else {
+						$csvstr .= "×, ";
+					}
 				}
 			}
-			$corr_rate = $corr_num / $questions_num * 100;
+			$corr_rate = (int)($corr_num / $que_num * 100);
 			$csvstr .= "{$corr_rate},";
       $csvstr .= $row['回答日']."\n";
     }
@@ -222,7 +228,7 @@ class MypageModel extends Model {
       $pdfStr .= "<th class='question'>第{$i}問</th>
 									<th class='rightOrWrong'>正誤</th>";
       if ($i == $questions_num) {
-        $pdfStr .= "<th class='corrRate'>正解率</th>
+        $pdfStr .= "<th class='corrRate'>正解率(%)</th>
 										<th class='date'>回答日</th>
 										</tr>";
       }
@@ -233,18 +239,31 @@ class MypageModel extends Model {
 		//answer_histrory表のデータとクイズの結果を一つの文字列にする
 		while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
 			$corr_num = 0;
+			$que_num = 0;		//問題を解いた時の問題数
 			$pdfStr .= "<tr>";
 			for ($i = 1; $i <= $questions_num; $i++) {
 				$pdfStr .= "<td class='question'>".$row["第{$i}問"]."</td>";
 				//クイズの正誤を○×で登録
-				if ($row["第{$i}問"] == $corr_ans[$i - 1]['id']) {
-					$corr_num++;
-					$pdfStr .= "<td class='rightOrWrong'>○</td>";
+				if (empty($row["第{$i}問"])) {
+					$pdfStr .= "<td class='rightOrWrong'>-</td>";
 				} else {
-					$pdfStr .= "<td class='rightOrWrong'>×</td>";
+					$que_num++;
+					if ($row["第{$i}問"] == $corr_ans[$i - 1]['id']) {
+						$corr_num++;
+						$pdfStr .= "<td class='rightOrWrong'>○</td>";
+					} else {
+						$pdfStr .= "<td class='rightOrWrong'>×</td>";
+					}
 				}
+				
+				// if ($row["第{$i}問"] == $corr_ans[$i - 1]['id']) {
+				// 	$corr_num++;
+				// 	$pdfStr .= "<td class='rightOrWrong'>○</td>";
+				// } else {
+				// 	$pdfStr .= "<td class='rightOrWrong'>×</td>";
+				// }
 			}
-			$corr_rate = $corr_num / $questions_num * 100;
+			$corr_rate = (int)($corr_num / $que_num * 100);
 			$pdfStr .= "<td class='corrRate'>{$corr_rate}</td>";
       $pdfStr .= "<td class='date'>{$row['回答日']}</td></tr>";
     }
