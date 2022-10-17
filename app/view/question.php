@@ -23,6 +23,7 @@
 				<p><?php echo $_SESSION['name'] ?>さん、ようこそ！</p>
 				<a href="index.php?action=mypage" class="btn top">マイページ</a>
 				<a href="index.php?action=management" class="btn top">管理画面</a>
+				<a href="index.php?action=logout" class="btn top">ログアウト</a>
 			</div>
 			<div class="regist-wrapper">
 			<?php if(isset($error)) echo "<p class='error'>{$error}</p>"; ?>
