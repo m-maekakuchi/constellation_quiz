@@ -29,6 +29,9 @@
               <a class="nav-link active" aria-current="page" href="index.php?action=management">ホーム</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="index.php?action=question">クイズ</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="index.php?action=mypage">マイページ</a>
             </li>
             <li class="nav-item">
