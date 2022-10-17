@@ -38,7 +38,7 @@
         <section class="col-md-8">
           <form action="index.php" method="post" class="needs-validation" novalidate>
             <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
-              <h1 class="fs-3 m-0">クイズの問題</h1>
+              <h1 class="fs-3 m-0">クイズ問題の追加</h1>
               <button type="submit" class="btn btn-primary btn-sm ms-auto">
                 <i class="bi bi-plus"></i>
                 追加
@@ -46,52 +46,75 @@
               <input type="hidden" name="addQuestion" value="addQuestion">
               <input type="hidden" name="action" value="management">
             </header>
-            <p>クイズの問題を追加することができます。</p>
             <?php if(isset($_SESSION['message'])) echo "<p class='text-danger'>{$message}</p>"; ?>
-            <div class="input-group mb-3">
+            <div class="mb-3">
               <div class="row">
-                <!-- <span class="input-group-text">問題文</span> -->
-                <textarea name="question" class="form-control" placeholder="問題文" aria-label="Question"></textarea>
+                <div class="mb-1">
+                  <label for="questionInput" class="form-label">問題文</label>
+                  <textarea class="form-control" name="question" id="questionInput" rows="3" placeholder="北斗七星はある星座のしっぽと言われていますがその星座は？"><?php echo isset($_SESSION['question']) ? $_SESSION['question'] : ""; ?></textarea>
+                </div>
                 <?php if(isset($errors['question'])) echo "<p class='text-danger mb-0'>{$errors['question']}</p>"; ?>
               </div>
             </div>
-            <div class="input-group mb-3">
+            <div class="mb-1">
               <div class="row">
-                <!-- <span class="input-group-text" id="basic-addon1">選択肢1</span> -->
-                <input type="text" name="choice1" class="form-control" placeholder="選択肢1" aria-label="Choice1" aria-describedby="basic-addon1">
+                <div class="mb-1">
+                  <label for="choice1" class="form-label">選択肢1</label>
+                  <input type="text" name="choice1" class="form-control" id="choice1" placeholder="こいぬ座" value="<?php echo isset($_SESSION['choice1']) ? $_SESSION['choice1'] : ""; ?>">
+                </div>
                 <?php if(isset($errors['choice1'])) echo "<p class='text-danger'>{$errors['choice1']}</p>"; ?>
               </div>
             </div>
-            <div class="input-group mb-3 was-validated">
-              <span class="input-group-text" id="basic-addon2">選択肢2</span>
-              <input type="text" name="choice2" class="form-control" placeholder="選択肢2" aria-label="Choice2" aria-describedby="basic-addon2" required>
-              <div class="invalid-feedback">
-                選択肢2を入力してください。
+            <div class="mb-1">
+              <div class="row">
+                <div class="mb-1">
+                  <label for="choice2" class="form-label">選択肢2</label>
+                  <input type="text" name="choice2" class="form-control" id="choice2" placeholder="おおぐま座" value="<?php echo isset($_SESSION['choice2']) ? $_SESSION['choice2'] : ""; ?>">
+                </div>
+                <?php if(isset($errors['choice2'])) echo "<p class='text-danger'>{$errors['choice2']}</p>"; ?>
               </div>
             </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon3">選択肢3</span>
-              <input type="text" name="choice3" class="form-control" placeholder="選択肢3" aria-label="Choice3" aria-describedby="basic-addon3">
-              <?php if(isset($errors['choice3'])) echo "<p class='text-danger'>{$errors['choice3']}</p>"; ?>
+            <div class="mb-1">
+              <div class="row">
+                <div class="mb-1">
+                  <label for="choice3" class="form-label">選択肢3</label>
+                  <input type="text" name="choice3" class="form-control" id="choice3" placeholder="おおいぬ座" value="<?php echo isset($_SESSION['choice3']) ? $_SESSION['choice3'] : ""; ?>">
+                </div>
+                <?php if(isset($errors['choice3'])) echo "<p class='text-danger'>{$errors['choice3']}</p>"; ?>
+              </div>
             </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon4">選択肢4</span>
-              <input type="text" name="choice4" class="form-control" placeholder="選択肢4" aria-label="Choice4" aria-describedby="basic-addon4">
-              <?php if(isset($errors['choice4'])) echo "<p class='text-danger'>{$errors['choice4']}</p>"; ?>
+            <div class="mb-2">
+              <div class="row">
+                <div class="mb-1">
+                  <label for="choice4" class="form-label">選択肢4</label>
+                  <input type="text" name="choice4" class="form-control" id="choice4" placeholder="こぐま座" value="<?php echo isset($_SESSION['choice4']) ? $_SESSION['choice4'] : ""; ?>">
+                </div>
+                <?php if(isset($errors['choice4'])) echo "<p class='text-danger'>{$errors['choice4']}</p>"; ?>
+              </div>
             </div>
-            <select name="corrChoice" class="form-select" aria-label="正答">
-              <option value="" selected>正答を選んでください</option>
-              <option value="1">選択肢1</option>
-              <option value="2">選択肢2</option>
-              <option value="3">選択肢3</option>
-              <option value="4">選択肢4</option>
-            </select>
-            <?php if(isset($errors['corrChoice'])) echo "<p class='text-danger'>{$errors['corrChoice']}</p>"; ?>
+            <div class="mb-2">
+              <div class="mb-1">
+                <label for="choice4" class="form-label">正しい選択肢</label>
+                <select name="corrChoice" class="form-select" aria-label="正答">
+                  <option value="">選んでください</option>
+                  <?php 
+                  for ($i = 1; $i <= 4; $i++) {
+                    $option = "<option value={$i} ";
+                    if (isset($_SESSION['corrChoice']) && $_SESSION['corrChoice'] == $i) {
+                      $option .= "selected";
+                    }
+                    $option.= ">選択肢{$i}</option>";
+                    echo $option;
+                  }
+                  ?>
+                </select>
+              </div>
+              <?php if(isset($errors['corrChoice'])) echo "<p class='text-danger'>{$errors['corrChoice']}</p>"; ?>
+            </div>
           </form>
         </section>
       </section>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

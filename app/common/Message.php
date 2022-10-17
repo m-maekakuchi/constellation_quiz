@@ -34,6 +34,6 @@ class Message {
   public static $VAL_CHOICE2_EMPTY         = "選択肢2を入力してください";
   public static $VAL_CHOICE3_EMPTY         = "選択肢3を入力してください";
   public static $VAL_CHOICE4_EMPTY         = "選択肢4を入力してください";
-  public static $VAL_CORRCHOICE_NOT_SELECT = "正答を選択してください";
+  public static $VAL_CORRCHOICE_NOT_SELECT = "答えを選択してください";
   public static $INSERT_QUESTION           = "クイズの問題を追加しました";
 }
