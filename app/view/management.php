@@ -36,7 +36,7 @@
           </div>
         </section>
         <section class="col-md-8">
-          <form action="index.php" method="post">
+          <form action="index.php" method="post" class="needs-validation" novalidate>
             <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
               <h1 class="fs-3 m-0">クイズの問題</h1>
               <button type="submit" class="btn btn-primary btn-sm ms-auto">
@@ -62,12 +62,11 @@
                 <?php if(isset($errors['choice1'])) echo "<p class='text-danger'>{$errors['choice1']}</p>"; ?>
               </div>
             </div>
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 was-validated">
               <span class="input-group-text" id="basic-addon2">選択肢2</span>
-              <input type="text" name="choice2" class="form-control" placeholder="選択肢2" aria-label="Choice2" aria-describedby="basic-addon2">
-              
+              <input type="text" name="choice2" class="form-control" placeholder="選択肢2" aria-label="Choice2" aria-describedby="basic-addon2" required>
               <div class="invalid-feedback">
-                Please choose a username.
+                選択肢2を入力してください。
               </div>
             </div>
             <div class="input-group mb-3">
