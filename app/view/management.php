@@ -17,10 +17,27 @@
     <title>簡易星座クイズプログラム</title>
   </head>
   <body>
-    <header class="bg-primary text-start text-light p-3">
-      <h1 class="fs-4">My Admin</h1>
-    </header>
-
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">My Admin</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.php?action=management">ホーム</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?action=mypage">マイページ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?action=logout">ログアウト</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div class="container mt-5">
       <section class="row">
         <section class="col-md-4 mb-5">
