@@ -75,10 +75,24 @@ class ManagementController extends Controller {
 
 					//バリデーションチェックをしてエラーがない場合
 					if (count($errors) == 0) {
-						// $newUsersId = $registrationModel->insertUsers($email, $hashed_pass);
-						// $newUser_detailId = $registrationModel->insertUser_d($name, $addr, $birthday, $tel, $work, $newUsersId);
+						$result_flg;
+						$choices = [$choice1, $choice2, $choice3, $choice4];
+						//セッションにエラーメッセージが登録されていた場合は消去する
+						if (isset($_SESSION['errors'])) {
+							$_SESSION['errors'] = [];
+						}
+						//問題文を登録
+						$newQuestionsId = $managementModel->insertQuestions($question);
+						//選択肢を登録
+						for ($i = 0; $i < 4; $i++) {
+							if ($corrChoice == $i + 1) {
+								$result_flg = 1;
+							} else {
+								$result_flg = 0;
+							}
+							$newChoicesId = $managementModel->insertChoices($choices[$i], $result_flg, $newQuestionsId);
+						}
 						$_SESSION['message'] = Message::$INSERT_QUESTION;
-						echo $_SESSION['message'];
 					//バリデーションチェックをしてエラーがある場合
 					} else {
 						$_SESSION['errors'] = $errors;

@@ -38,8 +38,8 @@ class ManagementModel extends Model {
             VALUES (?, ?, ?)";
 		$stt = $this->prepare($sql);
 		$stt->bindValue(1, $choice);
-    $stt->bindValue(1, $result_flg);
-    $stt->bindValue(1, $questions_id);
+    $stt->bindValue(2, $result_flg);
+    $stt->bindValue(3, $questions_id);
 		$stt->execute();
 		return $this->lastInsertId();
 	}
