@@ -25,6 +25,12 @@ class ManagementController extends Controller {
 					$managementModel = createModel("ManagementModel");
 					$val = new Validation();
 
+					//リロードによる重複登録の防止
+					$arr = $managementModel->selectSameQueNum($params->question);
+					if ($arr['sameQueNum'] != 0) {
+						return "view/management.php";
+					}
+
 					//問題文のバリデーションチェック
 					if ($val->checkEmpty($params->question)) {
 						$errors['question'] = Message::$VAL_QUESTION_EMPTY;
@@ -79,7 +85,7 @@ class ManagementController extends Controller {
 						$choices = [$choice1, $choice2, $choice3, $choice4];
 						//セッションにエラーメッセージが登録されていた場合は消去する
 						if (isset($_SESSION['errors'])) {
-							$_SESSION['errors'] = [];
+							unset($_SESSION['errors']);
 						}
 						//問題文を登録
 						$newQuestionsId = $managementModel->insertQuestions($question);
@@ -92,7 +98,14 @@ class ManagementController extends Controller {
 							}
 							$newChoicesId = $managementModel->insertChoices($choices[$i], $result_flg, $newQuestionsId);
 						}
-						$_SESSION['message'] = Message::$INSERT_QUESTION;
+						$_REQUEST['message'] = Message::$INSERT_QUESTION;
+						//クイズの登録に成功したら以下のセッションオブジェクトを破棄
+						unset($_SESSION['question']);
+						unset($_SESSION['choice1']);
+						unset($_SESSION['choice2']);
+						unset($_SESSION['choice3']);
+						unset($_SESSION['choice4']);
+						unset($_SESSION['corrChoice']);
 					//バリデーションチェックをしてエラーがある場合
 					} else {
 						$_SESSION['errors'] = $errors;

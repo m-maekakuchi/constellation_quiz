@@ -2,8 +2,8 @@
   if (isset($_SESSION['errors'])) {
     $errors = $_SESSION['errors'];
   }
-  if (isset($_SESSION['message'])) {
-    $message = $_SESSION['message'];
+  if (isset($_REQUEST['message'])) {
+    $message = $_REQUEST['message'];
   }
 ?>
 <!doctype html>
@@ -46,7 +46,7 @@
               <input type="hidden" name="addQuestion" value="addQuestion">
               <input type="hidden" name="action" value="management">
             </header>
-            <?php if(isset($_SESSION['message'])) echo "<p class='text-danger'>{$message}</p>"; ?>
+            <?php if(isset($message)) echo "<p class='text-danger'>{$message}</p>"; ?>
             <div class="mb-3">
               <div class="row">
                 <div class="mb-1">

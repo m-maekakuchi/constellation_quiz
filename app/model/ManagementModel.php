@@ -43,4 +43,24 @@ class ManagementModel extends Model {
 		$stt->execute();
 		return $this->lastInsertId();
 	}
+
+	/**
+	 * questions表から同じ問題文を取得するメソッド
+	 *
+	 * @param string $question 問題文
+	 * 
+	 *@return integer 行数
+	 */
+	public function selectSameQueNum($question) {
+		$sql = "SELECT
+    					COUNT(*) AS sameQueNum
+						FROM
+   						questions
+						WHERE
+    					content = ?";
+		$stt = $this->prepare($sql);
+		$stt->bindValue(1, $question);
+		$stt->execute();
+		return $stt->fetch(PDO::FETCH_ASSOC);
+	}
 }
