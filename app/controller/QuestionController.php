@@ -20,8 +20,9 @@ class QuestionController extends Controller {
 				if (isset($params->tryAgain)) {
 					unset($_SESSION['answers']);
 					unset($_SESSION['resultArrived']);
-				//ログイン後（第1問目）の場合問題数をセッションに登録
-				} else if (isset($params->loginSubmit)) {
+				}
+				//ログインボタンか再挑戦ボタンが押された場合 (クイズ問題の追加後)、問題数をセッションに登録
+				if (isset($params->loginSubmit) || isset($params->tryAgain)) {
 					$questions_num = $questionModel->selectCount();
 					$_SESSION['questions_num'] = $questions_num;
 				}
