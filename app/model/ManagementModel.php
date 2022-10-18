@@ -73,15 +73,11 @@ class ManagementModel extends Model {
 	 */
 	public function insertColum($question_id) {
 		$prenum = $question_id - 1;
-		// $colum = "choices_id{$question_id}";
-		// $precolumn = "choices_id{$prenum}";
 		$sql = "ALTER TABLE
     					answer_history 
 						ADD COLUMN choices_id{$question_id} INT 
 						AFTER choices_id{$prenum}";
 		$stt = $this->prepare($sql);
-		// $stt->bindValue(1, $question_id);
-		// $stt->bindValue(2, $prenum);
 		$stt->execute();
 		return $stt->rowCount();
 	}
