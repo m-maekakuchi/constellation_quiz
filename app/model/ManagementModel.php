@@ -81,4 +81,19 @@ class ManagementModel extends Model {
 		$stt->execute();
 		return $stt->rowCount();
 	}
+
+	/**
+	 * questions表からメソッド
+	 *
+	 * @param string $question_id 
+	 * 
+	 *@return array 検索結果
+	 */
+	public function selectQue($str) {
+		$sql = "";
+		$stt = $this->prepare($sql);
+		$stt->bindValue(1, $str);
+		$stt->execute();
+		return $stt->fetch(PDO::FETCH_ASSOC);
+	}
 }

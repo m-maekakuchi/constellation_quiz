@@ -47,7 +47,7 @@
           <div class="list-group">
             <a href="" class="list-group-item list-group-item-action active" aria-current="true">
               <i class="bi bi-table me-1"></i>
-              クイズの設問
+              クイズ
             </a>
             <a href="view/manageQuiz.php" class="list-group-item list-group-item-action">
               <i class="bi bi-person-fill me-1"></i>
@@ -58,7 +58,7 @@
         <section class="col-md-8">
           <form action="index.php" method="post" class="needs-validation" novalidate>
             <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
-              <h1 class="fs-3 m-0">クイズ問題の追加</h1>
+              <h1 class="fs-3 m-0">問題の追加</h1>
               <button type="submit" class="btn btn-primary btn-sm ms-auto">
                 <i class="bi bi-plus"></i>
                 追加
@@ -67,7 +67,7 @@
               <input type="hidden" name="action" value="management">
             </header>
             <?php if(isset($message)) echo "<p class='text-danger'>{$message}</p>"; ?>
-            <div class="mb-3">
+            <div class="mb-1">
               <div class="row">
                 <div class="mb-1">
                   <label for="questionInput" class="form-label">問題文</label>
@@ -132,7 +132,28 @@
               <?php if(isset($errors['corrChoice'])) echo "<p class='text-danger'>{$errors['corrChoice']}</p>"; ?>
             </div>
           </form>
+          <form action="index.php" method="post" class="needs-validation mt-5" novalidate>
+            <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
+              <h1 class="fs-3 m-0">問題の検索</h1>
+              <button type="submit" class="btn btn-primary btn-sm ms-auto">
+                <i class="bi bi-search"></i>
+                検索
+              </button>
+              <input type="hidden" name="searchQuestion" value="searchQuestion">
+              <input type="hidden" name="action" value="management">
+            </header>
+            <div class="mb-1">
+              <div class="row">
+                <div class="mb-1">
+                  <label for="questionInput" class="form-label">問題文</label>
+                  <input type="text" name="searchQue" class="form-control" id="searchQue" placeholder="北斗七星" value="<?php echo isset($_SESSION['searchQue']) ? $_SESSION['searchQue'] : ""; ?>">
+                </div>
+                <?php if(isset($errors['question'])) echo "<p class='text-danger mb-0'>{$errors['question']}</p>"; ?>
+              </div>
+            </div>
+          </form>
         </section>
+          
       </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
