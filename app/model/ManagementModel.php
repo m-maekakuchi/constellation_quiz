@@ -83,17 +83,44 @@ class ManagementModel extends Model {
 	}
 
 	/**
-	 * questions表からメソッド
+	 * questions表からある文字を含む問題文を検索するメソッド
 	 *
-	 * @param string $question_id 
+	 * @param string $str
 	 * 
 	 *@return array 検索結果
 	 */
 	public function selectQue($str) {
-		$sql = "";
+		$sql = "SELECT
+							id,
+    					content
+						FROM
+							questions
+						WHERE
+							content LIKE '%{$str}%'";
 		$stt = $this->prepare($sql);
-		$stt->bindValue(1, $str);
 		$stt->execute();
-		return $stt->fetch(PDO::FETCH_ASSOC);
+		return $stt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	/**
+	 * choices表からある文字を含む問題文を検索するメソッド
+	 *
+	 * @param int $question_id 
+	 * 
+	 *@return array 検索結果
+	 */
+	public function selectChoices($questions_id) {
+		$sql = "SELECT
+							id,
+							content,
+							result_flg,
+						FROM
+							choices
+						WHERE
+							questions_id = ?";
+		$stt = $this->prepare($sql);
+		$stt->bindValue(1, $questions_id);
+		$stt->execute();
+		return $stt->fetchAll(PDO::FETCH_ASSOC);
 	}
 }

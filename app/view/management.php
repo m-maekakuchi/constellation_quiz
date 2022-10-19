@@ -5,6 +5,12 @@
   if (isset($_REQUEST['message'])) {
     $message = $_REQUEST['message'];
   }
+  if (isset($_REQUEST['searchQue'])) {
+    $searchQue = $_REQUEST['searchQue'];
+  }
+  if (isset($_REQUEST['searchChoices'])) {
+    $searchChoices = $_REQUEST['searchChoices'];
+  }
 ?>
 <!doctype html>
 <html lang="ja">
@@ -43,7 +49,7 @@
     </nav>
     <div class="container mt-5">
       <section class="row">
-        <section class="col-md-4 mb-5">
+        <section class="col-md-3 mb-5">
           <div class="list-group">
             <a href="" class="list-group-item list-group-item-action active" aria-current="true">
               <i class="bi bi-table me-1"></i>
@@ -55,7 +61,7 @@
             </a>
           </div>
         </section>
-        <section class="col-md-8">
+        <section class="col-md-9">
           <form action="index.php" method="post" class="needs-validation" novalidate>
             <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
               <h1 class="fs-3 m-0">問題の追加</h1>
@@ -152,8 +158,49 @@
               </div>
             </div>
           </form>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">question</th>
+                <th scope="col">1</th>
+                <th scope="col">2</th>
+                <th scope="col">3</th>
+                <th scope="col">4</th>
+                <th scope="col">&emsp;&emsp;&emsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>次の星座のうち、日本からは全く見えない星座はどれでしょう？</td>
+                <td>かんむり座</td>
+                <td class=".text-nowrap">りょうけん座</td>
+                <td>りょうけん座</td>
+                <td>りょうけん座</td>
+                <td><button type="button" class="btn btn-primary btn-sm .text-nowrap" >変更</button></td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                <td>@fat</td>
+                <td>@fat</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry the Bird</td>
+                <td>@twitter</td>
+                <td>@twitter</td>
+                <td>@twitter</td>
+                <td>@twitter</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
         </section>
-          
       </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -18,11 +18,11 @@ class ManagementController extends Controller {
 		try {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
-				$errors   = [];
+				$errors = [];
+				$managementModel = createModel("ManagementModel");
 
 				//追加ボタンが押された場合
 				if (isset($params->addQuestion)) {
-					$managementModel = createModel("ManagementModel");
 					$val = new Validation();
 
 					//リロードによる重複登録の防止
@@ -112,6 +112,15 @@ class ManagementController extends Controller {
 					} else {
 						$_SESSION['errors'] = $errors;
 					}
+				} else if (isset($params->searchQuestion)) {
+					$searchQue = $managementModel->selectQue($params->searchQue);
+					$searchChoices = $managementModel->selectChoices($searchQue[1]['id']);
+					echo '<br>問題文：';
+					var_dump($searchQue);
+					echo '<br>選択肢：';
+					var_dump($searchChoices);
+					$_REQUEST['searchQue'] = $searchQue;
+					$_REQUEST['searchChoices'] = $searchChoices;
 				}
     		return "view/management.php";
 			} else {
