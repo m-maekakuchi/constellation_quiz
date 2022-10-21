@@ -57,7 +57,15 @@
             <input type="hidden" name="addQuestion" value="addQuestion">
             <input type="hidden" name="action" value="management">
           </header>
-          <p>現在、登録しているユーザーに関する情報です。</p>
+          <form action="index.php" method="post" class="needs-validation" novalidate>
+            <div class="row">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="name">名前</span>
+                <input type="text" name="name" class="form-control" aria-label="name" aria-describedby="name">
+              </div>
+              <?php if(isset($errors['question'])) echo "<p class='text-danger mb-0'>{$errors['question']}</p>"; ?>
+            </div>
+          </form>
           <table class="table table-striped table-bordered">
             <thead>
               <tr>
