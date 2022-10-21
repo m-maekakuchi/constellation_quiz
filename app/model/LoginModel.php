@@ -10,7 +10,7 @@ class LoginModel extends Model {
 	}
 
 	/**
-	 * users表からログインされたアカウントの情報を検索してセッションに登録するメソッド
+	 * users表からログインされたアカウントの情報を検索するメソッド
 	 *
 	 * @param string $userId　ユーザーID
 	 * 
