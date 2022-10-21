@@ -3,7 +3,8 @@
       $errors = $_SESSION['errors'];
     }
     $dateArray = ["year" => "年", "month" => "月", "day" => "日"];
-    $keys = array_keys($dateArray);
+    $keys      = array_keys($dateArray);
+    $admin_flg = 2;
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +20,9 @@
     <div class="container">
       <div class="top-wrapper">
         <h2>マイページ</h2>
+        <?php if ($_SESSION['status'] == $admin_flg): ?>
+					<a href="index.php?action=manageQuiz" class="btn top">管理画面</a>
+				<?php endif; ?>
         <a href="index.php?action=logout" class="btn top">ログアウト</a>
       </div>
       <div class="regist-wrapper">

@@ -22,6 +22,7 @@ class LoginModel extends Model {
 					d.name AS name,
 					u.email AS email,
 					u.password AS password,
+					u.status_id AS status,
 					d.address_id AS address,
 					d.birthday AS birthday,
 					d.tel AS tel,

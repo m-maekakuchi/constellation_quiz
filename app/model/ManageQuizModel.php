@@ -1,7 +1,7 @@
 <?php
 require_once("common/Database.php");
 
-class ManagementModel extends Model {
+class ManageQuizModel extends Model {
 	/**
 	 * データベースを接続
 	 */

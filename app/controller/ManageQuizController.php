@@ -3,7 +3,7 @@ require_once("controller/Controller.php");
 require_once('utilities/Validation.php');
 require_once('common/Message.php');
 
-class ManagementController extends Controller {
+class ManageQuizController extends Controller {
    /**
 	 * 管理ページへ遷移する
 	 *
@@ -14,19 +14,18 @@ class ManagementController extends Controller {
 	 * @return string Viewのパス
 	 */
   public function action($params, $model) {
-		var_dump($params);
 		try {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
 				$errors = [];
-				$managementModel = createModel("ManagementModel");
+				$manageQuizModel = createModel("ManageQuizModel");
 
 				//追加ボタンが押された場合
 				if (isset($params->addQuestion)) {
 					$val = new Validation();
 
 					//リロードによる重複登録の防止
-					$arr = $managementModel->selectSameQueNum($params->question);
+					$arr = $manageQuizModel->selectSameQueNum($params->question);
 					if ($arr['sameQueNum'] != 0) {
 						return "view/management.php";
 					}
@@ -88,7 +87,7 @@ class ManagementController extends Controller {
 							unset($_SESSION['errors']);
 						}
 						//問題文を登録
-						$newQuestionsId = $managementModel->insertQuestions($question);
+						$newQuestionsId = $manageQuizModel->insertQuestions($question);
 						//選択肢を登録
 						for ($i = 0; $i < 4; $i++) {
 							if ($corrChoice == $i + 1) {
@@ -96,10 +95,10 @@ class ManagementController extends Controller {
 							} else {
 								$result_flg = 0;
 							}
-							$newChoicesId = $managementModel->insertChoices($choices[$i], $result_flg, $newQuestionsId);
+							$newChoicesId = $manageQuizModel->insertChoices($choices[$i], $result_flg, $newQuestionsId);
 						}
 						//answer_historyに新しい列を追加
-						$insertRow = $managementModel->insertColum($newQuestionsId);
+						$insertRow = $manageQuizModel->insertColum($newQuestionsId);
 						$_REQUEST['message'] = Message::$INSERT_QUESTION;
 						//クイズの登録に成功したら以下のセッションオブジェクトを破棄
 						unset($_SESSION['question']);
@@ -113,8 +112,8 @@ class ManagementController extends Controller {
 						$_SESSION['errors'] = $errors;
 					}
 				} else if (isset($params->searchQuestion)) {
-					$searchQue = $managementModel->selectQue($params->searchQue);
-					$searchChoices = $managementModel->selectChoices($searchQue[1]['id']);
+					$searchQue = $manageQuizModel->selectQue($params->searchQue);
+					$searchChoices = $manageQuizModel->selectChoices($searchQue[1]['id']);
 					echo '<br>問題文：';
 					var_dump($searchQue);
 					echo '<br>選択肢：';
@@ -122,7 +121,7 @@ class ManagementController extends Controller {
 					$_REQUEST['searchQue'] = $searchQue;
 					$_REQUEST['searchChoices'] = $searchChoices;
 				}
-    		return "view/management.php";
+    		return "view/manageQuiz.php";
 			} else {
 				return "login";
 			}

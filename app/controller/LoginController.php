@@ -48,6 +48,7 @@ class LoginController extends Controller {
 							$_SESSION['id']       = $user['id'];
 							$_SESSION['name']     = $user['name'];
 							$_SESSION['email']    = $user['email'];
+							$_SESSION['status']   = $user['status'];
 							$_SESSION['address']  = $user['address'];
 							$_SESSION['birthday'] = $user['birthday'];
 							$_SESSION['tel']      = $user['tel'];

@@ -5,6 +5,7 @@
 	$choices       = $_SESSION['choices'];
 	$questions_num = $_SESSION['questions_num'];
 	$corr_ans      = $_SESSION['corr_ans'];
+	$admin_flg     = 2;
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +22,10 @@
 			<div class="top-wrapper">
 				<h2>星座クイズ</h2>
 				<p><?php echo $_SESSION['name'] ?>さん、ようこそ！</p>
-				<a href="index.php?action=mypage" class="btn top">マイページ</a>
-				<a href="index.php?action=management" class="btn top">管理画面</a>
+				<?php if ($_SESSION['status'] == $admin_flg): ?>
+					<a href="index.php?action=manageQuiz" class="btn top">管理画面</a>
+				<?php endif; ?>
+				<a href="index.php?action=mypage" class="btn top">マイページ</a>		
 				<a href="index.php?action=logout" class="btn top">ログアウト</a>
 			</div>
 			<div class="regist-wrapper">
