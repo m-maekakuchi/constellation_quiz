@@ -18,7 +18,7 @@ class ManageUserController extends Controller {
 			//ログイン状態が保たれていた場合
 			if (isset($_SESSION['loginStatus'])) {
 				var_dump($params);
-				$message = "";
+				$message  = "";
 				$manageUserModel = createModel("ManageUserModel");
 
 				//検索ボタンが押された場合
@@ -30,15 +30,24 @@ class ManageUserController extends Controller {
 					} else {
 						$_REQUEST['name'] = $params->name;
 						$users = $manageUserModel->selectUserInfo($params->name);
+						//該当者がいる場合
 						if (count($users) != 0) {
 							$_REQUEST['users'] = $users;
+						//該当者がいなかった場合
 						} else {
-							$message = '該当者はいませんでした';
+							$message = Message::$NOT_FIND_USERS;
 						}
 					}
+				//管理者にするボタンが押された場合
 				} else if (isset($params->addAdmin)) {
-					// $updateRow = $manageUserModel->updateStatus($params->userId);
-					$message = "〇〇さんを管理者として登録しました";
+					$updateRow = $manageUserModel->updateStatus($params->userId);
+					//管理者に変更できた場合
+					if ($updateRow > 0) {
+						$message = $params->userName.Message::$UPDATE_STATUS;
+					//不正な値が入力された場合
+					} else {
+						$message = Message::$NOT_UPDATE_STATUS;
+					}
 				}
 				if ($message != "") {
 					$_REQUEST['message'] = $message;

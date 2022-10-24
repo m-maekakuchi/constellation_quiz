@@ -20,7 +20,8 @@ class ManageUserModel extends Model {
 		$sql = "SELECT
               d.id AS id,
               d.name AS name,
-              u.email AS email
+              u.email AS email,
+							u.status_id AS status
             FROM
               users u
             LEFT JOIN user_detail d ON
@@ -48,6 +49,7 @@ class ManageUserModel extends Model {
 						WHERE
 							id = {$user_id}";
 		$stt = $this->prepare($sql);
+		var_dump($stt);
 		$stt->execute();
 		return $stt->rowCount();
 	}

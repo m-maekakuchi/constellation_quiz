@@ -1,4 +1,5 @@
 <?php
+  $adminStatus = 2;
   if (isset($_REQUEST['users'])) {
     $users = $_REQUEST['users'];
     $userNum = count($users);
@@ -69,6 +70,7 @@
               <input type="hidden" name="action" value="manageUser">
             </header>
             <div class="row">
+              <p>現在、登録しているユーザーを、管理者として設定することができます</p>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="name">名前</span>
                 <input type="text" name="name" class="form-control" value="<?php echo isset($_REQUEST['name']) ? $_REQUEST['name'] : ""; ?>" aria-label="name" aria-describedby="name">
@@ -95,10 +97,15 @@
                       <td><?php echo $users[$i]['name'] ?></td>
                       <td><?php echo $users[$i]['email'] ?></td>
                       <td class="text-center">
-                        <button type="submit" class="btn btn-primary btn-sm .text-nowrap">管理者にする</button>
-                        <input type="hidden" name="addAdmin" value="addAdmin">
-                        <input type="hidden" name="userId" value="<?php echo $users[$i]['id']?>">
-                        <input type="hidden" name="action" value="manageUser">
+                        <?php if ($users[$i]['status'] != $adminStatus): ?>
+                          <button type="submit" class="btn btn-primary btn-sm .text-nowrap">管理者にする</button>
+                          <input type="hidden" name="addAdmin" value="addAdmin">
+                          <input type="hidden" name="userId" value="<?php echo $users[$i]['id']?>">
+                          <input type="hidden" name="userName" value="<?php echo $users[$i]['name']?>">
+                          <input type="hidden" name="action" value="manageUser">
+                        <?php else: ?>
+                          管理者
+                        <?php endif; ?>
                       </td>
                     </tr>
                   <?php endfor; ?>
