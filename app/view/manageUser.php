@@ -1,3 +1,13 @@
+<?php
+  if (isset($_REQUEST['users'])) {
+    $users = $_REQUEST['users'];
+    $userNum = count($users);
+  }
+  if (isset($_REQUEST['message'])) {
+    $message = $_REQUEST['message'];
+  }
+?>
+
 <!doctype html>
 <html lang="ja">
   <head>
@@ -48,55 +58,57 @@
           </div>
         </section>
         <section class="col-md-9">
-          <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
-            <h1 class="fs-3 m-0">ユーザー情報</h1>
-            <button type="submit" class="btn btn-primary btn-sm ms-auto">
-              <i class="bi bi-search"></i>
-              検索
-            </button>
-            <input type="hidden" name="addQuestion" value="addQuestion">
-            <input type="hidden" name="action" value="management">
-          </header>
           <form action="index.php" method="post" class="needs-validation" novalidate>
+            <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
+              <h1 class="fs-3 m-0">ユーザー情報</h1>
+              <button type="submit" class="btn btn-primary btn-sm ms-auto">
+                <i class="bi bi-search"></i>
+                検索
+              </button>
+              <input type="hidden" name="searchUser" value="searchUser">
+              <input type="hidden" name="action" value="manageUser">
+            </header>
             <div class="row">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="name">名前</span>
-                <input type="text" name="name" class="form-control" aria-label="name" aria-describedby="name">
+                <input type="text" name="name" class="form-control" value="<?php echo isset($_REQUEST['name']) ? $_REQUEST['name'] : ""; ?>" aria-label="name" aria-describedby="name">
               </div>
               <?php if(isset($errors['question'])) echo "<p class='text-danger mb-0'>{$errors['question']}</p>"; ?>
             </div>
           </form>
-          <table class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">name</th>
-                <th scope="col">mail</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <!-- <td colspan="2">Larry the Bird</td> -->
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
+          <?php if(isset($message)) echo "<p class='text-danger mb-0'>{$message}</p>"; ?>
+          <?php if(isset($users)): ?>
+            <form action="index.php" method="post" class="needs-validation" novalidate>
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">名前</th>
+                    <th scope="col">メールアドレス</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php for ($i = 0; $i < $userNum; $i++): ?>
+                    <tr>
+                      <th scope="row" ><?php echo $i+1 ?></th>
+                      <td><?php echo $users[$i]['name'] ?></td>
+                      <td><?php echo $users[$i]['email'] ?></td>
+                      <td class="text-center">
+                        <button type="submit" class="btn btn-primary btn-sm .text-nowrap">管理者にする</button>
+                        <input type="hidden" name="addAdmin" value="addAdmin">
+                        <input type="hidden" name="userId" value="<?php echo $users[$i]['id']?>">
+                        <input type="hidden" name="action" value="manageUser">
+                      </td>
+                    </tr>
+                  <?php endfor; ?>
+                </tbody>
+              </table>
+            </form>
+          <?php endif; ?>
         </section>
       </section>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

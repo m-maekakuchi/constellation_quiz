@@ -14,7 +14,7 @@ class ManageUserModel extends Model {
 	 *
 	 * @param string $str
 	 * 
-	 *@return array 検索結果
+	 * @return array 検索結果
 	 */
 	public function selectUserInfo($str) {
 		$sql = "SELECT
@@ -28,8 +28,27 @@ class ManageUserModel extends Model {
             WHERE
               name LIKE '%{$str}%'";
 		$stt = $this->prepare($sql);
-		$stt->bindValue(1, $userId);
 		$stt->execute();
-		return $stt->fetch(PDO::FETCH_ASSOC);
+		return $stt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	/**
+	 * users表のstatus_id列の値を変更するメソッド
+	 *
+	 * @param int $user_id
+	 * 
+	 * @return integer 更新された行数
+	 */
+	public function updateStatus($user_id) {
+		$adminStatus = 2;
+		$sql = "UPDATE
+							users
+						SET
+							status_id = {$adminStatus}
+						WHERE
+							id = {$user_id}";
+		$stt = $this->prepare($sql);
+		$stt->execute();
+		return $stt->rowCount();
 	}
 }
