@@ -62,6 +62,10 @@ INSERT INTO users(id, email, password) VALUES (1, 'example@gmail.com', '1234abc'
 INSERT INTO user_detail(id, name, address_id, birthday, tel, works_id, users_id) VALUES (1, 'まりえ', 1, '1994/7/14', '090-1234-5678', 2, 1);
 
 
+INSERT INTO status(id, status) VALUES (1,'ユーザー');
+INSERT INTO status(id, status) VALUES (2,'管理者');
+
+
 INSERT INTO addresss(id, address) VALUES (1, '北海道');
 INSERT INTO addresss(id, address) VALUES (2, '青森');
 INSERT INTO addresss(id, address) VALUES (3, '岩手');
