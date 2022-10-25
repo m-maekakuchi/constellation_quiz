@@ -40,7 +40,7 @@ class ManageUserModel extends Model {
 	 * 
 	 * @return integer 更新された行数
 	 */
-	public function updateStatus($user_id) {
+	public function updateAdminStatus($user_id) {
 		$adminStatus = 2;
 		$sql = "UPDATE
 							users
@@ -49,7 +49,26 @@ class ManageUserModel extends Model {
 						WHERE
 							id = {$user_id}";
 		$stt = $this->prepare($sql);
-		var_dump($stt);
+		$stt->execute();
+		return $stt->rowCount();
+	}
+
+	/**
+	 * users表のstatus_id列の値を変更するメソッド
+	 *
+	 * @param int $user_id
+	 * 
+	 * @return integer 更新された行数
+	 */
+	public function updateUserStatus($user_id) {
+		$userStatus = 1;
+		$sql = "UPDATE
+							users
+						SET
+							status_id = {$userStatus}
+						WHERE
+							id = {$user_id}";
+		$stt = $this->prepare($sql);
 		$stt->execute();
 		return $stt->rowCount();
 	}

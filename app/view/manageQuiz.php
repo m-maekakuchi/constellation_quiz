@@ -75,6 +75,7 @@
             <?php if(isset($message)) echo "<p class='text-danger'>{$message}</p>"; ?>
             <div class="mb-1">
               <div class="row">
+                <p>クイズの問題を追加することができます。</p>
                 <div class="mb-1">
                   <label for="questionInput" class="form-label">問題文</label>
                   <textarea class="form-control" name="question" id="questionInput" rows="3" placeholder="北斗七星はある星座のしっぽと言われていますがその星座は？"><?php echo isset($_SESSION['question']) ? $_SESSION['question'] : ""; ?></textarea>

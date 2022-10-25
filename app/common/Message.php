@@ -38,6 +38,7 @@ class Message {
   public static $INSERT_QUESTION           = "クイズの問題を追加しました";
 
   public static $NOT_FIND_USERS            = "該当者はいませんでした";
-  public static $UPDATE_STATUS             = "さんを管理者として登録しました";
+  public static $UPDATE_ADMIN_STATUS       = "さんを管理者として登録しました";
+  public static $UPDATE_USER_STATUS        = "さんを管理者から削除しました";
   public static $NOT_UPDATE_STATUS         = "不正な値のため登録できませんでした";
 }

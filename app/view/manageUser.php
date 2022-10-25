@@ -70,7 +70,7 @@
               <input type="hidden" name="action" value="manageUser">
             </header>
             <div class="row">
-              <p>現在、登録しているユーザーを、管理者として設定することができます</p>
+              <p>管理者の設定をすることができます。</p>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="name">名前</span>
                 <input type="text" name="name" class="form-control" value="<?php echo isset($_REQUEST['name']) ? $_REQUEST['name'] : ""; ?>" aria-label="name" aria-describedby="name">
@@ -80,38 +80,39 @@
           </form>
           <?php if(isset($message)) echo "<p class='text-danger mb-0'>{$message}</p>"; ?>
           <?php if(isset($users)): ?>
-            <form action="index.php" method="post" class="needs-validation" novalidate>
-              <table class="table table-striped table-bordered">
-                <thead>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">#</th>
+                  <th scope="col">名前</th>
+                  <th scope="col">メールアドレス</th>
+                  <th scope="col" class="text-center"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php for ($i = 0; $i < $userNum; $i++): ?>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">名前</th>
-                    <th scope="col">メールアドレス</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php for ($i = 0; $i < $userNum; $i++): ?>
-                    <tr>
-                      <th scope="row" ><?php echo $i+1 ?></th>
-                      <td><?php echo $users[$i]['name'] ?></td>
-                      <td><?php echo $users[$i]['email'] ?></td>
-                      <td class="text-center">
+                    <th scope="row" class="text-center"><?php echo $i+1 ?></th>
+                    <td class="align-middle"><?php echo $users[$i]['name'] ?></td>
+                    <td class="align-middle"><?php echo $users[$i]['email'] ?></td>
+                    <td class="text-center align-middle">
+                      <form action="index.php" method="post" class="mb-0">
                         <?php if ($users[$i]['status'] != $adminStatus): ?>
-                          <button type="submit" class="btn btn-primary btn-sm .text-nowrap">管理者にする</button>
+                          <button type="submit" class="btn btn-Info btn-sm .text-nowrap">管理者にする</button>
                           <input type="hidden" name="addAdmin" value="addAdmin">
-                          <input type="hidden" name="userId" value="<?php echo $users[$i]['id']?>">
-                          <input type="hidden" name="userName" value="<?php echo $users[$i]['name']?>">
-                          <input type="hidden" name="action" value="manageUser">
                         <?php else: ?>
-                          管理者
+                          <button type="submit" class="btn btn-Secondary btn-sm .text-nowrap">管理者から外す</button>
+                          <input type="hidden" name="removeAdmin" value="removeAdmin">
                         <?php endif; ?>
-                      </td>
-                    </tr>
-                  <?php endfor; ?>
-                </tbody>
-              </table>
-            </form>
+                        <input type="hidden" name="userId" value="<?php echo $users[$i]['id']?>">
+                        <input type="hidden" name="userName" value="<?php echo $users[$i]['name']?>">
+                        <input type="hidden" name="action" value="manageUser">
+                      </form>
+                    </td>
+                  </tr>
+                <?php endfor; ?>
+              </tbody>
+            </table> 
           <?php endif; ?>
         </section>
       </section>

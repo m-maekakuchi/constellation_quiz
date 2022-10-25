@@ -40,10 +40,20 @@ class ManageUserController extends Controller {
 					}
 				//管理者にするボタンが押された場合
 				} else if (isset($params->addAdmin)) {
-					$updateRow = $manageUserModel->updateStatus($params->userId);
+					$updateRow = $manageUserModel->updateAdminStatus($params->userId);
 					//管理者に変更できた場合
 					if ($updateRow > 0) {
-						$message = $params->userName.Message::$UPDATE_STATUS;
+						$message = $params->userName.Message::$UPDATE_ADMIN_STATUS;
+					//不正な値が入力された場合
+					} else {
+						$message = Message::$NOT_UPDATE_STATUS;
+					}
+				//管理者から外すボタンが押された場合
+				} else if (isset($params->removeAdmin)) {
+					$updateRow = $manageUserModel->updateUserStatus($params->userId);
+					//管理者から外すことができた場合
+					if ($updateRow > 0) {
+						$message = $params->userName.Message::$UPDATE_USER_STATUS;
 					//不正な値が入力された場合
 					} else {
 						$message = Message::$NOT_UPDATE_STATUS;
