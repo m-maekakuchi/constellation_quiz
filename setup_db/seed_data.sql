@@ -8,6 +8,9 @@ INSERT INTO questions(id, content) VALUES (7, '次の星座のうち、日本か
 INSERT INTO questions(id, content) VALUES (8, '2つの1等星をもつ星座は、オリオン座、みなみじゅうじ座と何座?');
 INSERT INTO questions(id, content) VALUES (9, '日本でも南十字星が見える場所は？');
 INSERT INTO questions(id, content) VALUES (10, 'みずがめ座の別名は？');
+INSERT INTO questions(id, content) VALUES (11, 'ベテルギウスとリゲルという二つの一等星を持つ星座は？');
+INSERT INTO questions(id, content) VALUES (12, 'プロキオンを一等星に持つ星座は？');
+INSERT INTO questions(id, content) VALUES (13, 'シリウスを一等星に持つ星座は？');
 
 
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (1, 'こいぬ座', 0, 1);
@@ -34,10 +37,10 @@ INSERT INTO choices(id, content, result_flg, questions_id) VALUES (21, 'くじ�
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (22, 'おおぐま座', 0, 6);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (23, 'おとめ座', 0, 6);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (24, 'うみへび座', 1, 6);
-INSERT INTO choices(id, content, result_flg, questions_id) VALUES (25, 'はちぶんぎ座', 0, 7);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (25, 'はちぶんぎ座', 1, 7);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (26, 'ろくぶんぎ座', 0, 7);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (27, 'みなみじゅうじ座', 0, 7);
-INSERT INTO choices(id, content, result_flg, questions_id) VALUES (28, 'みなみのうお座', 1, 7);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (28, 'みなみのうお座', 0, 7);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (29, 'しし座', 0, 8);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (30, 'はくちょう座', 0, 8);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (31, 'ケンタウルス座', 1, 8);
@@ -50,6 +53,18 @@ INSERT INTO choices(id, content, result_flg, questions_id) VALUES (37, 'ポカ�
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (38, 'アクエリアス', 1, 10);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (39, 'オロナミン', 0, 10);
 INSERT INTO choices(id, content, result_flg, questions_id) VALUES (40, 'アオジル', 0, 10);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (41, 'おおいぬ座', 0, 11);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (42, 'オリオン座', 1, 11);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (43, 'はくちょう座', 0, 11);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (44, 'こいぬ座', 0, 11);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (45, 'こと座', 0, 12);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (46, 'オリオン座', 0, 12);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (47, 'はくちょう座', 0, 12);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (48, 'こいぬ座', 1, 12);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (49, 'おおいぬ座', 1, 13);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (50, 'わし座', 0, 13);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (51, 'はくちょう座', 0, 13);
+INSERT INTO choices(id, content, result_flg, questions_id) VALUES (52, 'こいぬ座', 0, 13);
 
 
 INSERT INTO answer_history(id, users_id, choices_id1, choices_id2, choices_id3, choices_id4, choices_id5, choices_id6, choices_id7, choices_id8, choices_id9, choices_id10)
