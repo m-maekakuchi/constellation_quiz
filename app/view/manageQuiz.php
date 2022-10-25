@@ -57,7 +57,7 @@
             </a>
             <a href="index.php?action=manageUser" class="list-group-item list-group-item-action">
               <i class="bi bi-person-fill me-1"></i>
-              ユーザー情報
+              ユーザー
             </a>
           </div>
         </section>

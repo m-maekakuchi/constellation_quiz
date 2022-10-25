@@ -54,14 +54,14 @@
             </a>
             <a href="index.php?action=manageUser" class="list-group-item list-group-item-action active" aria-current="true">
               <i class="bi bi-person-fill me-1"></i>
-              ユーザー情報
+              ユーザー
             </a>
           </div>
         </section>
         <section class="col-md-9">
           <form action="index.php" method="post" class="needs-validation" novalidate>
             <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
-              <h1 class="fs-3 m-0">ユーザー情報</h1>
+              <h1 class="fs-3 m-0">管理者の設定</h1>
               <button type="submit" class="btn btn-primary btn-sm ms-auto">
                 <i class="bi bi-search"></i>
                 検索
@@ -70,7 +70,7 @@
               <input type="hidden" name="action" value="manageUser">
             </header>
             <div class="row">
-              <p>管理者の設定をすることができます。</p>
+              <p>ユーザーを検索し、管理者の設定をすることができます。</p>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="name">名前</span>
                 <input type="text" name="name" class="form-control" value="<?php echo isset($_REQUEST['name']) ? $_REQUEST['name'] : ""; ?>" aria-label="name" aria-describedby="name">
