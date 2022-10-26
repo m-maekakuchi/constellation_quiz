@@ -70,7 +70,7 @@
                 追加
               </button>
               <input type="hidden" name="addQuestion" value="addQuestion">
-              <input type="hidden" name="action" value="management">
+              <input type="hidden" name="action" value="manageQuiz">
             </header>
             <?php if(isset($message)) echo "<p class='text-danger'>{$message}</p>"; ?>
             <div class="mb-1">
@@ -139,68 +139,6 @@
               <?php if(isset($errors['corrChoice'])) echo "<p class='text-danger'>{$errors['corrChoice']}</p>"; ?>
             </div>
           </form>
-          <!-- <form action="index.php" method="post" class="needs-validation mt-5" novalidate>
-            <header class="border-bottom pb-2 mb-3 d-flex align-items-center">
-              <h1 class="fs-3 m-0">問題の検索</h1>
-              <button type="submit" class="btn btn-primary btn-sm ms-auto">
-                <i class="bi bi-search"></i>
-                検索
-              </button>
-              <input type="hidden" name="searchQuestion" value="searchQuestion">
-              <input type="hidden" name="action" value="management">
-            </header>
-            <div class="mb-1">
-              <div class="row">
-                <div class="mb-1">
-                  <label for="questionInput" class="form-label">問題文</label>
-                  <input type="text" name="searchQue" class="form-control" id="searchQue" placeholder="北斗七星" value="<?php echo isset($_SESSION['searchQue']) ? $_SESSION['searchQue'] : ""; ?>">
-                </div>
-                <?php if(isset($errors['question'])) echo "<p class='text-danger mb-0'>{$errors['question']}</p>"; ?>
-              </div>
-            </div>
-          </form>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">question</th>
-                <th scope="col">1</th>
-                <th scope="col">2</th>
-                <th scope="col">3</th>
-                <th scope="col">4</th>
-                <th scope="col">&emsp;&emsp;&emsp;</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>次の星座のうち、日本からは全く見えない星座はどれでしょう？</td>
-                <td>かんむり座</td>
-                <td class=".text-nowrap">りょうけん座</td>
-                <td>りょうけん座</td>
-                <td>りょうけん座</td>
-                <td><button type="button" class="btn btn-primary btn-sm .text-nowrap" >変更</button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table> -->
         </section>
       </section>
     </div>

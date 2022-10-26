@@ -23,11 +23,7 @@ class ManageUserController extends Controller {
 
 				//検索ボタンが押された場合
 				if (isset($params->searchUser)) {
-					$val = new Validation();
-					//名前入力欄のバリデーションチェック
-					if ($val->checkEmpty($params->name)) {
-						$message = Message::$VAL_NAME_EMPTY;
-					} else {
+					if (isset($params->name)) {
 						$_REQUEST['name'] = $params->name;
 						$users = $manageUserModel->selectUserInfo($params->name);
 						//該当者がいる場合

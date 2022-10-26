@@ -31,51 +31,63 @@ class ManageQuizController extends Controller {
 					}
 
 					//問題文のバリデーションチェック
-					if ($val->checkEmpty($params->question)) {
-						$errors['question'] = Message::$VAL_QUESTION_EMPTY;
-					} else {
-						$_SESSION['question'] = $params->question;
-						$question = $_SESSION['question'];
+					if (isset($params->question)) {
+						if ($val->checkEmpty($params->question)) {
+							$errors['question'] = Message::$VAL_QUESTION_EMPTY;
+						} else {
+							$_SESSION['question'] = $params->question;
+							$question = $_SESSION['question'];
+						}
 					}
 
 					//選択肢1のバリデーションチェック
-					if ($val->checkEmpty($params->choice1)) {
-						$errors['choice1'] = Message::$VAL_CHOICE1_EMPTY;
-					} else {
-						$_SESSION['choice1'] = $params->choice1;
-						$choice1 = $_SESSION['choice1'];
+					if (isset($params->choice1)) {
+						if ($val->checkEmpty($params->choice1)) {
+							$errors['choice1'] = Message::$VAL_CHOICE1_EMPTY;
+						} else {
+							$_SESSION['choice1'] = $params->choice1;
+							$choice1 = $_SESSION['choice1'];
+						}
 					}
 
 					//選択肢2のバリデーションチェック
-					if ($val->checkEmpty($params->choice2)) {
-						$errors['choice2'] = Message::$VAL_CHOICE2_EMPTY;
-					} else {
-						$_SESSION['choice2'] = $params->choice2;
-						$choice2 = $_SESSION['choice2'];
+					if (isset($params->choice2)) {
+						if ($val->checkEmpty($params->choice2)) {
+							$errors['choice2'] = Message::$VAL_CHOICE2_EMPTY;
+						} else {
+							$_SESSION['choice2'] = $params->choice2;
+							$choice2 = $_SESSION['choice2'];
+						}
 					}
 
 					//選択肢3のバリデーションチェック
-					if ($val->checkEmpty($params->choice3)) {
-						$errors['choice3'] = Message::$VAL_CHOICE3_EMPTY;
-					} else {
-						$_SESSION['choice3'] = $params->choice3;
-						$choice3 = $_SESSION['choice3'];
+					if (isset($params->choice3)) {
+						if ($val->checkEmpty($params->choice3)) {
+							$errors['choice3'] = Message::$VAL_CHOICE3_EMPTY;
+						} else {
+							$_SESSION['choice3'] = $params->choice3;
+							$choice3 = $_SESSION['choice3'];
+						}
 					}
 
 					//選択肢4のバリデーションチェック
-					if ($val->checkEmpty($params->choice4)) {
-						$errors['choice4'] = Message::$VAL_CHOICE4_EMPTY;
-					} else {
-						$_SESSION['choice4'] = $params->choice4;
-						$choice4 = $_SESSION['choice4'];
+					if (isset($params->choice4)) {
+						if ($val->checkEmpty($params->choice4)) {
+							$errors['choice4'] = Message::$VAL_CHOICE4_EMPTY;
+						} else {
+							$_SESSION['choice4'] = $params->choice4;
+							$choice4 = $_SESSION['choice4'];
+						}
 					}
 
 					//正答のバリデーションチェック
-					if ($val->checkEmpty($params->corrChoice)) {
-						$errors['corrChoice'] = Message::$VAL_CORRCHOICE_NOT_SELECT;
-					} else {
-						$_SESSION['corrChoice'] = $params->corrChoice;
-						$corrChoice = $_SESSION['corrChoice'];
+					if (isset($params->corrChoice)) {
+						if ($val->checkEmpty($params->corrChoice)) {
+							$errors['corrChoice'] = Message::$VAL_CORRCHOICE_NOT_SELECT;
+						} else {
+							$_SESSION['corrChoice'] = $params->corrChoice;
+							$corrChoice = $_SESSION['corrChoice'];
+						}
 					}
 
 					//バリデーションチェックをしてエラーがない場合
@@ -111,15 +123,6 @@ class ManageQuizController extends Controller {
 					} else {
 						$_SESSION['errors'] = $errors;
 					}
-				} else if (isset($params->searchQuestion)) {
-					$searchQue = $manageQuizModel->selectQue($params->searchQue);
-					$searchChoices = $manageQuizModel->selectChoices($searchQue[1]['id']);
-					echo '<br>問題文：';
-					var_dump($searchQue);
-					echo '<br>選択肢：';
-					var_dump($searchChoices);
-					$_REQUEST['searchQue'] = $searchQue;
-					$_REQUEST['searchChoices'] = $searchChoices;
 				}
     		return "view/manageQuiz.php";
 			} else {
