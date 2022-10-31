@@ -79,10 +79,6 @@ a {
   border-radius: 7px;
 }
 
-.login-form .error {
-  font-size: 16px;
-}
-
 .login-form input:focus {
   box-shadow: 0 0 5px 1px #2078b9;
   outline: none;
@@ -154,6 +150,7 @@ a {
 
 .error{
   color: #fd7259;
+  font-size: 16px;
 }
 
 .update {

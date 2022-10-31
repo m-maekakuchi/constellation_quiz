@@ -21,50 +21,54 @@ class LoginController extends Controller {
 		$val      = new Validation();
 		try {
 			//ログインボタンが押された場合
-			// if ($params->submit === "ログイン") {
 			if ($params->loginSubmit === "login") {
-				//メールアドレスかパスワードが未入力の場合
-				if (empty($params->email) || empty($params->password)) {
-					$error = Message::$VAL_EMAIL_OR_PASS_EMPTY;
-					$_SESSION['error'] = $error;
-					return "view/login.php";
-				//メールアドレスが正しく入力されていない場合
-				} else if ($val->checklPattern(0, $params->email)) {
-					$error = Message::$VAL_EMAIL_NOT_CORRECT;
-					$_SESSION['error'] = $error;
-					return "view/login.php";
-				//メールアドレスとパスワードともに入力された場合
-				} else {
-					$_SESSION['loginStatus'] = "success";
-					$loginModel = createModel("LoginModel");
-					//メールアドレスが一致するアカウントがあるか判定
-					$row = $loginModel->selectByEmail($params->email);
-					//一致したらアカウント情報をセッションに登録
-					if ($row) {
-						//パスワードが一致するか判定
-						if (password_verify($params->password, $row['password'])) {
-							//ログインされたアカウント情報をセッションに登録
-							$user = $loginModel->selectUserInfo($row['id']);
-							$_SESSION['id']       = $user['id'];
-							$_SESSION['name']     = $user['name'];
-							$_SESSION['email']    = $user['email'];
-							$_SESSION['status']   = $user['status'];
-							$_SESSION['address']  = $user['address'];
-							$_SESSION['birthday'] = $user['birthday'];
-							$_SESSION['tel']      = $user['tel'];
-							$_SESSION['work']     = $user['work'];
-							return "question";
+				//メールアドレスとパスワードのパラメータ両方ある場合
+				if (isset($params->email) && isset($params->password)) {
+					//メールアドレスかパスワードが未入力の場合
+					if (empty($params->email) || empty($params->password)) {
+						$error = Message::$VAL_EMAIL_OR_PASS_EMPTY;
+						$_SESSION['error'] = $error;
+						return "view/login.php";
+					//メールアドレスが正しく入力されていない場合
+					} else if ($val->checklPattern(0, $params->email)) {
+						$error = Message::$VAL_EMAIL_NOT_CORRECT;
+						$_SESSION['error'] = $error;
+						return "view/login.php";
+					//メールアドレスとパスワードともに入力された場合
+					} else {
+						$_SESSION['loginStatus'] = "success";
+						$loginModel = createModel("LoginModel");
+						//メールアドレスが一致するアカウントがあるか判定
+						$row = $loginModel->selectByEmail($params->email);
+						//一致したらアカウント情報をセッションに登録
+						if ($row) {
+							//パスワードが一致するか判定
+							if (password_verify($params->password, $row['password'])) {
+								//ログインされたアカウント情報をセッションに登録
+								$user = $loginModel->selectUserInfo($row['id']);
+								$_SESSION['id']       = $user['id'];
+								$_SESSION['name']     = $user['name'];
+								$_SESSION['email']    = $user['email'];
+								$_SESSION['status']   = $user['status'];
+								$_SESSION['address']  = $user['address'];
+								$_SESSION['birthday'] = $user['birthday'];
+								$_SESSION['tel']      = $user['tel'];
+								$_SESSION['work']     = $user['work'];
+								return "question";
+							} else {
+								$error = Message::$VAL_PASSWORD_WRONG;
+								$_SESSION['error'] = $error;
+								return "view/login.php";
+							}
+						//一致するメールアドレスがなかった場合
 						} else {
-							$error = Message::$VAL_PASSWORD_WRONG;
+							$error = Message::$VAL_EMAIL_NOT_REGIST;
 							$_SESSION['error'] = $error;
 							return "view/login.php";
 						}
-					//一致するメールアドレスがなかった場合
-          } else {
-						$error = Message::$VAL_EMAIL_NOT_REGIST;
-						$_SESSION['error'] = $error;
-						return "view/login.php";
 					}
+				} else {
+					return "view/login.php";
 				}
 			//「アカウント登録はこちら」ボタンが押された場合
 			} else if ($params->submit === "アカウント登録はこちら") {
@@ -73,6 +77,7 @@ class LoginController extends Controller {
 			} else if (isset($_SESSION['id'])) {
 				unset($_SESSION['answers']);
 				return "question";
+			//ログアウトされた場合
 			} else {
 				$_SESSION = [];
 				session_destroy();

@@ -9,29 +9,42 @@ if (registBtn !== null) {
 
     //入力必須の名前のバリデーション
     const name = document.getElementById('name');
-    if (val.validateName(name) === 1) {
+    if (name !== null) {    //id属性値が変更された場合の対策
+      if (val.validateName(name) === 1) {
+        errorCount++;
+      }
+    } else {
       errorCount++;
     }
-    
     //入力必須のメールアドレスのバリデーション
     const email = document.getElementById('email');
-    if (val.validateEmail(email) === 1) {
+    if (email !== null) {
+      if (val.validateEmail(email) === 1) {
+        errorCount++;
+      }
+    } else {
       errorCount++;
     }
-    
     //入力必須のパスワードのバリデーション
     const pass = document.getElementById('pass');
     const passConfirm = document.getElementById('passConfirm');
-    if (val.validateRegistPass(pass, passConfirm) === 1){
-      errorCount++;
-    }
-
-    //入力任意の電話番号のバリデーション
-    const tel = document.getElementById('tel');
-    if (!val.checkEmpty(tel.value)) {
-      if (val.validateTel(tel)) {
+    if (pass !== null && passConfirm !== null) {
+      if (val.validateRegistPass(pass, passConfirm) === 1){
         errorCount++;
       }
+    } else {
+      errorCount++;
+    }
+    //入力任意の電話番号のバリデーション
+    const tel = document.getElementById('tel');
+    if (tel !== null) {
+      if (!val.checkEmpty(tel.value)) {
+        if (val.validateTel(tel)) {
+          errorCount++;
+        }
+      }
+    } else {
+      errorCount++;
     }
 
     //エラーがなければalertを表示
@@ -53,13 +66,20 @@ if (loginBtn !== null) {
   
     //メールアドレスのバリデーション
     const email = document.getElementById('email');
-    if (val.validateEmail(email) === 1) {
+    if (email !== null) {
+      if (val.validateEmail(email) === 1) {
+        errorCount++;
+      }
+    } else {
       errorCount++;
     }
-
     //パスワードのバリデーション
     const pass = document.getElementById('pass');
-    if(val.validateLoginPass(pass) === 1) {
+    if (pass !== null) {
+      if (val.validateLoginPass(pass) === 1) {
+        errorCount++;
+      }
+    } else {
       errorCount++;
     }
 
