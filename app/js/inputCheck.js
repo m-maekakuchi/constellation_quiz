@@ -90,35 +90,49 @@ if (loginBtn !== null) {
   });
 }
 
+
+
+
 //マイページのcsvDLボタンかpdfDLボタンが押された場合
 const csvDlBtn = document.getElementById('csvDlBtn');
 const pdfDlBtn = document.getElementById('pdfDlBtn');
 if (pdfDlBtn !== null || pdfDlBtn !== null) {
-  const fromyear = document.getElementById('fromyear');
-  const frommonth = document.getElementById('frommonth');
-  const fromday = document.getElementById('fromday');
-  const toyear = document.getElementById('toyear');
-  const tomonth = document.getElementById('tomonth');
-  const today = document.getElementById('today');
-
   let newValue = document.createElement('input');
   newValue.type = "hidden";
   newValue.name = "resultDl";
 
   csvDlBtn.addEventListener('click', e => {
     e.preventDefault();
-    if (val.validateDate(fromyear, frommonth, fromday, toyear, tomonth, today) === 0) {
-      newValue.value = "csv";
-      document.quizResultForm.appendChild(newValue);
-      document.quizResultForm.submit();
+    newValue.value = "csv";
+
+    const fromyear = document.getElementById('fromyear');
+    const frommonth = document.getElementById('frommonth');
+    const fromday = document.getElementById('fromday');
+    const toyear = document.getElementById('toyear');
+    const tomonth = document.getElementById('tomonth');
+    const today = document.getElementById('today');
+    if (fromyear !== null && frommonth !== null && fromday !== null && toyear !== null && tomonth !== null && today !== null) {
+      if (val.validateDate(fromyear, frommonth, fromday, toyear, tomonth, today) === 0) {
+        document.quizResultForm.appendChild(newValue);
+        document.quizResultForm.submit();
+      }
     }
   });
   pdfDlBtn.addEventListener('click', e => {
     e.preventDefault();
-    if (val.validateDate(fromyear, frommonth, fromday, toyear, tomonth, today) === 0) {
-      newValue.value = "pdf";
-      document.quizResultForm.appendChild(newValue);
-      document.quizResultForm.submit();
+    newValue.value = "pdf";
+
+    const fromyear = document.getElementById('fromyear');
+    const frommonth = document.getElementById('frommonth');
+    const fromday = document.getElementById('fromday');
+    const toyear = document.getElementById('toyear');
+    const tomonth = document.getElementById('tomonth');
+    const today = document.getElementById('today');
+    if (fromyear !== null && frommonth !== null && fromday !== null && toyear !== null && tomonth !== null && today !== null) {
+      if (val.validateDate(fromyear, frommonth, fromday, toyear, tomonth, today) === 0) {
+        document.quizResultForm.appendChild(newValue);
+        document.quizResultForm.submit();
+      }
     }
   });
 }
@@ -129,7 +143,7 @@ if (updateNameBtn !== null) {
   updateNameBtn.addEventListener('click', e => {
     e.preventDefault();
     const name = document.getElementById('name');
-    if (val.validateName(name) === 0) {
+    if (name != null && val.validateName(name) === 0) {
       document.updateNameForm.submit();
     }
   });
@@ -141,7 +155,7 @@ if (updateEmailBtn !== null) {
   updateEmailBtn.addEventListener('click', e => {
     e.preventDefault();
     const email = document.getElementById('email');
-    if (val.validateEmail(email) === 0) {
+    if (email != null && val.validateEmail(email) === 0) {
       document.updateEmailForm.submit();
     }
   });
@@ -154,7 +168,7 @@ if (updatePassBtn !== null) {
     e.preventDefault();
     const pass = document.getElementById('pass');
     const passConfirm = document.getElementById('passConfirm');
-    if (val.validateRegistPass(pass, passConfirm) === 0) {
+    if (pass != null && passConfirm != null && val.validateRegistPass(pass, passConfirm) === 0) {
       document.updatePassForm.submit();
     }
   });
@@ -166,7 +180,7 @@ if (updateAddressBtn !== null) {
   updateAddressBtn.addEventListener('click', e => {
     e.preventDefault();
     const address = document.getElementById('address');
-    if (val.validateAddress(address) === 0) {
+    if (address != null && val.validateAddress(address) === 0) {
       document.updateAddressForm.submit();
     }
   });
@@ -180,7 +194,7 @@ if (updateBirthdayBtn !== null) {
     const year = document.getElementById('year');
     const month = document.getElementById('month');
     const day = document.getElementById('day');
-    if (val.validateBirthday(year, month, day) === 0) {
+    if (year != null && month != null && day != null && val.validateBirthday(year, month, day) === 0) {
       document.updateBirthdayForm.submit();
     }
   });
@@ -192,7 +206,7 @@ if (updateTelBtn !== null) {
   updateTelBtn.addEventListener('click', e => {
     e.preventDefault();
     const tel = document.getElementById('tel');
-    if (val.validateTel(tel) === 0) {
+    if (tel != null && val.validateTel(tel) === 0) {
       document.updateTelForm.submit();
     }
   });
@@ -204,7 +218,7 @@ if (updateWorkBtn !== null) {
   updateWorkBtn.addEventListener('click', e => {
     e.preventDefault();
     const work = document.getElementById('work');
-    if (val.validateWork(work) === 0) {
+    if (work != null && val.validateWork(work) === 0) {
       document.updateWorkForm.submit();
     }
   });

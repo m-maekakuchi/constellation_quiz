@@ -14,7 +14,6 @@ class Validation {
     if (!para) {
       return true;    //未入力
     } else {
-      
       return false;   //入力値あり
     }
   };
