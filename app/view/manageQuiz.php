@@ -17,7 +17,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <title>簡易星座クイズプログラム</title>
@@ -87,8 +87,12 @@
               <div class="row">
                 <div class="mb-1">
                   <label for="choice1" class="form-label">選択肢1</label>
-                  <input type="text" name="choice1" class="form-control" id="choice1" placeholder="こいぬ座" value="<?php echo isset($_SESSION['choice1']) ? $_SESSION['choice1'] : ""; ?>">
+                  <input type="text" name="choice1" class="form-control" id="choice1" placeholder="こいぬ座" value="<?php echo isset($_SESSION['choice1']) ? $_SESSION['choice1'] : ""; ?>" required>
+                  <div class="invalid-feedback">
+                    Please provide a valid zip.
+                  </div>
                 </div>
+                
                 <?php if(isset($errors['choice1'])) echo "<p class='text-danger'>{$errors['choice1']}</p>"; ?>
               </div>
             </div>
@@ -143,5 +147,27 @@
       </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+    </script>
   </body>
 </html>
